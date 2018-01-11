@@ -110,12 +110,12 @@ fabric.properties
 *.asp
 *.cer
 *.csr
-*.css
+#*.css
 *.htm
-*.html
-*.js
-*.jsp
-*.php
+#*.html
+#*.js
+#*.jsp
+#*.php
 *.rss
 *.xhtml
 
@@ -182,3 +182,4 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/web,windows,angular,netbeans,phpstorm,webstorm
+!/ModeloBD.php
