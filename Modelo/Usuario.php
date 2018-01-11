@@ -40,7 +40,9 @@ class Usuario extends BD{
     }
 
     function setPassword($password) {
+       $password= password_hash($password, PASSWORD_BCRYPT);
         $this->password = $password;
+        
     }
 
     function setTipo($tipo) {
@@ -50,6 +52,11 @@ class Usuario extends BD{
     function setFullname($fullname) {
         $this->fullname = $fullname;
     }
-
+    function registrar(){
+        $usuario=new Usuario();
+        $usuario->insert('INSERT INTO :tabla(username, password, tipo,fullname) VALUES (":username",":password",":tipo",":fullname");', ['tabla'=> $this->tabla,'username'=> $this->username,'password'=> $this->password,"tipo"=>0,"fullname"=> $this->fullname]);
+    //METER MAIL AQUI?
+        
+    }
 
 }
