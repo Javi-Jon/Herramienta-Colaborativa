@@ -8,7 +8,9 @@ class UsuarioController extends Controller{
             case 'c':
                 $this->registrar();
                 break;
-
+            case 'log':
+                $this->logearse();
+                break;
             default:
                 break;
         }
@@ -21,5 +23,13 @@ class UsuarioController extends Controller{
         $usuario->setFullname($_POST['fullname']);
         $usuario->setCorreo($_POST['correo']);
         $usuario->registrar();
+    }
+    function logearse() {
+        $usuario=new Usuario();
+        $usuario->setUsername($_POST['username']);
+        $usuario->setPassword($_POST['password']);        
+        $usuario->login();
+       
+        
     }
 }

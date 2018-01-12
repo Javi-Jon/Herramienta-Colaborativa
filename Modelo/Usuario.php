@@ -45,7 +45,7 @@ class Usuario extends BD {
     }
 
     function setPassword($password) {
-        $password = password_hash($password, PASSWORD_BCRYPT);
+       
         $this->password = $password;
     }
 
@@ -66,8 +66,9 @@ class Usuario extends BD {
     }
 
     function registrar() {
-        $usuario = new Usuario();
-        echo $usuario->insert("INSERT INTO $this->tabla (username, password, tipo,fullname,correo) VALUES (:username,:password,:tipo,:fullname,:correo)", ['username' => $this->getUsername(), 'password' => $this->getPassword(), "tipo" => $this->getTipo(), "fullname" => $this->getFullname(), 'correo' => $this->getCorreo()]);
+        
+         $password = password_hash($this->getPassword(), 1);
+        echo $this->insert("INSERT INTO $this->tabla (username, password, tipo,fullname,correo) VALUES (:username,:password,:tipo,:fullname,:correo)", ['username' => $this->getUsername(), 'password' => $password, "tipo" => $this->getTipo(), "fullname" => $this->getFullname(), 'correo' => $this->getCorreo()]);
         //mail($usuario->getCorreo(), "registro", "te has registrado");  //METER MAIL AQUI?
 
         $mensaje = '<div>te has registrado con exito</div> ';
@@ -82,11 +83,21 @@ class Usuario extends BD {
         //dirección de respuesta, si queremos que sea distinta que la del remitente 
         $headers .= "Reply-To: pruebasjavier3@gmail.com\r\n";
 
-        if (mail($usuario->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
-            echo 'exito';
-        } else {
-            echo 'error';
-        }
+//        if (mail($this->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
+//            echo 'exito';
+//        } else {
+//            echo 'error';
+//        }
+    }
+    function login(){
+        
+     $item= $this->fSelectO("SELECT id, fullname, password FROM $this->tabla WHERE username=:username AND tipo=0", ['username'=> $this->getUsername()]);
+       if(password_verify($this->password,$item->password)){
+// LOGIN CORRECTO
+           $_SESSION['idusuario']=$item->id;
+       }else{
+           die('login erroneo');
+       }
     }
 
 }

@@ -11,14 +11,22 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>
+        <div>REGISTRO
             <form action="../index.php?controller=usuario&action=c" method="POST">
-                username<input type="text" name="username">
-               password <input type="password" name="password">
-               fullname<input type="text" name="fullname">
-               correo<input type="email" name="correo">
+                username<input type="text" name="username"><br>
+                password <input type="password" name="password"><br>
+                fullname<input type="text" name="fullname"><br>
+                correo<input type="email" name="correo"><br>
                <input type="submit">
             </form>
+            LOGIN
+            <form action="../index.php?controller=usuario&action=log" method="POST">
+                username<input type="text" name="username">
+               password <input type="password" name="password">
+             
+               <input type="submit">
+            </form>
+            
         </div>
     </body>
 </html>
