@@ -6,9 +6,10 @@ abstract class BD {
     private $user = 'root';
     private $passw = '';
     protected $conexion;
-    protected $tabla="";
-                function connect() {
+   
+    function connect() {
         $this->conexion = new PDO($this->ddbb, $this->user, $this->passw);
+      
     }
 
     function fSelectN($query, $param) {
@@ -57,10 +58,10 @@ abstract class BD {
         }else{
             $sentencia->execute($param);
         }
-         $id= $this->conexion->lastInsertId();
+        $id= $this->conexion->lastInsertId();
         $this->conexion=null;
       
-       return $id;
+         return $id;
          } catch (Exception $ex) {
             return $ex;
         }

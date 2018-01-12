@@ -7,8 +7,10 @@ class Proyecto extends BD{
     private $descripcion;
     private $creacion;
     
+    private $tabla="proyectos";
+            
     function __construct() {
-        $this->tabla="proyectos";   
+       
     }
     function getId() {
         return $this->id;

@@ -9,8 +9,9 @@ class Mensaje extends BD{
    private $hora;
    private $estado;
    
+   private $tabla="mensajes";
    function __construct() {
-       $this->tabla="mensajes";
+       
    }
    function getId() {
        return $this->id;

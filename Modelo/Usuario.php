@@ -1,6 +1,6 @@
 <?php
 
-require_once './ModeloBD.php';
+require_once __DIR__ . '/ModeloBD.php';
 
 class Usuario extends BD {
 
@@ -10,9 +10,10 @@ class Usuario extends BD {
     private $tipo;
     private $fullname;
     private $correo;
+    private $tabla = "usuarios";
 
     function __construct() {
-        $this->tabla = "usuarios";
+        
     }
 
     function getId() {
@@ -66,8 +67,26 @@ class Usuario extends BD {
 
     function registrar() {
         $usuario = new Usuario();
-        $usuario->insert('INSERT INTO :tabla(username, password, tipo,fullname,correo) VALUES (":username",":password",":tipo",":fullname",":correo");', ['tabla' => $this->tabla, 'username' => $this->username, 'password' => $this->password, "tipo" => 0, "fullname" => $this->fullname, 'correo' => $this->correo]);
-        //METER MAIL AQUI?
+        echo $usuario->insert("INSERT INTO $this->tabla (username, password, tipo,fullname,correo) VALUES (:username,:password,:tipo,:fullname,:correo)", ['username' => $this->getUsername(), 'password' => $this->getPassword(), "tipo" => $this->getTipo(), "fullname" => $this->getFullname(), 'correo' => $this->getCorreo()]);
+        //mail($usuario->getCorreo(), "registro", "te has registrado");  //METER MAIL AQUI?
+
+        $mensaje = '<div>te has registrado con exito</div> ';
+
+        //para el envío en formato HTML 
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+
+        //dirección del remitente 
+        $headers .= "From: javier marin <pruebasjavier3@gmail.com>\r\n";
+
+        //dirección de respuesta, si queremos que sea distinta que la del remitente 
+        $headers .= "Reply-To: pruebasjavier3@gmail.com\r\n";
+
+        if (mail($usuario->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
+            echo 'exito';
+        } else {
+            echo 'error';
+        }
     }
 
 }
