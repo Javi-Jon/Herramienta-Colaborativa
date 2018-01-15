@@ -8,6 +8,9 @@ class Proyecto extends BD{
     private $creacion;
     private $creador;
     
+    private $participantes;
+
+
     private $tabla="proyectos";
             
     function __construct() {
@@ -52,11 +55,28 @@ class Proyecto extends BD{
     function setCreador($creador) {
         $this->creador = $creador;
     }
+    
+                function getParticipantes() {
+                    return $this->participantes;
+                }
 
+                function setParticipantes($participantes) {
+                    $this->participantes = $participantes;
+                }
+
+    
         
     function nuevoProyecto(){
         $id=$this->insert("INSERT INTO $this->tabla (nombre,descripcion,creacion,creador) VALUES (:nombre,:descripcion,:creacion,:creador)", ['nombre'=> $this->getNombre(),'descripcion'=> $this->getDescripcion(),'creacion'=>date("Y-n-j"),'creador'=> $this->getCreador()]);
         return $id;
+    }
+    function anadirParticipante($idusuario){
+       
+        $this->insert("INSERT INTO participaciones (idusuario,idproyecto) VALUES (:idusuario,:idproyecto)", ['idusuario'=>$idusuario,'idproyecto'=> $this->getId()]);
+    }
+    function getParticipaciones() {
+       $participantes= $this->fSelectN("SELECT usuarios.username, usuarios.id, usuarios.fullname FROM participaciones,usuarios WHERE usuarios.id=participaciones.idusuario AND participaciones.idproyecto=:idproyecto", ['idproyecto'=> $this->getId()]);
+       return $participantes;
     }
 
 

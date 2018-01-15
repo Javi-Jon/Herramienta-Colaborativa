@@ -6,7 +6,8 @@ abstract class BD {
     private $user = 'root';
     private $passw = '';
     protected $conexion;
-   
+    protected $tabla;
+            
     function connect() {
         $this->conexion = new PDO($this->ddbb, $this->user, $this->passw);
       
@@ -92,23 +93,23 @@ abstract class BD {
     }
     
     public function getAll(){
-        $result =$this->fSelectN("SELECT * FROM :tabla",["tabla"=>$this->tabla]);        
+        $result =$this->fSelectN("SELECT * FROM $this->tabla",[]);        
         return $result;
     }   
     
     public function getById($id){
-        $object= $this->fSelectO("SELECT * FROM :tabla WHERE id = :id",["tabla"=>$this->tabla,"id"=>$id]);
+        $object= $this->fSelectO("SELECT * FROM $this->tabla WHERE id = :id",["id"=>$id]);
         return $object;
     }
     
     public function getByColumn($column,$value){
-        $result = $this->fSelectN("SELECT * FROM :tabla WHERE :column = :value",["tabla"=>$this->tabla,"column"=>$column,"value"=>$value]);        
+        $result = $this->fSelectN("SELECT * FROM $this->tabla WHERE :column = :value",["column"=>$column,"value"=>$value]);        
         return $result;
     }
     
     public function deleteById($id){
         try {
-            $this->delete("DELETE FROM :tabla WHERE id = :id",["tabla"=>$this->tabla,"id"=>$id]);
+            $this->delete("DELETE FROM $this->tabla WHERE id = :id",["id"=>$id]);
         } catch (Exception $e) {           
             return -1;
         }
@@ -116,7 +117,7 @@ abstract class BD {
     
     public function deleteByColumn($column,$value){
         try {
-            $this->delete("DELETE FROM :tabla WHERE :column = :value",["tabla"=>$this->tabla,"column"=>$column,"value"=>$value]);
+            $this->delete("DELETE FROM $this->tabla WHERE :column = :value",["column"=>$column,"value"=>$value]);
         } catch (Exception $e) {            
             return -1;
         }

@@ -8,7 +8,9 @@ class ProyectoController extends Controller{
             case 'c':
                 $this->crearProyecto();
                 break;
-            
+            case 'ap':
+                $this->anadirParticipacion();
+            break;
             default:
                 break;
         }
@@ -21,5 +23,18 @@ class ProyectoController extends Controller{
         
        $id= $proyecto->nuevoProyecto();
        echo $id;
+    }
+    function anadirParticipacion(){
+        $proyecto=new Proyecto();
+        $proyecto->setId($_GET['idproyecto']);
+        $proyecto->anadirParticipante($_GET['idparticipante']);
+    }
+    function buscarParticipantes() {
+        $proyecto=new Proyecto();
+        $proyecto->setId($_POST['idproyecto']);
+        $participantes=$proyecto->getParticipaciones();
+        
+       echo json_encode($participantes);
+        
     }
 }

@@ -100,5 +100,9 @@ class Usuario extends BD {
           return false;
        }
     }
+    function getUsuarioByUsername() {
+        $arrayUsuario= $this->getByColumn("username", $this->getUsername());
+        
+    }
 
 }

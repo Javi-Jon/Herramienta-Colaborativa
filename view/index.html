@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app>
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -22,7 +22,7 @@ and open the template in the editor.
 
         </style>
     </head>
-    <body>
+    <body ng-controller="ctrl">
         <div id="container">
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
@@ -59,13 +59,13 @@ and open the template in the editor.
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                            <h5 class="modal-title">New message</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="../index.php?controller=proyecto&action=c" method="POST">
+                            <form action="../index.php?controller=proyecto&action=c" method="POST" id="newProy">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Nombre del Proyecto</label>
                                     <input type="text" class="form-control" id="recipient-name" name="nombre">
@@ -75,10 +75,37 @@ and open the template in the editor.
                                     <textarea class="form-control" id="desc-proj" name="descripcion"></textarea>
                                 </div>
                                 <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary">
-                        </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" id="subm-newProy">
+                                </div>
                             </form>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="participantes-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Añadir participantes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+            {{getTotal()}}
+			<ul>
+				<li ng-repeat="tarea in lista" >{{tarea.nombre}} <button ng-click="borrar(tarea.id)">X</button></li>
+
+			</ul>
+            <form>
+                <input type="text" name="nombre" ng-model="txtnombre" >
+                <input type="submit" ng-click='anadir()'>
+            </form>
+		</div>
+
                         </div>                        
                     </div>
                 </div>
@@ -91,6 +118,9 @@ and open the template in the editor.
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/angular.js"></script>
     </body>
 
 </html>
