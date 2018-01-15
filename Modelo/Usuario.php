@@ -95,8 +95,9 @@ class Usuario extends BD {
        if(password_verify($this->password,$item->password)){
 // LOGIN CORRECTO
            $_SESSION['idusuario']=$item->id;
+           return true;
        }else{
-           die('login erroneo');
+          return false;
        }
     }
 

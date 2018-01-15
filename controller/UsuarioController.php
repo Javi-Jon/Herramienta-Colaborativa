@@ -28,7 +28,9 @@ class UsuarioController extends Controller{
         $usuario=new Usuario();
         $usuario->setUsername($_POST['username']);
         $usuario->setPassword($_POST['password']);        
-        $usuario->login();
+        if($usuario->login()){
+            header("Location: view/index.html");
+        }
        
         
     }

@@ -3,7 +3,7 @@ require_once 'controller/UsuarioController.php';;
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
-}elseif (isset ($_GET['controller'])) {
+}elseif (isset ($_GET['controller']) || isset($_SESSION['idusuario'])) {
    switch ($_GET['controller']) {
     case 'usuario':       
            $controller = new UsuarioController();
@@ -21,4 +21,7 @@ function action($objController) {
 }
 function loginView(){
     header("Location: ./view/loginView.php");
+}
+function index(){
+    header("Location: view/index.html");
 }
