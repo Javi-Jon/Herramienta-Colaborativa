@@ -1,5 +1,6 @@
 <?php
-require_once 'controller/UsuarioController.php';;
+require_once 'controller/UsuarioController.php';
+require_once 'controller/ProyectoController.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
@@ -7,6 +8,10 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
    switch ($_GET['controller']) {
     case 'usuario':       
            $controller = new UsuarioController();
+          action($controller);       
+        break;
+    case 'proyecto':       
+           $controller = new ProyectoController();
           action($controller);       
         break;
     default:
