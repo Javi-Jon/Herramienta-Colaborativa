@@ -11,6 +11,9 @@ class ProyectoController extends Controller{
             case 'ap':
                 $this->anadirParticipacion();
             break;
+            case 'dp':
+                $this->deleteParticipacion();
+                break;
             default:
                 break;
         }
@@ -26,8 +29,19 @@ class ProyectoController extends Controller{
     }
     function anadirParticipacion(){
         $proyecto=new Proyecto();
+        $p=new Usuario();
+        $p->setUsername($_POST['username']);
+        $persona=$p->getUsuarioByUsername($_POST['username']);
+        if($persona==''){
+            echo'error';
+        } else {
         $proyecto->setId($_GET['idproyecto']);
-        $proyecto->anadirParticipante($_GET['idparticipante']);
+        
+      $idParticipacion=$proyecto->anadirParticipante($persona->id);   
+      echo json_encode([$persona,"participacionID"=>$idParticipacion]);
+        }
+    
+        
     }
     function buscarParticipantes() {
         $proyecto=new Proyecto();
@@ -35,6 +49,13 @@ class ProyectoController extends Controller{
         $participantes=$proyecto->getParticipaciones();
         
        echo json_encode($participantes);
+        
+    }
+    function deleteParticipacion() {
+        $proyecto=new Proyecto();
+       $filas= $proyecto->deleteParti($_GET['idpart']);
+       
+       echo $filas;
         
     }
 }

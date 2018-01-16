@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app>
+<html>
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -22,7 +22,7 @@ and open the template in the editor.
 
         </style>
     </head>
-    <body ng-controller="ctrl">
+    <body>
         <div id="container">
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
@@ -95,14 +95,21 @@ and open the template in the editor.
                         </div>
                         <div class="modal-body">
                             <div>
-            {{getTotal()}}
-			<ul>
-				<li ng-repeat="tarea in lista" >{{tarea.nombre}} <button ng-click="borrar(tarea.id)">X</button></li>
+
+			<ul id="participantes">
+                            <li  class="alert alert-success">
+                                  <button>X</button></li>
+                                
 
 			</ul>
-            <form>
-                <input type="text" name="nombre" ng-model="txtnombre" >
-                <input type="submit" ng-click='anadir()'>
+            
+            <div class="input-group ">
+    <div class="input-group-addon"><i class="material-icons">account_circle</i></div>
+    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+  </div>
+            <form id='formuser'>
+                <input type="text" name="username">
+                <input type="submit" id="subm-part">
             </form>
 		</div>
 
@@ -110,6 +117,11 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+            
+            <form action='../index.php?controller=usuario&action=rself' method="POST">
+                <input type="text" name="username">
+                <input type="submit">
+            </form>
             <footer>
                 asdasdsa
             </footer>
@@ -118,7 +130,7 @@ and open the template in the editor.
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+
         <script src="js/index.js"></script>
         <script src="js/angular.js"></script>
     </body>

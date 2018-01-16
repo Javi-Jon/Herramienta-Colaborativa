@@ -3,25 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function ctrl($scope) {
 
-	$scope.lista=[
-	{id:0,nombre:'javer'},
-	{id:1,nombre:'anselmo'}];
+lista=[{index:0,fullname:'yo'}];
+//    $.ajax({                url:'../index.php?controller=usuario&action=rself',
+//                     success:function(dato){
+//                         console.log(dato);
+//                       x=jQuery.parseJSON(dato);
+//                       
+//                        $scope.lista[x];
+//                        console.log('asdasd');
+//                    },
+//                    ajaxError:function(){
+//                alert('algo no ha ido como debia');
+//            }
+//                });
 
-	 $scope.getTotal = function () {
-    return $scope.lista.length;
+	
+
+	  function getTotal () {
+    return lista.length;
   };
 
-	$scope.anadir=function() {		
-		$scope.lista.push({id:$scope.getTotal(),nombre:$scope.txtnombre});
-		$scope.txtnombre='';		
-	};
-	$scope.borrar=function($index){
-		$scope.lista.splice($index,1);
-	};
-}
+	
+            
+            //$scope.lista.push({id:$scope.getTotal(),fullname:$scope.txtnombre});
+//		$scope.txtnombre='';		
 
+	function borrar($index){
+		lista.splice($index,1);
+	};
 
 
 

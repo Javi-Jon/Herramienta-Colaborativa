@@ -26,6 +26,10 @@ and open the template in the editor.
              
                <input type="submit">
             </form>
+            <form action='../index.php?controller=usuario&action=rbyuser' method="POST">
+                <input type="text" name="username">
+                <input type="submit">
+            </form>
             
         </div>
     </body>

@@ -72,11 +72,16 @@ class Proyecto extends BD{
     }
     function anadirParticipante($idusuario){
        
-        $this->insert("INSERT INTO participaciones (idusuario,idproyecto) VALUES (:idusuario,:idproyecto)", ['idusuario'=>$idusuario,'idproyecto'=> $this->getId()]);
+        $idParticipacion=$this->insert("INSERT INTO participaciones (idusuario,idproyecto) VALUES (:idusuario,:idproyecto)", ['idusuario'=>$idusuario,'idproyecto'=> $this->getId()]);
+        return $idParticipacion;
     }
     function getParticipaciones() {
        $participantes= $this->fSelectN("SELECT usuarios.username, usuarios.id, usuarios.fullname FROM participaciones,usuarios WHERE usuarios.id=participaciones.idusuario AND participaciones.idproyecto=:idproyecto", ['idproyecto'=> $this->getId()]);
        return $participantes;
+    }
+    function deleteParti($id) {
+        $filas=$this->delete("DELETE FROM participaciones WHERE id=:id", ['id'=>$id]);
+        return $filas;
     }
 
 

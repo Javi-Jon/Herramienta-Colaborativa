@@ -6,7 +6,7 @@ abstract class BD {
     private $user = 'root';
     private $passw = '';
     protected $conexion;
-    protected $tabla;
+    private $tabla;
             
     function connect() {
         $this->conexion = new PDO($this->ddbb, $this->user, $this->passw);
@@ -76,7 +76,9 @@ abstract class BD {
         }else{
             $sentencia->execute($param);
         }
+        $filas=$sentencia->rowCount();
         $this->conexion=null;
+        return $filas;
          } catch (Exception $ex) {
             return $ex;
         }
@@ -117,7 +119,7 @@ abstract class BD {
     
     public function deleteByColumn($column,$value){
         try {
-            $this->delete("DELETE FROM $this->tabla WHERE :column = :value",["column"=>$column,"value"=>$value]);
+            $this->delete("DELETE FROM $this->tabla WHERE :column = ':value'",["column"=>$column,"value"=>$value]);
         } catch (Exception $e) {            
             return -1;
         }

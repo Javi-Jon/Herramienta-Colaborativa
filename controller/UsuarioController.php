@@ -11,6 +11,12 @@ class UsuarioController extends Controller{
             case 'log':
                 $this->logearse();
                 break;
+            case 'rbyuser':
+                $this->buscarByUsername();                
+                break;
+            case 'rself':
+                $this->buscarSelf();
+                break;
             default:
                 break;
         }
@@ -30,8 +36,25 @@ class UsuarioController extends Controller{
         $usuario->setPassword($_POST['password']);        
         if($usuario->login()){
             header("Location: view/index.html");
+        }else{
+            echo 'login incorrecto';
         }
-       
         
     }
+    function buscarByUsername(){
+        $user=new Usuario();
+        $user->setUsername($_POST['username']);
+        $ausuario=$user->getUsuarioByUsername();
+        echo json_encode($ausuario);              
+    }
+    function buscarSelf(){
+        $user=new Usuario();
+        $user->setId($_SESSION['idusuario']);        
+        $ausuario=$user->getUsuarioByID();
+        echo json_encode($ausuario);
+//        return $ausuario;
+        
+        
+    }
+    
 }
