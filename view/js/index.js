@@ -56,7 +56,10 @@ $(document).ready(function(){
                     
                   participacion.remove();
                }
-           }
+           },
+           ajaxError:function(){
+                alert('algo no ha ido como debia');
+            }
         });
      
     });
