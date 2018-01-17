@@ -16,7 +16,7 @@ class TareasController extends Tarea {
     }
     function readMisTareas(){
         $tareas=new Tarea();
-        $tareas=$tareas->getTareasByUser($_SESSION['idusuario']);
-        echo json_encode($tareas);
+        $tarea=$tareas->getTareasByUser($_SESSION['idusuario']);
+        echo json_encode($tarea);
     }
 }

@@ -2,4 +2,23 @@
 .m-top-nav{
     margin-top: 5px;
 }
-
+.tarea-span{
+   
+  visibility: hidden;
+  opacity:0;
+     transition: visibility 0s, opacity 0.2s linear;
+}
+.tarea-li:hover > span{
+    visibility: visible;
+    opacity: 1;
+}
+.tarea-span{
+    transition-timing-function: ease;
+}
+.tarea-li{
+     display: flex;
+    justify-content: space-between;
+}
+.tarea-span> input:nth-child(1):hover{
+    background-color:greenyellow;
+}
