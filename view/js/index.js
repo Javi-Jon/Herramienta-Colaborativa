@@ -1,3 +1,14 @@
+
+function comprobarMisTareas(){$.ajax({
+    url:"../index.php?controller=tareas&action=rself",
+    success:function(tareas){
+        console.log(tareas);
+        return tareas;s
+    }
+    
+});}
+tareas=comprobarMisTareas();
+
 $(document).ready(function(){
     $('#subm-newProy').click(function(e){
         e.preventDefault();
@@ -17,6 +28,11 @@ $(document).ready(function(){
             }
         });
     });
+    $('#mistareas-btn').click(function(){
+       comprobarMisTareas(); 
+       $('#mistareas-modal').modal('show');
+    });
+    
     $('#subm-part').click(function(evt){
         evt.preventDefault();
 

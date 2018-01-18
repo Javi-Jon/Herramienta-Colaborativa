@@ -1,6 +1,6 @@
 <?php
 
-require_once './ModeloBD.php';
+require_once __DIR__ .'./ModeloBD.php';
 class Tarea extends BD {
     private $id;
     private $titulo;
@@ -136,7 +136,7 @@ class Tarea extends BD {
         echo $this->deleteById($this->getId());
     }
     function getTareasByUser($iduser){
-        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM `tareas`, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:user", ['user'=>$iduser]);
+        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:user", ['user'=>$iduser]);
               return $tareas; 
         
     }

@@ -1,6 +1,7 @@
 <?php
 require_once 'controller/UsuarioController.php';
 require_once 'controller/ProyectoController.php';
+require_once './controller/TareasController.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
@@ -12,6 +13,10 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
         break;
     case 'proyecto':       
            $controller = new ProyectoController();
+          action($controller);       
+        break;
+    case 'tareas':       
+           $controller = new TareasController();
           action($controller);       
         break;
     default:
