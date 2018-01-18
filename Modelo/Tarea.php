@@ -129,15 +129,24 @@ class Tarea extends BD {
     }
 
     function nuevaTarea() {
-        echo $this->insert("INSERT INTO $this->tabla (titulo, descripcion, proyecto, estado, dificultad, plazo) VALUES (:titulo, :descripcion, :proyecto, :estado, :dificultad, :plazo)", ["titulo"=>$this->getTitulo(), "descripcion"=>$this->getDescripcion(), "proyecto"=>$this->getProyecto(), "estado"=>$this->getEstado(), "dificultad"=>$this->getDificultad(), "plazo"=>$this->getPlazo()]);
+        $filas= $this->insert("INSERT INTO $this->tabla (titulo, descripcion, proyecto, estado, dificultad, plazo) VALUES (:titulo, :descripcion, :proyecto, :estado, :dificultad, :plazo)", ["titulo"=>$this->getTitulo(), "descripcion"=>$this->getDescripcion(), "proyecto"=>$this->getProyecto(), "estado"=>$this->getEstado(), "dificultad"=>$this->getDificultad(), "plazo"=>$this->getPlazo()]);
+        return $filas;
     }
 
     function borrarTarea() {
-        echo $this->deleteById($this->getId());
+        return $this->deleteById($this->getId());
+    }
+    function editarTarea(){
+        $filas=$this->update("UPDATE $this->tabla SET `titulo`=:titulo,`descripcion`=:descripcion,`dificultad`=:dificultad,`plazo`=:plazo WHERE id=:id", ['titulo'=> $this->getTitulo(),'descripcion'=> $this->getDescripcion(),'dificultad'=> $this->getDificultad(),'plazo'=> $this->getPlazo(),'id'=> $this->getId()]); 
+       return $filas;
     }
     function getTareasByUser($iduser){
         $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:user", ['user'=>$iduser]);
-              return $tareas; 
+      return $tareas; 
         
+    }
+    function marcarRealizada() {
+        $estado= $this->update("UPDATE $this->tabla SET `estado`=1 WHERE id=:id",['id'=> $this->getId()]);
+        return $estado;
     }
 }

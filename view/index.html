@@ -48,7 +48,7 @@ and open the template in the editor.
                         </li>
                     </ul>
                     <div class="navbar-nav ">
-                        <button class="btn btn-warning d-flex align-items-center m-top-nav"  id="mistareas-btn"><i class="material-icons">assignment</i>Mis tareas</button>
+                        <button class="btn btn-warning d-flex align-items-center m-top-nav "  id="mistareas-btn"><i class="material-icons">assignment</i>Mis tareas</button>
                         <a class="nav-link nav-item  d-flex align-items-center" href="#"><i class="material-icons">account_circle</i>Bienvenido{{nombre}}</a>
                     </div>
 
@@ -125,11 +125,9 @@ and open the template in the editor.
                         </div>
                         <div class="modal-body">
                             <div>
-                                <ul>
+                                <ul id="tareas">
                                     
-                                    <li class="tarea-li">asdassa<span class="tarea-span"><input type="radio"><input type="radio"><input type="radio"><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></span></li>
-                                    <li class="tarea-li">asdassa<span class="tarea-span"><i class="material-icons">mode_edit</i><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></span></li>
-                                    <li class="tarea-li">asdassa<span class="tarea-span"><i class="material-icons">mode_edit</i><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></span></li>
+                                   
                                 </ul>
                                 <hr>todo
                             </div>
@@ -139,8 +137,12 @@ and open the template in the editor.
             </div>
 
 
-            <form action='../index.php?controller=usuario&action=rself' method="POST">
-                <input type="text" name="username">
+            <form action='../index.php?controller=tareas&action=ubyID&id=1' method="POST">
+                <input type="text" name="titulo">
+                <input type="text" name="descripcion">
+                <input type="number" name="dificultad">
+                <input type="checkbox" name="estado">
+                <input type="date" name="plazo">
                 <input type="submit">
             </form>
             <footer>

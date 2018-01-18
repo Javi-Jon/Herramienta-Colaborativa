@@ -88,7 +88,10 @@ abstract class BD {
         $this->connect();
         $sentencia=$this->conexion->prepare($sql);
         $sentencia->execute($param);
+        $filas=$sentencia->rowCount();
+   
         $this->conexion=null;
+        return $filas;
          } catch (Exception $ex) {
             return $ex;
         }
