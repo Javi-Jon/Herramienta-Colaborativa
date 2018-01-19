@@ -2,6 +2,7 @@
 
 require_once 'ControllerGenerico.php';
 require_once __DIR__ . '/../Modelo/Tarea.php';
+require_once 'ProyectoController.php';
 
 class TareasController extends Tarea {
 
@@ -18,6 +19,9 @@ class TareasController extends Tarea {
                 break;
             case 'dbyID':
                 $this->deleteTarea();
+                break;
+            case 'ct':
+                $this->insertTarea();
                 break;
             default:
                 break;
@@ -60,6 +64,20 @@ class TareasController extends Tarea {
         } else {
             echo '0';
         }
+    }
+    function getTareasDeProyecto($idproyecto){
+      $tarea=new Tarea();
+      $tareas=$tarea->getTareasByProyecto($idproyecto);
+        return $tareas;
+        
+    }
+    function insertTarea() {
+       $tarea=new Tarea();
+       $tarea->setTitulo($_POST['titulo']);
+       $tarea->setDescripcion($_POST['descripcion']);
+       $tarea->setProyecto($_POST['proyecto']);
+       $tarea->setEstado(0);
+       $tarea->
     }
 
 }

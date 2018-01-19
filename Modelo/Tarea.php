@@ -151,4 +151,9 @@ class Tarea extends BD {
         $estado= $this->update("UPDATE $this->tabla SET `estado`=1 WHERE id=:id",['id'=> $this->getId()]);
         return $estado;
     }
+    function getTareasByProyecto($idproyecto){
+        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla WHERE  AND proyecto=:proyecto AND estado=0", ['proyecto'=>$idproyecto]);
+      return $tareas; 
+        
+    }
 }

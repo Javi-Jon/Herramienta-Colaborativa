@@ -20,10 +20,12 @@
             </article>
             <section class="proyectos-index-r">
                  {%for proyecto in datos.proyectos%}
-                <div class="div-proyecto card">
+                 <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}">
+                    <div class="div-proyecto card">
                     <h3>{{proyecto.nombre}}</h3>
                     <p>{{proyecto.descripcion}}</p>                    
                 </div>
+                     </a>
 
                 
                  {% endfor %}

@@ -88,6 +88,10 @@ class Proyecto extends BD{
     
        return $proyectos;
     }
+    function getProyectoById(){
+        $proyecto= $this->fSelectO("SELECT * FROM $this->tabla WHERE id=:id", ['id'=> $this->getId()]);
+        return $proyecto;
+    }
 
 
 

@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div id="wrapper-proyecto">
+    <h1>{{datos.proyecto.nombre}}</h1>
+    <p>{{datos.proyecto.descripcion}}</p>
+    <select>
+    {%for persona in datos.participantes%}
+    <option>{{persona.fullname}}</option>
+    {% endfor %}
+    </select>
+    <ul>
+    {%for persona in datos.participantes%}
+    <li>{{persona.username}}</li>
+    {% endfor %}
+    
+    </ul>
+</div>
+
+{%endblock%}

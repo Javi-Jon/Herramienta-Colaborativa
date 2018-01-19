@@ -1,6 +1,7 @@
 <?php
 require_once 'ControllerGenerico.php';
 require_once __DIR__ .'/../Modelo/Proyecto.php';
+require_once 'TareasController.php';
 class ProyectoController extends Controller{
      
     function run($action){
@@ -14,8 +15,11 @@ class ProyectoController extends Controller{
             case 'dp':
                 $this->deleteParticipacion();
                 break;
-            case 'pp':
-                $this->getProyectosUsuario($_GET['asd']);
+//            case 'pp':
+//                $this->getProyectosUsuario($_GET['asd']);
+//                break;
+            case 'vp':
+                $this->verProyecto();
                 break;
             default:
                 break;
@@ -66,5 +70,15 @@ class ProyectoController extends Controller{
         $proyectos= $proyecto->getProyectosByUsuario($idusuario);
         
         return $proyectos;
+    }
+    function verProyecto() {
+        $p=new Proyecto();
+        $p->setId($_GET['id']);
+       $proyecto= $p->getProyectoById();
+       $participantes=$p->getParticipaciones();
+      $tc=new TareasController();
+     $tareas= $tc->getTareasDeProyecto($p->getId());
+       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas];
+       $this->view('proyecto', $datos);
     }
 }
