@@ -77,7 +77,7 @@ class TareasController extends Tarea {
        $tarea->setDescripcion($_POST['descripcion']);
        $tarea->setProyecto($_POST['proyecto']);
        $tarea->setEstado(0);
-       $tarea->
+
     }
 
 }
