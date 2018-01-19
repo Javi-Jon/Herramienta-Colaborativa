@@ -14,6 +14,9 @@ class ProyectoController extends Controller{
             case 'dp':
                 $this->deleteParticipacion();
                 break;
+            case 'pp':
+                $this->getProyectosUsuario($_GET['asd']);
+                break;
             default:
                 break;
         }
@@ -57,5 +60,11 @@ class ProyectoController extends Controller{
        
        echo $filas;
         
+    }
+    function getProyectosUsuario($idusuario) {
+         $proyecto=new Proyecto();
+        $proyectos= $proyecto->getProyectosByUsuario($idusuario);
+        
+        return $proyectos;
     }
 }

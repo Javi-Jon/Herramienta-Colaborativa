@@ -1,6 +1,7 @@
 <?php
 require_once 'ControllerGenerico.php';
 require_once __DIR__ .'/../Modelo/Usuario.php';
+require_once 'ProyectoController.php';
 class UsuarioController extends Controller{
       
     function run($action){
@@ -35,7 +36,8 @@ class UsuarioController extends Controller{
         $usuario->setUsername($_POST['username']);
         $usuario->setPassword($_POST['password']);        
         if($usuario->login()){
-            $this->view('index',[]);
+          $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
+            $this->view('index',['proyectos'=>$proyectos]);
         }else{
             echo 'login incorrecto';
         }
@@ -55,6 +57,11 @@ class UsuarioController extends Controller{
 //        return $ausuario;
         
         
+    }
+    function getInfoUsuario($idusuario){
+         $pc=new ProyectoController();
+          $proyectos=  $pc->getProyectosUsuario($idusuario);
+          return $proyectos;
     }
     
 }

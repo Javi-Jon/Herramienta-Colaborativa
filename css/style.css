@@ -31,14 +31,17 @@
 }
 .tarea-li{
      display: flex;
-     flex-direction:column;
-   
+     flex-direction:column;   
     cursor: pointer;
+    transition: visibility 0.8s ease-out;
+
 }
 /*.tarea-li > div{
     display: flex;
   
 }*/
+
+
 
 
 
@@ -62,6 +65,8 @@
   }
 }
 
+
+
 /*****************************************
 
 
@@ -70,10 +75,16 @@
 
 
 ********************************************/
-
+/*#wrapper{
+     display: flex;
+     flex-direction: column;
+align-items: stretch;
+}*/
 #wrap{
     display: flex;
+align-items: stretch;
 
+flex-grow: 1;
     
 }
 .aside-index{
@@ -82,33 +93,45 @@
     flex-grow: 3;
     background-color: red;
       transition: width 0.4s linear;
-      max-width: 560px;
+      max-width: 400px;
+      min-width: 400px;
+
+align-items: center;
 }
 
-.section-index-c{
-    display: flex;
+.fd-c{
+   
     flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
-    flex-grow: 7;
+    ;    
+    /*align-items:  stretch;*/
+  
     background-color: blue;
    
 }
-.section-index-r{
+.proyectos-index-r{
     display: flex;
-
     flex-wrap: wrap;
     justify-content: space-around;
-    align-content: center;
+   
     flex-grow: 7;
-    background-color: blue;
+  
    
 }
 .div-proyecto{
     display: flex;
-    flex-wrap: wrap;
-    width: 30%;
-    margin: 1.5em;
+    margin: 0.5em;
     background-color: #83b339;
+}
+.div-proyecto:hover{
+    background-color: #73ab58;
+}
+.section-index{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 7;
+}
+@media screen and (max-width: 991px){
+    .aside-index{
+        display: none;
+    }
 }

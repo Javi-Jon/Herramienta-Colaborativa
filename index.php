@@ -7,7 +7,7 @@ session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
 }elseif (isset ($_GET['controller']) || isset($_SESSION['idusuario'])) {
-   switch ($_GET['controller']) {
+   switch (@$_GET['controller']) {
     case 'usuario':       
            $controller = new UsuarioController();
           action($controller);       
@@ -36,5 +36,8 @@ function loginView(){
     
 }
 function index(){
-    $ctrl->view('index', ['prueba'=>'dasda']);
+    $ctrl=new Controller();
+    $usuario=new UsuarioController();
+     $proyectos=$usuario->getInfoUsuario($_SESSION['idusuario']);
+    $ctrl->view('index', ['proyectos'=>$proyectos]);
 }

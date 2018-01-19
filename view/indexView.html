@@ -1,10 +1,10 @@
 {% extends "index.html" %}
 
 {% block content %}
-        <div id="wrap">
+        <div id="wrap">            
             <aside class="aside-index">
                 <div class="text-center">
-                    <img src="" class="img-circle" alt="...">
+                    <img src="https://www.sonypark360.net/wp-content/uploads/2017/08/profile-pictures.png" class="img-circle" alt="...">
                 </div>
                 <hr>
                 <div> 
@@ -12,30 +12,22 @@
                 </div>
             </aside>
             
-            <section class="section-index-c">
-
+        <section class="section-index">
+            <article>
+            <h1>Tus Proyectos</h1>
+            <button id="blayout"><i class="material-icons">dashboard</i></button>
+            <hr>
+            </article>
+            <section class="proyectos-index-r">
+                 {%for proyecto in datos.proyectos%}
                 <div class="div-proyecto card">
-                    <h3>Proyecto Ruedas</h3>
-                    <p>Proyecto creado para hacer ruedas</p>
+                    <h3>{{proyecto.nombre}}</h3>
+                    <p>{{proyecto.descripcion}}</p>                    
                 </div>
 
-                <div class="div-proyecto card">
-                    <h3>Proyecto Ruedas</h3>
-                    <p>Proyecto creado para hacer ruedas</p>
-                </div> 
-                <div class="div-proyecto card">
-                    <h3>Proyecto Ruedas</h3>
-                    <p>Proyecto creado para hacer ruedas</p>
-                </div> 
-                <div class="div-proyecto card">
-                    <h3>Proyecto Ruedas</h3>
-                    <p>Proyecto creado para hacer ruedas</p>
-                </div> 
-                <div class="div-proyecto card">
-                    <h3>Proyecto Ruedas</h3>
-                    <p>Proyecto creado para hacer ruedas</p>
-                </div>
-
+                
+                 {% endfor %}
             </section>
-        </div>
+        </section>
+    </div>
 {% endblock %}
