@@ -9,7 +9,7 @@ $(document).ready(function(){
     $('#subm-newProy').click(function(e){
         e.preventDefault();        
         $.ajax({
-            url:"../index.php?controller=proyecto&action=c",
+            url:"index.php?controller=proyecto&action=c",
             method:'POST',
             data:$('#newProy').serialize(),
             success:function(data){
@@ -32,7 +32,7 @@ $(document).ready(function(){
         evt.preventDefault();
 
         $.ajax({
-                    url:'../index.php?controller=proyecto&action=ap&idproyecto='+idproyecto,
+                    url:'./index.php?controller=proyecto&action=ap&idproyecto='+idproyecto,
                     method:'POST',
                     data:$('#formuser').serialize(),                    
                      success:function(dato){                       
@@ -55,7 +55,7 @@ $(document).ready(function(){
         participacion=$(this).parent();
 
         $.ajax({
-            url:'../index.php?controller=proyecto&action=dp&idpart='+$(this).attr('idpart'),
+            url:'./index.php?controller=proyecto&action=dp&idpart='+$(this).attr('idpart'),
             method:'GET',
            success:function(datos){            
                if(datos==1){                
@@ -68,7 +68,7 @@ $(document).ready(function(){
         });
      
     });
-      $("#container").on('click', '.beditarTarea', function () {
+      $(".tareas-wrap").on('click', '.beditarTarea', function () {
           if($(this).hasClass('editando')){
             var  selector='#formTarea'+$(this).attr('idtarea');
               $(this).removeClass('editando');              
@@ -79,10 +79,10 @@ $(document).ready(function(){
           }
          
       });
-      $("#container").on('submit', '.form-editar-tarea', function (e) {
+      $(".tareas-wrap").on('submit', '.form-editar-tarea', function (e) {
           e.preventDefault();
           $.ajax({
-              url:'../index.php?controller=tareas&action=ubyID',
+              url:'index.php?controller=tareas&action=ubyID',
               data:$(this).serialize(),
               method:'POST',
               success:function(datos){
@@ -98,7 +98,7 @@ $(document).ready(function(){
 function comprobarMisTareas(){
   
     $.ajax({
-    url:"../index.php?controller=tareas&action=rself",
+    url:"./index.php?controller=tareas&action=rself",
     success:function(tareas){        
         tarea=jQuery.parseJSON(tareas);     
             construirElemTareas(tarea);
@@ -113,9 +113,9 @@ function comprobarMisTareas(){
 }
 
 function construirElemTareas(tareas){
-    $('#tareas').empty();
+    $('.tareas-wrap').empty();
    tareas.forEach(function(tarea){
-        $('#tareas').append('<li class="tarea-li"><div>'+tarea.titulo+ tarea.plazo+tarea.estado+'<span class="tarea-span"><i class="material-icons beditarTarea" idtarea="'+tarea.id+'">mode_edit</i><i class="material-icons">delete</i></span></div></li>');
+        $('.tareas-wrap').append('<li class="tarea-li"><div>'+tarea.titulo+ tarea.plazo+tarea.estado+'<span class="tarea-span"><i class="material-icons beditarTarea" idtarea="'+tarea.id+'">mode_edit</i><i class="material-icons">delete</i></span></div></li>');
    });
             
         }

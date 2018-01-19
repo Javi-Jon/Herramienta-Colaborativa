@@ -10,17 +10,8 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"     rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <style>
-            footer{
-                display:flex;
-                margin-top: auto;
-                background-color: #ffecb6;
-            }
-
-        </style>
     </head>
     <body>
         <div id="container">
@@ -28,7 +19,6 @@ and open the template in the editor.
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
 
                 <a class="navbar-brand" href="#"><img src="../img/logo2.png" class="img-responsive" height="40"></a>
 
@@ -125,7 +115,7 @@ and open the template in the editor.
                         </div>
                         <div class="modal-body">
                             <div>
-                                <ul id="tareas">
+                                <ul class="tareas-wrap">
                                     
                                    
                                 </ul>
@@ -138,16 +128,10 @@ and open the template in the editor.
             
         <!--ESTO ES EL CUERPO -->
             
+{% block content %}
+{% endblock %}
 
-
-            <form action='../index.php?controller=tareas&action=ubyID&id=1' method="POST">
-                <input type="text" name="titulo">
-                <input type="text" name="descripcion">
-                <input type="number" name="dificultad">
-                <input type="checkbox" name="estado">
-                <input type="date" name="plazo">
-                <input type="submit">
-            </form>        
+           
         
         
         </div>

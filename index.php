@@ -2,6 +2,7 @@
 require_once 'controller/UsuarioController.php';
 require_once 'controller/ProyectoController.php';
 require_once './controller/TareasController.php';
+require_once 'controller/ControllerGenerico.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
@@ -30,8 +31,10 @@ function action($objController) {
     $objController->run($_GET['action']);
 }
 function loginView(){
-    header("Location: ./view/loginView.php");
+   $ctrl=new Controller();
+   $ctrl->view('login', ['prueba'=>'dasda']);
+    
 }
 function index(){
-    header("Location: view/index.html");
+    $ctrl->view('index', ['prueba'=>'dasda']);
 }

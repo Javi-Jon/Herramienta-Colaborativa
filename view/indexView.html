@@ -1,42 +1,41 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/index-style.css" >
-    </head>
-    <body>
-        
-        
-        
+{% extends "index.html" %}
+
+{% block content %}
         <div id="wrap">
-            <aside>aside</aside>
-            <section>
-                <div class="div-proyecto">asdasasdasasdasasdasasdasasdasasda sasdasasdasasdasas asasdasasdasasdas asdasasdasasdasasdasasdasasdasasdasasdas
+            <aside class="aside-index">
+                <div class="text-center">
+                    <img src="" class="img-circle" alt="...">
+                </div>
+                <hr>
+                <div> 
+                    <ul class="tareas-wrap"></ul>
+                </div>
+            </aside>
+            
+            <section class="section-index-c">
+
+                <div class="div-proyecto card">
+                    <h3>Proyecto Ruedas</h3>
+                    <p>Proyecto creado para hacer ruedas</p>
+                </div>
+
+                <div class="div-proyecto card">
+                    <h3>Proyecto Ruedas</h3>
+                    <p>Proyecto creado para hacer ruedas</p>
                 </div> 
-                <div class="div-proyecto">asdas</div>
-                <div class="div-proyecto">asdas</div>
-                <div class="div-proyecto">asdas</div>
-                <div class="div-proyecto">asdas</div>
-                <div class="div-proyecto">asdas</div>
-                
+                <div class="div-proyecto card">
+                    <h3>Proyecto Ruedas</h3>
+                    <p>Proyecto creado para hacer ruedas</p>
+                </div> 
+                <div class="div-proyecto card">
+                    <h3>Proyecto Ruedas</h3>
+                    <p>Proyecto creado para hacer ruedas</p>
+                </div> 
+                <div class="div-proyecto card">
+                    <h3>Proyecto Ruedas</h3>
+                    <p>Proyecto creado para hacer ruedas</p>
+                </div>
+
             </section>
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    </body>
-</html>
+{% endblock %}

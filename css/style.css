@@ -1,0 +1,114 @@
+
+/******************************************
+
+
+        CSS para la navbar
+
+
+
+
+**************************************/
+
+
+
+/*para hacer que los elementos del navbar tengan separacion */
+.m-top-nav{
+    margin-top: 5px;
+    margin-left:5px;
+}
+.tarea-span{
+   
+  visibility: hidden;
+  opacity:0;
+     transition: visibility 0.4s, opacity 0.4s linear;
+}
+.tarea-li:hover > div >span{
+    visibility: visible;
+    opacity: 1;
+}
+.tarea-span{
+    transition-timing-function: ease;
+}
+.tarea-li{
+     display: flex;
+     flex-direction:column;
+   
+    cursor: pointer;
+}
+/*.tarea-li > div{
+    display: flex;
+  
+}*/
+
+
+
+.form-editar-tarea{
+    display: flex;
+    flex-direction: column;
+  animation: animationFrames linear 4s;
+  animation-iteration-count: 1;
+  transform-origin: 50% 0%;
+}
+
+@keyframes animationFrames{
+  0% {
+    transform:  scaleY(0.11) ;
+  }
+  17% {
+    transform:  scaleY(1) ;
+  }
+  100% {
+    transform:  scaleY(1) ;
+  }
+}
+
+/*****************************************
+
+
+    CSS index
+
+
+
+********************************************/
+
+#wrap{
+    display: flex;
+
+    
+}
+.aside-index{
+   display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    background-color: red;
+      transition: width 0.4s linear;
+      max-width: 560px;
+}
+
+.section-index-c{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    flex-grow: 7;
+    background-color: blue;
+   
+}
+.section-index-r{
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    flex-grow: 7;
+    background-color: blue;
+   
+}
+.div-proyecto{
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    margin: 1.5em;
+    background-color: #83b339;
+}

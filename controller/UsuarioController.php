@@ -35,7 +35,7 @@ class UsuarioController extends Controller{
         $usuario->setUsername($_POST['username']);
         $usuario->setPassword($_POST['password']);        
         if($usuario->login()){
-            header("Location: view/index.html");
+            $this->view('index',[]);
         }else{
             echo 'login incorrecto';
         }
