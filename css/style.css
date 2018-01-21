@@ -135,3 +135,37 @@ align-items: center;
         display: none;
     }
 }
+
+/*****************************************
+
+
+    CSS proyecto
+
+
+
+********************************************/
+
+#wrapper-proyecto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/*    flex-direction: column;*/
+}
+#wrapper-proyecto  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+   width: 800px;
+   background-color: red;
+    }
+    #mychart{
+        max-width: 500px;
+    }
+    .comentario{
+        
+    }
+    .misc{
+        display: flex;
+        flex-direction: column;
+    }
