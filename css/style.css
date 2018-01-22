@@ -45,7 +45,7 @@
 
 
 
-.form-editar-tarea{
+.form-editar-tarea,fieldset{
     display: flex;
     flex-direction: column;
   animation: animationFrames linear 4s;
@@ -105,7 +105,7 @@ align-items: center;
     ;    
     /*align-items:  stretch;*/
   
-    background-color: blue;
+/*    background-color: blue;*/
    
 }
 .proyectos-index-r{
@@ -157,7 +157,7 @@ align-items: center;
     justify-content: center;
     flex-wrap: wrap;
    width: 800px;
-   background-color: red;
+/*   background-color: red;*/
     }
     #mychart{
         max-width: 500px;
@@ -169,3 +169,29 @@ align-items: center;
         display: flex;
         flex-direction: column;
     }
+    .tarea-realizada{
+        text-decoration: line-through;
+    }
+    fieldset{
+        border: solid 1px silver;
+        padding: 1.5em;
+    }
+    
+    
+    [for*="rb"]:nth-of-type(1){
+color: #73ab58;        
+    }
+    [for*="rb"]:nth-of-type(2){
+color: darkgoldenrod;       
+    }
+    [for*="rb"]:nth-of-type(3){
+color: crimson;        
+    }
+    #vertical{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    
+    

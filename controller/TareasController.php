@@ -4,7 +4,7 @@ require_once 'ControllerGenerico.php';
 require_once __DIR__ . '/../Modelo/Tarea.php';
 require_once 'ProyectoController.php';
 
-class TareasController extends Tarea {
+class TareasController extends Controller {
 
     function run($action) {
         switch ($action) {
@@ -22,6 +22,9 @@ class TareasController extends Tarea {
                 break;
             case 'ct':
                 $this->insertTarea();
+                break;
+            case 'assign':
+                $this->asignarTarea();
                 break;
             default:
                 break;
@@ -77,7 +80,25 @@ class TareasController extends Tarea {
        $tarea->setDescripcion($_POST['descripcion']);
        $tarea->setProyecto($_POST['proyecto']);
        $tarea->setEstado(0);
-
+       $tarea->setPlazo($_POST['plazo']);
+       $tarea->setDificultad($_POST['dificultad']);
+      $id= $tarea->nuevaTarea();
+      echo $id;
+    }
+    function asignarTarea() {
+        $tarea=new Tarea();
+        $tarea->setId($_POST['idtarea']);
+        foreach($_POST['participantes'] as $part){
+            $tarea->asignarTareas($part);
+        }
+       
+    }
+    function getProgreso($idproyecto){
+        $tarea=new Tarea();
+        $tarea->setProyecto($idproyecto);
+        $ntotal=$tarea->getTotalTareas();
+        $nrealizadas=$tarea->getTotalTareasRealizadas();
+        return [$ntotal,$nrealizadas];
     }
 
 }

@@ -105,7 +105,7 @@ $(document).ready(function () {
             url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idtarea,
             success: function (datos) {
                 if (datos == 1) {
-                   $(selector).next().css('text-decoration', 'line-through').parent().delay(1500).fadeOut();
+                   $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
                     alert('ha habido un problema');
                 }
@@ -123,11 +123,12 @@ $(document).ready(function () {
     
     $(".tareas-wrap").on('click', '.bborrarTarea', function (e) {
        var idtarea= $(this).attr('idtarea');
+       var selector='[value="'+idtarea+'"].realizar-tarea ';
        $.ajax({
             url: 'index.php?controller=tareas&action=dbyID&idtarea=' + idtarea,
             success: function (datos) {
                 if (datos == 1) {
-                   $(selector).next().css('text-decoration', 'line-through').parent().delay(1500).fadeOut();
+                   $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
                     alert('ha habido un problema');
                 }
@@ -138,7 +139,60 @@ $(document).ready(function () {
         });
         
     });
+ $('#banadirTarea').click(function(){
+        
+        
+     var titulo=  $('#formNuevaTarea [name="titulo"]').val();
+        var tarea=$('#formNuevaTarea').serialize();
+        $.ajax({
+            url:'index.php?controller=tareas&action=ct',
+            data: tarea,
+            method:'POST',
+            success:function(data){
+               if(data!==0){
+                   console.log(data);
+                   $('#asignaciones-modal .modal-title').html(titulo); 
+                   $('#formNuevaTarea')[0].reset();
+                   $('[name="idtarea"]').val(data);
+                   $('#tareas-proyecto').append('<li>'+titulo+'</li>');
+                   $('#asignaciones-modal').modal('show');                   
+         
+               }else{
+                  alert('ha habido un error');
+               }
+                
+            },
+             error: function () {
+                alert('algo no ha ido como debia');
+            }
+        });
 
+    });
+    
+    $('#formAsign').submit(function(e){
+       e.preventDefault();
+      var data=$(this).serialize();
+      $.ajax({
+          url: "./index.php?controller=tareas&action=assign",
+          method:'POST',
+          data:data,
+          success:function(dato){
+              $('#asignaciones-modal').modal('hide');
+          }
+      });
+    $(this)[0].reset(); 
+});
+$('#form-muro').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+        url:'index.php?controller=muro&action=cm',
+        data: $(this).serialize,
+        success:function(){
+            $(this).append('<div class="comentario">hola</div>')
+        }
+    });
+   
+});
 });
 function comprobarMisTareas() {
 
@@ -159,6 +213,7 @@ function comprobarMisTareas() {
 
 function construirElemTareas(tareas) {
     $('.tareas-wrap').empty();
+   $('#mistareas-btn > .badge').html(tareas.length);
     tareas.forEach(function (tarea) {
         $('.tareas-wrap').append('<li class="tarea-li"><div><input type="checkbox" value="' + tarea.id + '" class="realizar-tarea"><span>' + tarea.titulo + tarea.plazo + tarea.estado + '</span><span class="tarea-span"><i class="material-icons beditarTarea" idtarea="' + tarea.id + '">mode_edit</i><i class="material-icons bborrarTarea" idtarea="' + tarea.id + '">delete</i></span></div></li>');
     });

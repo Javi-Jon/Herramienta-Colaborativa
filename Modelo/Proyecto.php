@@ -92,7 +92,7 @@ class Proyecto extends BD{
         $proyecto= $this->fSelectO("SELECT * FROM $this->tabla WHERE id=:id", ['id'=> $this->getId()]);
         return $proyecto;
     }
-
+    
 
 
    

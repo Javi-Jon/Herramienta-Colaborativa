@@ -3,6 +3,7 @@ require_once 'controller/UsuarioController.php';
 require_once 'controller/ProyectoController.php';
 require_once './controller/TareasController.php';
 require_once 'controller/ControllerGenerico.php';
+require_once './controller/MuroController.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
@@ -19,6 +20,10 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     case 'tareas':       
            $controller = new TareasController();
           action($controller);       
+        break;
+    case 'muro':
+            $controller=new MuroController();
+             action($controller);  
         break;
     default:
         index();

@@ -129,8 +129,8 @@ class Tarea extends BD {
     }
 
     function nuevaTarea() {
-        $filas= $this->insert("INSERT INTO $this->tabla (titulo, descripcion, proyecto, estado, dificultad, plazo) VALUES (:titulo, :descripcion, :proyecto, :estado, :dificultad, :plazo)", ["titulo"=>$this->getTitulo(), "descripcion"=>$this->getDescripcion(), "proyecto"=>$this->getProyecto(), "estado"=>$this->getEstado(), "dificultad"=>$this->getDificultad(), "plazo"=>$this->getPlazo()]);
-        return $filas;
+        $id= $this->insert("INSERT INTO $this->tabla (titulo, descripcion, proyecto, estado, dificultad, plazo) VALUES (:titulo, :descripcion, :proyecto, :estado, :dificultad, :plazo)", ["titulo"=>$this->getTitulo(), "descripcion"=>$this->getDescripcion(), "proyecto"=>$this->getProyecto(), "estado"=>$this->getEstado(), "dificultad"=>$this->getDificultad(), "plazo"=>$this->getPlazo()]);
+        return $id;
     }
 
     function borrarTarea() {
@@ -152,8 +152,24 @@ class Tarea extends BD {
         return $estado;
     }
     function getTareasByProyecto($idproyecto){
-        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla WHERE  AND proyecto=:proyecto AND estado=0", ['proyecto'=>$idproyecto]);
+        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla WHERE proyecto=:proyecto ", ['proyecto'=>$idproyecto]);
       return $tareas; 
         
     }
+    function asignarTareas($idusuario){
+        $asignaciones=$this->insert("INSERT INTO `asignacion`(`idtarea`, `iduser`) VALUES (:idtarea,:idusuario)", ['idtarea'=>$this->getId(),'idusuario'=>$idusuario]);
+        return $asignaciones;
+    }
+    function getTotalTareas(){
+        $total= $this->fSelectO("SELECT count(id) as total FROM $this->tabla WHERE proyecto =:proyecto", ['proyecto'=> $this->getProyecto()]);
+        return $total;
+    }
+    function getTotalTareasRealizadas(){
+        $totalRealizadas= $this->fSelectO("SELECT count(id) as total FROM $this->tabla WHERE proyecto =:proyecto AND estado=1", ['proyecto'=> $this->getProyecto()]);
+        return $totalRealizadas;
+    }
+//    function getTotalTareasUser($idusuario){
+//        $total= $this->fSelectO("SELECT COUNT(tareas.id) FROM tareas, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:idusuario AND estado=0", ['idusuario'=> $idusuario]);
+//        return $total;
+//    }
 }

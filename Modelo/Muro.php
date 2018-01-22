@@ -1,6 +1,6 @@
 <?php
 
-require_once './ModeloBD.php';
+require_once __DIR__ .'./ModeloBD.php';
 class Muro extends BD {
     private $id;
     private $mensaje;
@@ -57,9 +57,9 @@ class Muro extends BD {
     /**
      * @param mixed $hora
      */
-    public function setHora($hora)
+    public function setHora()
     {
-        $this->hora = $hora;
+        $this->hora = date("Y-m-d h:i:sa");
     }
 
     /**
@@ -92,6 +92,14 @@ class Muro extends BD {
     public function setAutor($autor)
     {
         $this->autor = $autor;
+    }
+    function getMuro() {
+        $muro= $this->fSelectN("SELECT usuarios.fullname, mensaje, muro.hora FROM `muro`,usuarios WHERE muro.proyecto=:proyecto AND usuarios.id =muro.autor ORDER BY hora", ['proyecto'=> $this->getProyecto()]);
+        return $muro;
+    }
+    function publicarenMuro() {
+       $id=$this->insert("INSERT INTO `muro`( `mensaje`, `hora`, `proyecto`, `autor`) VALUES (:mensaje,:hora,:proyecto,:autor)", ['mensaje'=>$this->getMensaje(),'hora'=> $this->getHora(),'proyecto'=> $this->getProyecto(),'autor'=> $this->getAutor()]);
+        return $id;
     }
 
 
