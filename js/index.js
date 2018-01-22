@@ -3,7 +3,9 @@ comprobarMisTareas();
 
 //console.log(tareas);
 //construirElemTareas();
-
+ $('#formAsign').validetta({
+        realTime : true
+    });
 
 $(document).ready(function () {
     $('#subm-newProy').click(function (e) {
@@ -37,7 +39,7 @@ $(document).ready(function () {
             data: $('#formuser').serialize(),
             success: function (dato) {
                 if (dato === 'error') {
-                    alert('error1');
+                  $('#formuser').effect( "shake" );
                 } else {
                     persona = jQuery.parseJSON(dato);
                     console.log(persona);
@@ -139,6 +141,8 @@ $(document).ready(function () {
         });
         
     });
+    
+    
  $('#banadirTarea').click(function(){
         
         
@@ -169,6 +173,7 @@ $(document).ready(function () {
 
     });
     
+    
     $('#formAsign').submit(function(e){
        e.preventDefault();
       var data=$(this).serialize();
@@ -183,12 +188,17 @@ $(document).ready(function () {
     $(this)[0].reset(); 
 });
 $('#form-muro').submit(function(e){
+    var datos=$(this).serialize();
+    console.log(datos);
+    var form=$(this);
     e.preventDefault();
     $.ajax({
         url:'index.php?controller=muro&action=cm',
-        data: $(this).serialize,
-        success:function(){
-            $(this).append('<div class="comentario">hola</div>')
+        data: datos,
+        method:'POST',
+        success:function(data){
+            console.log(data);
+            form.append('<div class="comentario card">'+$('[name="mensaje"]').val()+'</div>');
         }
     });
    

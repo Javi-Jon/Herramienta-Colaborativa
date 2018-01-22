@@ -60,7 +60,7 @@
                <li {% if tarea.estado==1%}
                  class="tarea-realizada"
                 {%endif%}
-                >{{tarea.titulo}}</li>
+                 >{{tarea.titulo}}</li>
                 {% endfor %}
 
             </ul>
@@ -79,7 +79,7 @@
                             <form id="formAsign">
                                 <input type="hidden" name="idtarea" >
                             {%for persona in datos.participantes%}
-                            <input type="checkbox" value="{{persona.id}}" name="participantes[]">{{persona.fullname}}
+                            <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}
                             
                 {% endfor %}
                 <input type="submit">
