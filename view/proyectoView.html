@@ -79,7 +79,7 @@
                             <form id="formAsign">
                                 <input type="hidden" name="idtarea" >
                             {%for persona in datos.participantes%}
-                            <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}
+                            <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
                             
                 {% endfor %}
                 <input type="submit">
@@ -91,6 +91,7 @@
             </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="js/angular.js"></script>
 <script type="text/javascript">
 var ctx = document.getElementById("myChart");
 
