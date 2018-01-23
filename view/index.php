@@ -1,24 +1,34 @@
-<?php
-include_once 'header.php';
-//require_once 'vendor/autoload.php';
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"     rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/validetta.min.css">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+      <script src="js/validetta.min.js"></script>
 
-?>
-    <style>
-        footer{
-            display:flex;
-            margin-top: auto;
-            background-color: #ffecb6;
-        }
-
-    </style>
         <div id="container">
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
-                <a class="navbar-brand" href="#"><img src="../img/logo2.png" class="img-responsive" height="40"></a>
+                <a class="navbar-brand" href="index.php"><img src="img/logo2.png" class="img-responsive" height="40"></a>
 
                 <div class="navbar-collapse collapse show " id="navbarColor01" aria-expanded="true" style="">
                     <ul class="navbar-nav mr-auto">
@@ -32,11 +42,11 @@ include_once 'header.php';
                             <a class="nav-link" href="#"><i class="material-icons">email</i><span class="badge badge-danger">2</span></a>
                         </li>
                         <li class="nav-item ">
-                            <button class="btn btn-success d-flex align-items-center m-top-nav" data-toggle="modal" data-target="#proyect-modal" ><i class="material-icons">add_box</i>Nuevo Proyecto</button>
+
                         </li>
                     </ul>
-                    <div class="navbar-nav ">
-                        <button class="btn btn-warning d-flex align-items-center m-top-nav"  id="mistareas-btn"><i class="material-icons">assignment</i>Mis tareas</button>
+                    <div class="navbar-nav "><button class="btn btn-success d-flex align-items-center m-top-nav" data-toggle="modal" data-target="#proyect-modal" ><i class="material-icons">add_box</i>Nuevo Proyecto</button>
+                        <button class="btn btn-warning d-flex align-items-center m-top-nav "  id="mistareas-btn"><i class="material-icons">assignment</i> <span class="badge badge-danger">4</span>Mis tareas </button>
                         <a class="nav-link nav-item  d-flex align-items-center" href="#"><i class="material-icons">account_circle</i>Bienvenido{{nombre}}</a>
                     </div>
 
@@ -113,11 +123,9 @@ include_once 'header.php';
                         </div>
                         <div class="modal-body">
                             <div>
-                                <ul>
+                                <ul class="tareas-wrap">
                                     
-                                    <li class="tarea-li">asdassa<span class="tarea-span"><input type="radio"><input type="radio"><input type="radio"><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></span></li>
-                                    <li class="tarea-li">asdassa<span class="tarea-span"><i class="material-icons">mode_edit</i><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></span></li>
-                                    <li class="tarea-li">asdassa<span class="tarea-span"><i class="material-icons">mode_edit</i><i class="material-icons">mode_edit</i><i class="material-icons">delete</i></span></li>
+
                                 </ul>
                                 <hr>todo
                             </div>
@@ -126,22 +134,17 @@ include_once 'header.php';
                 </div>
             </div>
 
+        <!--ESTO ES EL CUERPO -->
+        <div id="wrapper">
+{% block content %}
+{% endblock %}
 
-            <form action='../index.php?controller=usuario&action=rself' method="POST">
-                <input type="text" name="username">
-                <input type="submit">
-            </form>
-            <footer>
-                asdasdsa
-            </footer>
+           </div>
+
+
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
-
-        <script src="js/index.js"></script>
-        <script src="js/angular.js"></script>
+            <script src="js/index.js"></script>
     </body>
 
 </html>

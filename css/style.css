@@ -1,0 +1,197 @@
+
+/******************************************
+
+
+        CSS para la navbar
+
+
+
+
+**************************************/
+
+
+
+/*para hacer que los elementos del navbar tengan separacion */
+.m-top-nav{
+    margin-top: 5px;
+    margin-left:5px;
+}
+.tarea-span{
+   
+  visibility: hidden;
+  opacity:0;
+     transition: visibility 0.4s, opacity 0.4s linear;
+}
+.tarea-li:hover > div >span{
+    visibility: visible;
+    opacity: 1;
+}
+.tarea-span{
+    transition-timing-function: ease;
+}
+.tarea-li{
+     display: flex;
+     flex-direction:column;   
+    cursor: pointer;
+    transition: visibility 0.8s ease-out;
+
+}
+/*.tarea-li > div{
+    display: flex;
+  
+}*/
+
+
+
+
+
+.form-editar-tarea,fieldset{
+    display: flex;
+    flex-direction: column;
+  animation: animationFrames linear 4s;
+  animation-iteration-count: 1;
+  transform-origin: 50% 0%;
+}
+
+@keyframes animationFrames{
+  0% {
+    transform:  scaleY(0.11) ;
+  }
+  17% {
+    transform:  scaleY(1) ;
+  }
+  100% {
+    transform:  scaleY(1) ;
+  }
+}
+
+
+
+/*****************************************
+
+
+    CSS index
+
+
+
+********************************************/
+/*#wrapper{
+     display: flex;
+     flex-direction: column;
+align-items: stretch;
+}*/
+#wrap{
+    display: flex;
+align-items: stretch;
+
+flex-grow: 1;
+    
+}
+.aside-index{
+   display: flex;
+    flex-direction: column;
+    flex-grow: 3;
+    background-color: red;
+      transition: width 0.4s linear;
+      max-width: 400px;
+      min-width: 400px;
+
+align-items: center;
+}
+
+.fd-c{
+   
+    flex-direction: column;
+    ;    
+    /*align-items:  stretch;*/
+  
+/*    background-color: blue;*/
+   
+}
+.proyectos-index-r{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   
+    flex-grow: 7;
+  
+   
+}
+.div-proyecto{
+    display: flex;
+    margin: 0.5em;
+    background-color: #83b339;
+}
+.div-proyecto:hover{
+    background-color: #73ab58;
+}
+.section-index{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 7;
+}
+@media screen and (max-width: 991px){
+    .aside-index{
+        display: none;
+    }
+}
+
+/*****************************************
+
+
+    CSS proyecto
+
+
+
+********************************************/
+
+#wrapper-proyecto{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+/*    flex-direction: column;*/
+}
+#wrapper-proyecto  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+   width: 800px;
+/*   background-color: red;*/
+    }
+    #mychart{
+        max-width: 500px;
+    }
+    .comentario{
+        
+    }
+    .misc{
+        display: flex;
+        flex-direction: column;
+    }
+    .tarea-realizada{
+        text-decoration: line-through;
+    }
+    fieldset{
+        border: solid 1px silver;
+        padding: 1.5em;
+    }
+    
+    
+    [for*="rb"]:nth-of-type(1){
+color: #73ab58;        
+    }
+    [for*="rb"]:nth-of-type(2){
+color: darkgoldenrod;       
+    }
+    [for*="rb"]:nth-of-type(3){
+color: crimson;        
+    }
+    #vertical{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    
+    

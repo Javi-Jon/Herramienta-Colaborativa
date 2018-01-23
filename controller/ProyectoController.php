@@ -1,6 +1,8 @@
 <?php
 require_once 'ControllerGenerico.php';
 require_once __DIR__ .'/../Modelo/Proyecto.php';
+require_once 'TareasController.php';
+require_once 'MuroController.php';
 class ProyectoController extends Controller{
      
     function run($action){
@@ -13,6 +15,12 @@ class ProyectoController extends Controller{
             break;
             case 'dp':
                 $this->deleteParticipacion();
+                break;
+//            case 'pp':
+//                $this->getProyectosUsuario($_GET['asd']);
+//                break;
+            case 'vp':
+                $this->verProyecto();
                 break;
             default:
                 break;
@@ -58,4 +66,30 @@ class ProyectoController extends Controller{
        echo $filas;
         
     }
+    function getProyectosUsuario($idusuario) {
+         $proyecto=new Proyecto();
+        $proyectos= $proyecto->getProyectosByUsuario($idusuario);
+        
+        return $proyectos;
+    }
+    function verProyecto() {
+        $p=new Proyecto();
+        $p->setId($_GET['id']);
+       $proyecto= $p->getProyectoById();
+       $participantes=$p->getParticipaciones();
+      $tc=new TareasController();
+      $numeros=$tc->getProgreso($_GET['id']);
+      
+//      print_r(get_defined_vars());
+//      echo $numeros[0]->total;
+//      echo $numeros[1]->total;
+      $restantes=$numeros[0]->total-$numeros[1]->total;
+     $tareas= $tc->getTareasDeProyecto($p->getId());
+     
+     $mc= new MuroController();
+    $mensajes= $mc->readMuro($_GET['id']);
+       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes];
+       $this->view('proyecto', $datos);
+    }
+    
 }

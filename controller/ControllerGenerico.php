@@ -1,13 +1,13 @@
 <?php
-// require_once './vendor/autoload.php';
+ require_once './vendor/autoload.php';
  class Controller {
     
-//private $twig;
+private $twig;
      public function view($vista,$datos){
-//        $loader = new Twig_Loader_Filesystem('view');
-//        $this->twig = new Twig_Environment($loader, array('debug' => true));
-//           echo $this->twig->render($vista."View.html", array('datos' => $datos));
-        require_once  __DIR__ ."/../view/" . $vista . "View.php";
+       $loader = new Twig_Loader_Filesystem('view');
+        $this->twig = new Twig_Environment($loader, array('debug' => true));
+           echo $this->twig->render($vista."View.html", array('datos' => $datos));
+//        require_once  __DIR__ ."/../view/" . $vista . "View.html";
 
     }
     

@@ -1,0 +1,125 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div id="wrapper-proyecto">
+    <div id="vertical">
+    <section>
+        
+            <div id="proy-div">
+                <h1>{{datos.proyecto.nombre}}</h1>
+                <hr>
+                <p>{{datos.proyecto.descripcion}}</p>
+                <div>
+                    {% if datos.tareas%}
+                   <canvas id="myChart" width="400" height="400"></canvas>
+                   {%endif%}
+                </div>
+                <ul>
+                {%for persona in datos.participantes%}
+                <li class="d-flex align-items-center"> <i class="material-icons">perm_identity</i>{{persona.username}}</li>
+                {% endfor %}
+
+            </ul>
+
+            </div>
+
+         
+            
+    </section>
+        <form id="form-muro" action="index.php?controller=muro&action=cm" method="POST">
+            <input class='form-control' type="text" name="mensaje" >
+            <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
+            <input type="submit">
+        </form>
+        <div>
+               {%for comentario in datos.muro%}
+               <div class="card comentario"><span>{{comentario.mensaje}}</span> <span> {{comentario.fullname}}</span> <span> {{comentario.hora}}</span></div>
+                {% endfor %}
+          </div>
+        </div>
+    <aside>
+        <div><fieldset>
+          
+
+            
+                <h3>Nueva Tarea</h3>
+           <form id="formNuevaTarea">
+               titulo <input class='form-control' type="text" name="titulo" >
+                descripcion<input class='form-control' type="text" name="descripcion">
+               plazo <input class='form-control' type="date" name="plazo">
+               <input  type="radio" name="dificultad" value="1" checked="checked" id="rbf"><label for="rbf">Facil </label> 
+                <input  type="radio" name="dificultad" value="2" id="rbm"><label for="rbf">Medio </label>              
+                <input  type="radio" name="dificultad" value="3" id="rbd"><label for="rbf">Dificil </label>
+                <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
+            </form>
+                     <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea"><i class="material-icons">add</i>Añadir Tarea</button>      </fieldset>         
+            
+            
+                     <ul id="tareas-proyecto">
+                {%for tarea in datos.tareas%}
+               <li {% if tarea.estado==1%}
+                 class="tarea-realizada"
+                {%endif%}
+                 >{{tarea.titulo}}</li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </aside>
+    <div class="modal fade" id="asignaciones-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formAsign">
+                                <input type="hidden" name="idtarea" >
+                            {%for persona in datos.participantes%}
+                            <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
+                            
+                {% endfor %}
+                <input type="submit">
+                </form>
+                            
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="js/angular.js"></script>
+<script type="text/javascript">
+var ctx = document.getElementById("myChart");
+
+data = {
+    datasets: [{
+            data: [{{datos.progreso}},{{datos.totales}}],
+            backgroundColor: ['#003fed'],
+            responsive: true,
+
+// Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+
+            maintainAspectRatio: false
+
+        }],
+// These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: [
+        '%completed',
+        '%missing'
+    ]
+};
+var myChart = new Chart(ctx, {
+
+    type: 'doughnut',
+    data: data
+
+});
+
+
+</script>
+
+{%endblock%}

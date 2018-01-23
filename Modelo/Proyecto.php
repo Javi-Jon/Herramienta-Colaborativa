@@ -83,7 +83,16 @@ class Proyecto extends BD{
         $filas=$this->delete("DELETE FROM participaciones WHERE id=:id", ['id'=>$id]);
         return $filas;
     }
-
+    function getProyectosByUsuario($idusuario){
+        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador` FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario", ['idusuario'=>$idusuario]);
+    
+       return $proyectos;
+    }
+    function getProyectoById(){
+        $proyecto= $this->fSelectO("SELECT * FROM $this->tabla WHERE id=:id", ['id'=> $this->getId()]);
+        return $proyecto;
+    }
+    
 
 
    

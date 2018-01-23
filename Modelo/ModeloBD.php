@@ -88,7 +88,10 @@ abstract class BD {
         $this->connect();
         $sentencia=$this->conexion->prepare($sql);
         $sentencia->execute($param);
+        $filas=$sentencia->rowCount();
+   
         $this->conexion=null;
+        return $filas;
          } catch (Exception $ex) {
             return $ex;
         }
@@ -111,7 +114,8 @@ abstract class BD {
     
     public function deleteById($id){
         try {
-            $this->delete("DELETE FROM $this->tabla WHERE id = :id",["id"=>$id]);
+            $filas=$this->delete("DELETE FROM $this->tabla WHERE id = :id",["id"=>$id]);
+            return $filas;
         } catch (Exception $e) {           
             return -1;
         }

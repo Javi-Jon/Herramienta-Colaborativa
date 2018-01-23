@@ -2,11 +2,13 @@
 require_once 'controller/UsuarioController.php';
 require_once 'controller/ProyectoController.php';
 require_once './controller/TareasController.php';
+require_once 'controller/ControllerGenerico.php';
+require_once './controller/MuroController.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
 }elseif (isset ($_GET['controller']) || isset($_SESSION['idusuario'])) {
-   switch ($_GET['controller']) {
+   switch (@$_GET['controller']) {
     case 'usuario':       
            $controller = new UsuarioController();
           action($controller);       
@@ -19,6 +21,10 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
            $controller = new TareasController();
           action($controller);       
         break;
+    case 'muro':
+            $controller=new MuroController();
+             action($controller);  
+        break;
     default:
         index();
         break;       
@@ -30,8 +36,13 @@ function action($objController) {
     $objController->run($_GET['action']);
 }
 function loginView(){
-    header("Location: ./view/loginView.php");
+   $ctrl=new Controller();
+   $ctrl->view('login', ['prueba'=>'dasda']);
+    
 }
 function index(){
-    header("Location: view/index.html");
+    $ctrl=new Controller();
+    $usuario=new UsuarioController();
+     $proyectos=$usuario->getInfoUsuario($_SESSION['idusuario']);
+    $ctrl->view('index', ['proyectos'=>$proyectos]);
 }

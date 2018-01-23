@@ -1,0 +1,26 @@
+#wrap{
+    display: flex;
+
+    
+}
+aside{
+    flex-grow: 3;
+    background-color: red;
+}
+section{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    flex-grow: 7;
+    background-color: blue;
+   
+}
+.div-proyecto{
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+margin: 1.5em;
+    background-color: #83b339;
+}
