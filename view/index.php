@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <style>
-            footer{
-                display:flex;
-                margin-top: auto;
-                background-color: #ffecb6;
-            }
+<?php
+include_once 'header.php';
+//require_once 'vendor/autoload.php';
 
-        </style>
-    </head>
-    <body>
+?>
+    <style>
+        footer{
+            display:flex;
+            margin-top: auto;
+            background-color: #ffecb6;
+        }
+
+    </style>
         <div id="container">
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
