@@ -2,6 +2,7 @@
 require_once 'ControllerGenerico.php';
 require_once __DIR__ .'/../Modelo/Usuario.php';
 require_once 'ProyectoController.php';
+require_once 'TareasController.php';
 class UsuarioController extends Controller{
       
     function run($action){
@@ -54,13 +55,27 @@ class UsuarioController extends Controller{
         $user->setId($_SESSION['idusuario']);        
         $ausuario=$user->getUsuarioByID();
         echo json_encode($ausuario);
-//        return $ausuario;
-        
+//        return $ausuario;      
         
     }
     function getInfoUsuario($idusuario){
          $pc=new ProyectoController();
           $proyectos=  $pc->getProyectosUsuario($idusuario);
+          
+          $tc=new TareasController();
+          foreach($proyectos as &$proyecto){
+            $numeros=$tc->getProgreso($proyecto['id']);
+            if($numeros[0]->total==0){
+                $proyecto['prog'] = 0;
+                
+            } else {
+                $proyecto['prog']= round($numeros[1]->total/$numeros[0]->total*100);
+
+            }
+           
+          }
+          unset($proyecto);
+         
           return $proyectos;
     }
     

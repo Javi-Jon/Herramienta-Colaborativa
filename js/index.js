@@ -6,6 +6,7 @@ comprobarMisTareas();
 
 
 $(document).ready(function () {
+    //alertify.success("Success log message");
     $('#subm-newProy').click(function (e) {
         e.preventDefault();
         $.ajax({
@@ -18,8 +19,8 @@ $(document).ready(function () {
                 $('#proyect-modal').modal("hide");
                 $('#participantes-modal').modal("show");
             },
-            ajaxError: function () {
-                alert('algo no ha ido como debia');
+            error: function () {
+               alertify.error("Error log message");
             }
         });
     });
@@ -27,6 +28,7 @@ $(document).ready(function () {
         comprobarMisTareas();
         $('#mistareas-modal').modal('show');
     });
+
 
     $('#subm-part').click(function (evt) {
         evt.preventDefault();
@@ -45,15 +47,14 @@ $(document).ready(function () {
                 }
 
             },
-            ajaxError: function () {
-                alert('algo no ha ido como debia');
+            error: function () {
+              alertify.error("Error log message");
             }
         });
     });
 
     $("#container").on('click', '.bborrar', function () {
         participacion = $(this).parent();
-
         $.ajax({
             url: './index.php?controller=proyecto&action=dp&idpart=' + $(this).attr('idpart'),
             method: 'GET',
@@ -62,8 +63,8 @@ $(document).ready(function () {
                     participacion.remove();
                 }
             },
-            ajaxError: function () {
-                alert('algo no ha ido como debia');
+            error: function () {
+               alertify.error("Error log message");
             }
         });
 
@@ -91,7 +92,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                alert('algo no ha ido como debia');
+              alertify.error("Error log message");
             }
         });
 
@@ -107,11 +108,11 @@ $(document).ready(function () {
                 if (datos == 1) {
                    $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
-                    alert('ha habido un problema');
+                   alertify.error("Error log message");
                 }
             },
             error: function () {
-                alert('algo no ha ido como debia');
+               alertify.error("Error log message");
             }
         });
 
@@ -130,11 +131,11 @@ $(document).ready(function () {
                 if (datos == 1) {
                    $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
-                    alert('ha habido un problema');
+                   alertify.error("Error log message");
                 }
             },
             error: function () {
-                alert('algo no ha ido como debia');
+                alertify.error("Error log message");
             }
         });
         
@@ -152,7 +153,7 @@ function comprobarMisTareas() {
             construirElemTareas(tarea);
         },
         error: function () {
-            alert('algo no ha ido como debia');
+           alertify.error("Error log message");
         }
 
 

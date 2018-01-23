@@ -16,8 +16,13 @@
 //                .append('<div class="alert alert-danger">Stop bro !! There are some errors.</div>');
 //        }
     });
+      $('fieldset').toggle( "drop" )
      
 $(document).ready(function(){
+    $('#tabs').tabs({
+  heightStyle: "auto",
+  
+});
     $('#banadirTarea').click(function(){
         
         
@@ -37,12 +42,12 @@ $(document).ready(function(){
                    $('#asignaciones-modal').modal('show');                   
          
                }else{
-                  alert('ha habido un error');
+                alertify.error("Error log message");
                }
                 
             },
              error: function () {
-                alert('algo no ha ido como debia');
+              alertify.error("Error log message");
             }
         });
 
@@ -74,10 +79,15 @@ $('#form-muro').submit(function(e){
         success:function(data){
             console.log(data);
             form.append('<div class="comentario card">'+$('[name="mensaje"]').val()+'</div>');
-        }
+        },
+        error: function () {
+              alertify.error("Error log message");
+            }
     });
    
 });
-
+$('#abrir').click(function(){
+    $('fieldset').toggle( "drop" )
+}) ;
 
 });

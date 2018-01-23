@@ -84,13 +84,18 @@ class Proyecto extends BD{
         return $filas;
     }
     function getProyectosByUsuario($idusuario){
-        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador` FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario", ['idusuario'=>$idusuario]);
+        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador` FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario ORDER BY proyectos.id DESC ", ['idusuario'=>$idusuario]);
     
        return $proyectos;
     }
     function getProyectoById(){
         $proyecto= $this->fSelectO("SELECT * FROM $this->tabla WHERE id=:id", ['id'=> $this->getId()]);
         return $proyecto;
+    }
+    function getStatsProyecto(){
+        $stats= $this->fSelectN("SELECT COUNT(asignacion.id) as stat,usuarios.username FROM `asignacion`,usuarios,proyectos,tareas WHERE iduser=usuarios.id and tareas.proyecto=proyectos.id and asignacion.idtarea=tareas.id AND proyectos.id=:idproyecto GROUP BY usuarios.id",
+                ['idproyecto'=> $this->getId()]);
+        return $stats;
     }
     
 
