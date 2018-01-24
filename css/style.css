@@ -45,7 +45,7 @@
 
 
 
-.form-editar-tarea,fieldset{
+.form-editar-tarea{
     display: flex;
     flex-direction: column;
   animation: animationFrames linear 4s;
@@ -145,11 +145,11 @@ align-items: center;
 
 ********************************************/
 
-#wrapper-proyecto{
+/*#wrapper-proyecto{
     display: flex;
     justify-content: center;
     align-items: flex-start;
-/*    flex-direction: column;*/
+    flex-direction: column;
 }
 #wrapper-proyecto  section {
     display: flex;
@@ -157,8 +157,8 @@ align-items: center;
     justify-content: center;
     flex-wrap: wrap;
    width: 800px;
-/*   background-color: red;*/
-    }
+   background-color: red;
+    }*/
     #mychart{
         max-width: 500px;
     }
@@ -175,6 +175,7 @@ align-items: center;
     fieldset{
         border: solid 1px silver;
         padding: 1.5em;
+       
     }
     
     
@@ -192,6 +193,30 @@ color: crimson;
         flex-direction: column;
         align-items: stretch;
     }
+    .chart-container{
+        position: relative; 
+        height:300px; 
+        width:600px
+    }   
+.ui-tabs .ui-tabs-nav {
+    display: flex;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    flex: 1;
+    display: flex;
+    /* If placed in a small width sidebar or something like that disabling nowrap will fix the overflow issue */
+    white-space: normal;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    flex: 1;
+    /* If you want to align tab titles center */
+    text-align: center;
+}
     
-    
-    
+#stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

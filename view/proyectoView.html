@@ -2,16 +2,28 @@
 
 {% block content %}
 <div id="wrapper-proyecto">
-    <div id="vertical">
-    <section>
-        
-            <div id="proy-div">
+ <div id="tabs">
+  <ul>
+    <li><a href="#fragment-1"> Proyecto</a></li>
+    <li><a href="#fragment-2">Muro</a></li>
+    <li><a href="#fragment-3">Tareas</a></li>
+  </ul>
+  <div id="fragment-1">
+   <div id="proy-div">
                 <h1>{{datos.proyecto.nombre}}</h1>
                 <hr>
                 <p>{{datos.proyecto.descripcion}}</p>
-                <div>
-                    {% if datos.tareas%}
-                   <canvas id="myChart" width="400" height="400"></canvas>
+                <div> {% if datos.tareas%}
+                    <div id="stats">
+                    <div class="chart-container" >
+                        <canvas id="myChart"></canvas></div>
+                        <div class="chart-container" >
+                        <canvas id="myChart2"></canvas>
+                        
+                    </div>
+                        </div>
+                   
+                   <!--<canvas id="myChart" width="400" height="400"></canvas>-->
                    {%endif%}
                 </div>
                 <ul>
@@ -20,13 +32,10 @@
                 {% endfor %}
 
             </ul>
-
-            </div>
-
-         
-            
-    </section>
-        <form id="form-muro" action="index.html?controller=muro&action=cm" method="POST">
+            </div>   
+</div>
+  <div id="fragment-2">    
+  <form id="form-muro" action="index.php?controller=muro&action=cm" method="POST">
             <input class='form-control' type="text" name="mensaje" >
             <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
             <input type="submit">
@@ -35,15 +44,20 @@
                {%for comentario in datos.muro%}
                <div class="card comentario"><span>{{comentario.mensaje}}</span> <span> {{comentario.fullname}}</span> <span> {{comentario.hora}}</span></div>
                 {% endfor %}
-          </div>
-        </div>
+                 {%for stat in datos.stats%}
+                 <p>{{stat.stat}}{{stat.username}}</p>
+                 {%endfor%}
+          </div>   
+  </div>
+  <div id="fragment-3">
     <aside>
-        <div><fieldset>
-          
+        <div>
+           <button id="abrir">abrir</button>
 
             
-                <h3>Nueva Tarea</h3>
+                <fieldset>
            <form id="formNuevaTarea">
+               <h3>Nueva Tarea</h3>
                titulo <input class='form-control' type="text" name="titulo" >
                 descripcion<input class='form-control' type="text" name="descripcion">
                plazo <input class='form-control' type="date" name="plazo">
@@ -52,10 +66,10 @@
                 <input  type="radio" name="dificultad" value="3" id="rbd"><label for="rbf">Dificil </label>
                 <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
             </form>
-                     <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea"><i class="material-icons">add</i>Añadir Tarea</button>      </fieldset>         
+                     <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea"><i class="material-icons">add</i>Añadir Tarea</button>      
+            </fieldset>  
             
-            
-                     <ul id="tareas-proyecto">
+             <ul id="tareas-proyecto">
                 {%for tarea in datos.tareas%}
                <li {% if tarea.estado==1%}
                  class="tarea-realizada"
@@ -66,6 +80,12 @@
             </ul>
         </div>
     </aside>
+  </div>
+</div>
+            
+                    
+    
+    
     <div class="modal fade" id="asignaciones-modal" tabindex="-1" role="dialog"  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -93,17 +113,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="js/angular.js"></script>
 <script type="text/javascript">
-var ctx = document.getElementById("myChart");
+
+var ctx = document.getElementById("myChart").getContext("2d");
+//ctx.canvas.width = 300;
+//ctx.canvas.height = 300;
 
 data = {
     datasets: [{
             data: [{{datos.progreso}},{{datos.totales}}],
             backgroundColor: ['#003fed'],
-            responsive: true,
+     responsive: true,
 
 // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
 
-            maintainAspectRatio: false
+        maintainAspectRatio: false
 
         }],
 // These labels appear in the legend and in the tooltips when hovering different arcs
@@ -112,13 +135,40 @@ data = {
         '%missing'
     ]
 };
+//var myDoughnut = new Chart(ctx).Doughnut(data);
 var myChart = new Chart(ctx, {
 
     type: 'doughnut',
     data: data
 
 });
-
+var ctx2 = document.getElementById("myChart2").getContext("2d");
+var myBarChart = new Chart(ctx2, {
+    type: 'horizontalBar',
+    data: {
+    datasets: [{
+            data: [0,3,4,5],
+            backgroundColor: ['#003fed','#003fed','#003fed','#003fed'],
+           // responsive: true,
+           // maintainAspectRatio: false
+        }],
+// These labels appear in the legend and in the tooltips when hovering different arcs
+    labels: ['sda',
+        '%completed',
+        '%missing','asdas'
+    ],
+    options : {
+    scales: {
+        xAxes: [{
+            gridLines: {
+                offsetGridLines: true
+            }
+        }]
+    }
+}
+},
+ 
+});
 
 </script>
 

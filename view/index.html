@@ -20,8 +20,10 @@ and open the template in the editor.
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-      <script src="js/validetta.min.js"></script>
+        <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
 
+      <script src="js/validetta.min.js"></script> 
+  
         <div id="container">
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
@@ -41,9 +43,7 @@ and open the template in the editor.
                         <li class="nav-item active">
                             <a class="nav-link" href="#"><i class="material-icons">email</i><span class="badge badge-danger">2</span></a>
                         </li>
-                        <li class="nav-item ">
-
-                        </li>
+                       
                     </ul>
                     <div class="navbar-nav "><button class="btn btn-success d-flex align-items-center m-top-nav" data-toggle="modal" data-target="#proyect-modal" ><i class="material-icons">add_box</i>Nuevo Proyecto</button>
                         <button class="btn btn-warning d-flex align-items-center m-top-nav "  id="mistareas-btn"><i class="material-icons">assignment</i> <span class="badge badge-danger">4</span>Mis tareas </button>
@@ -125,25 +125,25 @@ and open the template in the editor.
                             <div>
                                 <ul class="tareas-wrap">
                                     
-
+                                   
                                 </ul>
                                 <hr>todo
                             </div>
                         </div>                        
                     </div>
                 </div>
-            </div>
-
+            </div>                
+            
         <!--ESTO ES EL CUERPO -->
-        <div id="wrapper">
+        <div id="wrapper">      
 {% block content %}
 {% endblock %}
 
            </div>
-
-
+        
+        
         </div>
-
+        
             <script src="js/index.js"></script>
     </body>
 

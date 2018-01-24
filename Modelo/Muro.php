@@ -94,7 +94,7 @@ class Muro extends BD {
         $this->autor = $autor;
     }
     function getMuro() {
-        $muro= $this->fSelectN("SELECT usuarios.fullname, mensaje, muro.hora FROM `muro`,usuarios WHERE muro.proyecto=:proyecto AND usuarios.id =muro.autor ORDER BY hora", ['proyecto'=> $this->getProyecto()]);
+        $muro= $this->fSelectN("SELECT usuarios.fullname, mensaje, muro.hora FROM `muro`,usuarios WHERE muro.proyecto=:proyecto AND usuarios.id =muro.autor ORDER BY hora DESC", ['proyecto'=> $this->getProyecto()]);
         return $muro;
     }
     function publicarenMuro() {

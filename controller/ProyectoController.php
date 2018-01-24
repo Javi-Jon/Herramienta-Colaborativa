@@ -77,6 +77,7 @@ class ProyectoController extends Controller{
         $p->setId($_GET['id']);
        $proyecto= $p->getProyectoById();
        $participantes=$p->getParticipaciones();
+       $stats=$p->getStatsProyecto();
       $tc=new TareasController();
       $numeros=$tc->getProgreso($_GET['id']);
       
@@ -88,7 +89,7 @@ class ProyectoController extends Controller{
      
      $mc= new MuroController();
     $mensajes= $mc->readMuro($_GET['id']);
-       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes];
+       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats];
        $this->view('proyecto', $datos);
     }
     

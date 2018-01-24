@@ -27,7 +27,7 @@
         flex-basis:  20%;
     }
     blockquote{
-        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; //CSS-Tricks
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; /*CSS-Tricks*/
         font-weight: 300;
         font-size: 2em;
     }
@@ -103,7 +103,7 @@
         <div class="vacio"></div>
         <div class="card">
             <div class="form-group">
-                <form action="../index.php?controller=usuario&action=c" method="POST" class="form">
+                <form action="index.php?controller=usuario&action=c" method="POST" class="form">
                     <input type="text" name="fullname" class="form-control" placeholder="Nombre y apellidos"><br>
                     <input type="text" name="username" class="form-control" placeholder="Elige un nombre de usuario"><br>
                     <input type="password" name="password" id="contrasena" class="form-control" placeholder="Contraseña">
@@ -112,7 +112,7 @@
                     <input type="submit" class="btn btn-success" value="Registrarse en ViWeb Colaborativa">
                 </form>
 
-                <form action="../index.php?controller=usuario&action=log" method="POST">
+                <form action="index.php?controller=usuario&action=log" method="POST">
                     <input type="text" name="username" class="form-control" placeholder="Usuario"><br>
                     <input type="password" name="password" id="contrasenaLogin" class="form-control" placeholder="Contraseña">
                     <i id="i2" class="fa fa-eye fa-lg" style="color: lightgrey;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasenaLogin', '#i2')" onmouseup="mouseUp('contrasenaLogin', '#i2')"></i><br>
