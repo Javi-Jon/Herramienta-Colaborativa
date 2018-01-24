@@ -22,7 +22,8 @@
                         
                     </div>
                         </div>
-                   
+                    {%else%}
+                    <p>no hay estadisticas disponibles aun </p>
                    <!--<canvas id="myChart" width="400" height="400"></canvas>-->
                    {%endif%}
                 </div>
@@ -44,9 +45,7 @@
                {%for comentario in datos.muro%}
                <div class="card comentario"><span>{{comentario.mensaje}}</span> <span> {{comentario.fullname}}</span> <span> {{comentario.hora}}</span></div>
                 {% endfor %}
-                 {%for stat in datos.stats%}
-                 <p>{{stat.stat}}{{stat.username}}</p>
-                 {%endfor%}
+                
           </div>   
   </div>
   <div id="fragment-3">
@@ -147,16 +146,24 @@ var myBarChart = new Chart(ctx2, {
     type: 'horizontalBar',
     data: {
     datasets: [{
-            data: [0,3,4,5],
-            backgroundColor: ['#003fed','#003fed','#003fed','#003fed'],
+            
+            
+            
+             
+            data: [0{%for stat in datos.stats%}
+                ,{{stat.stat}}
+                 {%endfor%}
+                 ],
+            backgroundColor: ['#003fed'{%for stat in datos.stats%}
+                ,'#003fed'
+                 {%endfor%}],
            // responsive: true,
            // maintainAspectRatio: false
         }],
 // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: ['sda',
-        '%completed',
-        '%missing','asdas'
-    ],
+    labels: ['tareas recibidas'{%for stat in datos.stats%}
+                ,'{{stat.username}}'
+                 {%endfor%}],
     options : {
     scales: {
         xAxes: [{

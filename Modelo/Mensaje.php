@@ -1,6 +1,6 @@
 <?php
 
-require_once './ModeloBD.php';
+require_once __DIR__.'/ModeloBD.php';
 class Mensaje extends BD{
    private $id;
    private $envia;
@@ -53,12 +53,21 @@ class Mensaje extends BD{
        $this->mensaje = $mensaje;
    }
 
-   function setHora($hora) {
-       $this->hora = $hora;
+   function setHora() {
+      $this->hora = date("Y-m-d h:i:sa");
    }
 
    function setEstado($estado) {
        $this->estado = $estado;
+   }
+   function getConversacion(){
+       $conversacion= $this->fSelectN("SELECT * FROM `mensajes` WHERE (envia=:envia AND recibe=:recibe)OR (envia=:recibe AND recibe=:envia) order by hora asc", ['envia'=> $this->getEnvia(),'recibe'=> $this->getRecibe()]);
+       return $conversacion;
+   }
+   function enviarMensaje(){
+       $id= $this->insert("INSERT INTO `mensajes`( `envia`, `mensaje`, `recibe`, `hora`, `estado`) VALUES (:envia,:mensaje,:recibe,:hora,:estado)", ['envia'=> $this->getEnvia(),'mensaje'=> $this->getMensaje(),'recibe'=> $this->getRecibe(),'hora'=> $this->getHora(),'estado'=> $this->getEstado()]);
+       return $id;
+       
    }
 
 

@@ -4,7 +4,7 @@ comprobarMisTareas();
 //console.log(tareas);
 //construirElemTareas();
 
-
+buscarComps();
 $(document).ready(function () {
     //alertify.success("Success log message");
     $('#subm-newProy').click(function (e) {
@@ -140,6 +140,33 @@ $(document).ready(function () {
         });
         
     });
+    $('#nvb-msjs').click(function(){
+        $('#mensajes-modal').modal('show');
+    });
+   $("#mensajes-modal").on('click', '.conver', function (){
+        buscarConversavcion($(this).attr('dataVal'));
+   });
+    $("#mensajes-modal").on('submit', '#form-chat', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url:"./index.php?controller=mensaje&action=cm",
+            data:$('#form-chat').serialize(),
+            method:'POST',
+            success:function(data){
+                
+                if(data!=0){
+                    alertify.success('asdas');
+                }
+            },
+            error: function () {
+                alertify.error("Error log message");
+            }
+        });
+        $('#form-chat').prepend("<div class='msj self-msj'>"+$('[name="mensaje"]').val()+"</div>");
+        $('#form-chat')[0].reset();
+        
+    });
+    
     
     
  
@@ -160,7 +187,6 @@ function comprobarMisTareas() {
     });
 
 }
-
 function construirElemTareas(tareas) {
     $('.tareas-wrap').empty();
    $('#mistareas-btn > .badge').html(tareas.length);
@@ -169,4 +195,56 @@ function construirElemTareas(tareas) {
     });
 
 }
+function construirCompaneros(convers) {
+ $('#ul-convers').empty();
+//   $('#mistareas-btn > .badge').html(convers.length);
+    convers.forEach(function (persona) {
+        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'</div>');
+    });
+
+}
+function buscarComps() {
+
+    $.ajax({
+        url: "./index.php?controller=usuario&action=rcomp",
+        success: function (convers) {
+           
+            conversaciones = jQuery.parseJSON(convers);
+            construirCompaneros(conversaciones);
+        },
+        error: function () {
+           alertify.error("Error log message");
+        }
+
+
+    });
+
+}
+function buscarConversavcion(id){
+  
+    $.ajax({
+       url:"./index.php?controller=mensaje&action=rm&id="+id,
+        success: function (convers) {
+    
+            conversaciones = jQuery.parseJSON(convers);
+            construirConversacion(conversaciones,id);
+        },
+        error: function () {
+           alertify.error("Error log message");
+        }
+    });
+    
+}
+function construirConversacion(conversacion,id){
+    $('#wrap-conversacion').empty();
+     conversacion.msjs.forEach(function (mensaje) {
+      if(mensaje.envia==conversacion.idusuario){
+           $('#wrap-conversacion').append('<div class="msj self-msj">'+mensaje.mensaje+'</div>');
+      }else{
+        $('#wrap-conversacion').append('<div class="msj" >'+mensaje.mensaje+'</div>');
+    }
+    });
+    $('#wrap-conversacion').append('<form id="form-chat"><input type="text" name="mensaje"><input type="hidden" name="recibe" value="'+id+'"><input type="submit"></form>');
+}
+
 

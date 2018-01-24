@@ -19,6 +19,9 @@ class UsuarioController extends Controller{
             case 'rself':
                 $this->buscarSelf();
                 break;
+            case 'rcomp':
+                $this->buscarCompaneros();
+                break;
             default:
                 break;
         }
@@ -71,12 +74,17 @@ class UsuarioController extends Controller{
             } else {
                 $proyecto['prog']= round($numeros[1]->total/$numeros[0]->total*100);
 
-            }
-           
+            }           
           }
           unset($proyecto);
          
           return $proyectos;
+    }
+    function buscarCompaneros(){
+        $usuario=new Usuario();
+        $usuario->setId($_SESSION['idusuario']);
+        $compas=$usuario->getCompaneros();
+        echo json_encode($compas);        
     }
     
 }

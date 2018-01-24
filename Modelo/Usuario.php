@@ -110,6 +110,11 @@ class Usuario extends BD {
         return $item;
         
     }
+    function getCompaneros(){
+        $conocidos= $this->fSelectN("SELECT DISTINCT usuarios.id,username FROM `participaciones`,usuarios WHERE idproyecto IN (SELECT idproyecto FROM `participaciones` WHERE idusuario=:idusuario) AND participaciones.idusuario=usuarios.id AND usuarios.id <>:idusuario", ['idusuario'=> $this->getId()]);
+        return $conocidos;
+        
+    }
    
 
 }
