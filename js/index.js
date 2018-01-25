@@ -6,6 +6,7 @@ comprobarMisTareas();
 
 buscarComps();
 $(document).ready(function () {
+    
     //alertify.success("Success log message");
     $('#subm-newProy').click(function (e) {
         e.preventDefault();
@@ -18,11 +19,16 @@ $(document).ready(function () {
                 idproyecto = data;
                 $('#proyect-modal').modal("hide");
                 $('#participantes-modal').modal("show");
+                $('#finalizar').attr("href",'index.php?controller=proyecto&action=vp&id='+data);
+           
             },
             error: function () {
                alertify.error("Error log message");
             }
         });
+    });
+    $('#participantes-modal').on('hide.bs.modal',function(e){
+        e.preventDefault();
     });
     $('#mistareas-btn').click(function () {
         comprobarMisTareas();
@@ -44,6 +50,7 @@ $(document).ready(function () {
                     persona = jQuery.parseJSON(dato);
                     console.log(persona);
                     $('#participantes').append("<li  class='alert alert-success'>" + persona[0].fullname + " <button class='bborrar' idpart='" + persona.participacionID + "'>X</button></li>");
+                    $('#formuser')[0].reset();
                 }
 
             },

@@ -41,7 +41,7 @@ class UsuarioController extends Controller{
         $usuario->setPassword($_POST['password']);        
         if($usuario->login()){
           $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
-            $this->view('index',['proyectos'=>$proyectos]);
+            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
         }else{
             echo 'login incorrecto';
         }

@@ -8,7 +8,9 @@
 
 
 **************************************/
-
+html{
+    min-width: 615px;
+}
 
 
 /*para hacer que los elementos del navbar tengan separacion */
@@ -40,7 +42,22 @@
     display: flex;
   
 }*/
+.bborrar {
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #c43d4f;
+ border: 1px solid transparent;
+  text-decoration: none;
+}
 
+.bborrar:hover {
+  background: #992020;
+  text-decoration: none;
+}
 
 
 
@@ -118,6 +135,13 @@
      flex-direction: column;
 align-items: stretch;
 }*/
+
+.a-proyecto:hover{
+    text-decoration: none;
+}
+.a-proyecto{
+    color: inherit;
+}
 #wrap{
     display: flex;
 align-items: stretch;
@@ -149,16 +173,17 @@ align-items: center;
 .proyectos-index-r{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-   
+  justify-content: space-around;   
     flex-grow: 7;
   
    
 }
 .div-proyecto{
+
     display: flex;
     margin: 0.5em;
     background-color: #83b339;
+    flex-grow: 1;
 }
 .div-proyecto:hover{
     background-color: #73ab58;
@@ -257,4 +282,20 @@ color: crimson;
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+@media screen and (max-width:1239px){
+    #stats{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-self: center; */
+    /* align-content: center; */
+    align-items: center;
+    }
+}
+
+
+
+.ui-widget.ui-widget-content{
+    border: 1px transparent !important;
 }

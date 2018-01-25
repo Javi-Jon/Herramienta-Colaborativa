@@ -50,5 +50,5 @@ function index(){
     $ctrl=new Controller();
     $usuario=new UsuarioController();
      $proyectos=$usuario->getInfoUsuario($_SESSION['idusuario']);
-    $ctrl->view('index', ['proyectos'=>$proyectos]);
+    $ctrl->view('index', ['proyectos'=>$proyectos ,'yo'=>$_SESSION['idusuario']]);
 }

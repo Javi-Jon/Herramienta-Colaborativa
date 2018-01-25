@@ -2,112 +2,180 @@
 
 {% block content %}
 <div id="wrapper-proyecto">
- <div id="tabs">
-  <ul>
-    <li><a href="#fragment-1"> Proyecto</a></li>
-    <li><a href="#fragment-2">Muro</a></li>
-    <li><a href="#fragment-3">Tareas</a></li>
-  </ul>
-  <div id="fragment-1">
-   <div id="proy-div">
+    <div id="tabs">
+        <ul>
+            <li><a href="#fragment-1"> Proyecto</a></li>
+            <li><a href="#fragment-2">Muro</a></li>
+            <li><a href="#fragment-3">Tareas</a></li>
+        </ul>
+        <div id="fragment-1">
+            <div id="proy-div">
                 <h1>{{datos.proyecto.nombre}}</h1>
+                {%if datos.proyecto.creador==datos.yo%}
+                <b>Eres el administrador de este proyecto</b>
+                <div class="d-flex justify-content-around">
+                    <a href="index.php?controller=proyecto&action=d&idproyecto={{datos.proyecto.id}}" class="a-proyecto">
+                        <button class="btn btn-danger d-flex align-items-center"> <i class="material-icons">delete_forever</i>Borrar Proyecto</button>                   
+                    </a>
+                    <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i>   Administrar Participantes</button>
+                </div>
+                {%endif%}
                 <hr>
                 <p>{{datos.proyecto.descripcion}}</p>
                 <div> {% if datos.tareas%}
                     <div id="stats">
-                    <div class="chart-container" >
-                        <canvas id="myChart"></canvas></div>
                         <div class="chart-container" >
-                        <canvas id="myChart2"></canvas>
-                        
-                    </div>
+                            <canvas id="myChart"></canvas></div>
+                        <div class="chart-container" >
+                            <canvas id="myChart2"></canvas>
+
                         </div>
+                    </div>
                     {%else%}
                     <p>no hay estadisticas disponibles aun </p>
-                   <!--<canvas id="myChart" width="400" height="400"></canvas>-->
-                   {%endif%}
+                    <!--<canvas id="myChart" width="400" height="400"></canvas>-->
+                    {%endif%}
                 </div>
-                <ul>
-                {%for persona in datos.participantes%}
-                <li class="d-flex align-items-center"> <i class="material-icons">perm_identity</i>{{persona.username}}</li>
-                {% endfor %}
+                <ul id="participantes">
+                    {%for persona in datos.participantes%}
+                    {%if persona.id==datos.proyecto.creador%}
+                    <li class="d-flex align-items-center">
+                        <i class="material-icons">supervisor_account</i>{{persona.participacion}}{{persona.username}}
+                    </li>
+                    {%else%}
+                    <li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>{{persona.username}}
+                        {%if datos.proyecto.creador==datos.yo%}
+                        <button class=" bborrar" idpart="{{persona.participacion}}">X</button> 
+                        {%endif%}
+                    </li>
+                    {%endif%}
+                    {% endfor %}
 
-            </ul>
+                </ul>
             </div>   
-</div>
-  <div id="fragment-2">    
-  <form id="form-muro" action="index.php?controller=muro&action=cm" method="POST">
-            <input class='form-control' type="text" name="mensaje" >
-            <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
-            <input type="submit">
-        </form>
-        <div>
-               {%for comentario in datos.muro%}
-               <div class="card comentario"><span>{{comentario.mensaje}}</span> <span> {{comentario.fullname}}</span> <span> {{comentario.hora}}</span></div>
-                {% endfor %}
-                
-          </div>   
-  </div>
-  <div id="fragment-3">
-    <aside>
-        <div>
-           <button id="abrir">abrir</button>
-
-            
-                <fieldset>
-           <form id="formNuevaTarea">
-               <h3>Nueva Tarea</h3>
-               titulo <input class='form-control' type="text" name="titulo" >
-                descripcion<input class='form-control' type="text" name="descripcion">
-               plazo <input class='form-control' type="date" name="plazo">
-               <input  type="radio" name="dificultad" value="1" checked="checked" id="rbf"><label for="rbf">Facil </label> 
-                <input  type="radio" name="dificultad" value="2" id="rbm"><label for="rbf">Medio </label>              
-                <input  type="radio" name="dificultad" value="3" id="rbd"><label for="rbf">Dificil </label>
-                <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
-            </form>
-                     <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea"><i class="material-icons">add</i>Añadir Tarea</button>      
-            </fieldset>  
-            
-             <ul id="tareas-proyecto">
-                {%for tarea in datos.tareas%}
-               <li {% if tarea.estado==1%}
-                 class="tarea-realizada"
-                {%endif%}
-                 >{{tarea.titulo}}</li>
-                {% endfor %}
-
-            </ul>
         </div>
-    </aside>
-  </div>
-</div>
-            
-                    
-    
-    
-    <div class="modal fade" id="asignaciones-modal" tabindex="-1" role="dialog"  aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="formAsign">
-                                <input type="hidden" name="idtarea" >
-                            {%for persona in datos.participantes%}
-                            <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
-                            
-                {% endfor %}
+        <div id="fragment-2">    
+            <form id="form-muro" action="index.php?controller=muro&action=cm" method="POST">
+                <input class='form-control' type="text" name="mensaje" >
+                <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
                 <input type="submit">
-                </form>
-                            
-                        </div>                        
-                    </div>
+            </form>
+            <div>
+                {%for comentario in datos.muro%}
+                <div class="card comentario">
+                    <span>{{comentario.mensaje}}</span> 
+                    <span> {{comentario.fullname}}</span> 
+                    <span> {{comentario.hora}}</span></div>
+                {% endfor %}
+
+            </div>   
+        </div>
+        <div id="fragment-3">
+            <aside>
+                <div>
+                    <button id="abrir">abrir</button>
+
+
+                    <fieldset>
+                        <form id="formNuevaTarea">
+                            <h3>Nueva Tarea</h3>
+                            titulo <input class='form-control' type="text" name="titulo" data-validetta="required">
+                            descripcion<input class='form-control' type="text" name="descripcion" data-validetta="required">
+                            plazo <input class='form-control' type="date" name="plazo" data-validetta="required">
+                            <input  type="radio" name="dificultad" value="1" id="rbf" data-validetta="required">
+                            <label for="rbf">Facil </label> 
+                            <input  type="radio" name="dificultad" value="2" id="rbm" data-validetta="required">
+                            <label for="rbf">Medio </label>              
+                            <input  type="radio" name="dificultad" value="3" id="rbd" data-validetta="required">
+                            <label for="rbf">Dificil </label>
+                            <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
+                        <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea">
+                            <i class="material-icons">add</i>Añadir Tarea
+                        </button> 
+                        </form>
+                             
+                    </fieldset>  
+
+                    <ul id="tareas-proyecto">
+                        {%for tarea in datos.tareas%}
+                         {% if tarea.estado==1%}
+                          <li class=" d-flex align-items-center"  ><i class="material-icons">assignment_turned_in</i> {{tarea.titulo}}</li>
+                          {%else%} 
+                          <li class=" d-flex align-items-center"  ><i class="material-icons ">assignment</i> {{tarea.titulo}}</li>
+                            {%endif%}
+                        
+                        {% endfor %}
+
+                    </ul>
+
                 </div>
+            </aside>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="adm-participantes-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Añadir participantes</h5>
+
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <ul id="participantes">
+                            <li  class="alert alert-success">
+                                Yo</li>
+                            {%for persona in datos.participantes%}
+                            {%if persona.id == datos.yo%}
+                            <li  class='alert alert-success'>{{persona.fullname}}</li>
+                            {%else%}
+                            <li  class='alert alert-success'>{{persona.fullname}}<button class='bborrar' idpart='{{persona.participacion}}'>X</button></li>
+                            {%endif%}
+                            {% endfor %}
+                        </ul>
+
+
+
+                        <form id='formuser'><div class="input-group ">
+                                <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
+                                <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
+
+                        </form> 
+                        <br>
+                        <a href="" id="finalizar" class="btn btn-primary" style="float: right">finalizar</a>
+                    </div>
+                </div>                        
             </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="asignaciones-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAsign" >
+                        <input type="hidden" name="idtarea">
+                        {%for persona in datos.participantes%}
+                        <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
+
+                        {% endfor %}
+                        <input type="submit">
+                    </form>
+
+                </div>                        
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="js/angular.js"></script>
@@ -118,63 +186,62 @@ var ctx = document.getElementById("myChart").getContext("2d");
 //ctx.canvas.height = 300;
 
 data = {
-    datasets: [{
-            data: [{{datos.progreso}},{{datos.totales}}],
-            backgroundColor: ['#003fed'],
-     responsive: true,
-
-// Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+datasets: [{
+data: [{{datos.progreso}}, {{datos.totales}}],
+        backgroundColor: ['#003fed'],
+        responsive: true,
+        // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
 
         maintainAspectRatio: false
 
-        }],
-// These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-        '%completed',
-        '%missing'
-    ]
+}],
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+                '%completed',
+                '%missing'
+        ]
 };
 //var myDoughnut = new Chart(ctx).Doughnut(data);
+
 var myChart = new Chart(ctx, {
 
-    type: 'doughnut',
-    data: data
+type: 'doughnut',
+        data: data
 
 });
 var ctx2 = document.getElementById("myChart2").getContext("2d");
 var myBarChart = new Chart(ctx2, {
-    type: 'horizontalBar',
-    data: {
-    datasets: [{
-            
-            
-            
-             
-            data: [0{%for stat in datos.stats%}
-                ,{{stat.stat}}
-                 {%endfor%}
-                 ],
-            backgroundColor: ['#003fed'{%for stat in datos.stats%}
-                ,'#003fed'
-                 {%endfor%}],
-           // responsive: true,
-           // maintainAspectRatio: false
+type: 'horizontalBar',
+        data: {
+        datasets: [{
+
+
+
+
+        data: [0{%for stat in datos.stats%}
+        , {{stat.stat}}
+        {%endfor%}
+        ],
+                backgroundColor: ['#003fed'{%for stat in datos.stats%}
+                , '#003fed'
+                {% endfor %}],
+                // responsive: true,
+                // maintainAspectRatio: false
         }],
-// These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: ['tareas recibidas'{%for stat in datos.stats%}
-                ,'{{stat.username}}'
-                 {%endfor%}],
-    options : {
-    scales: {
-        xAxes: [{
-            gridLines: {
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: ['tareas recibidas'{%for stat in datos.stats%}
+                , '{{stat.username}}'
+                {% endfor %}],
+                options : {
+                scales: {
+                xAxes: [{
+                gridLines: {
                 offsetGridLines: true
-            }
-        }]
-    }
-}
-},
- 
+                }
+                }]
+                }
+                }
+        },
 });
 
 </script>
