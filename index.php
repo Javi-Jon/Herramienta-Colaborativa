@@ -4,6 +4,7 @@ require_once 'controller/ProyectoController.php';
 require_once './controller/TareasController.php';
 require_once 'controller/ControllerGenerico.php';
 require_once './controller/MuroController.php';
+require_once 'controller/MensajesController.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
     loginView();
@@ -25,6 +26,11 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
             $controller=new MuroController();
              action($controller);  
         break;
+    case 'mensaje':
+            $controller=new MensajesController();
+             action($controller);  
+        break;
+    
     default:
         index();
         break;       
