@@ -148,7 +148,7 @@ class Tarea extends BD {
         
     }
     function marcarRealizada() {
-        $estado= $this->update("UPDATE $this->tabla SET `estado`=1 WHERE id=:id",['id'=> $this->getId()]);
+        $estado= $this->update("UPDATE $this->tabla SET `estado`=:estado WHERE id=:id",['id'=> $this->getId(),'estado'=> $this->getEstado()]);
         return $estado;
     }
     function getTareasByProyecto($idproyecto){

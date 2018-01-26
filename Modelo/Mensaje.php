@@ -69,6 +69,13 @@ class Mensaje extends BD{
        return $id;
        
    }
+   function conversacionLeida($el,$yo){
+       $this->update("UPDATE $this->tabla SET `estado`=1 WHERE envia=:envia AND recibe=:recibe", ['envia'=>$el,'recibe'=>$yo]);
+   }
+   function contarMensajesPendientes(){
+     $msjs=  $this->fSelectO("SELECT count(`id`) as msjs FROM $this->tabla WHERE recibe=:yo AND estado=0", ['yo'=> $this->getRecibe()]);
+     return $msjs->msjs;
+   }
 
 
 

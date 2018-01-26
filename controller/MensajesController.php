@@ -11,6 +11,9 @@ class MensajesController extends Controller{
            case'cm':
                $this->enviarMensaje();
                break;
+           case 'notifMsjs':
+               $this->notificacionesMensajes();
+               break;
 
            default:
                break;
@@ -24,6 +27,7 @@ class MensajesController extends Controller{
       
        $conversacion->setEnvia($_GET['id']);
        $mensajes=$conversacion->getConversacion();
+       $conversacion->conversacionLeida($_GET['id'],$_SESSION['idusuario']);
     echo json_encode(['idusuario'=>$_SESSION['idusuario'],'msjs'=>$mensajes]);
    }
    function enviarMensaje() {
@@ -35,5 +39,11 @@ class MensajesController extends Controller{
        $mensaje->setHora();
        $id=$mensaje->enviarMensaje();
     echo $id;
+   }
+   function notificacionesMensajes(){
+       $msjs=new Mensaje();
+       $msjs->setRecibe($_SESSION['idusuario']);
+      $numero= $msjs->contarMensajesPendientes();
+              echo $numero;
    }
 }

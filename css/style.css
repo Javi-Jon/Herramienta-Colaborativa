@@ -13,6 +13,13 @@ html{
 }
 
 
+
+#wrapper{
+    display: flex;
+    flex-grow: 1;
+    height: 94vh;
+}
+
 /*para hacer que los elementos del navbar tengan separacion */
 .m-top-nav{
     margin-top: 5px;
@@ -43,8 +50,7 @@ html{
   
 }*/
 .bborrar {
-  -webkit-border-radius: 60;
-  -moz-border-radius: 60;
+
   border-radius: 60px;
   font-family: Arial;
   color: #ffffff;
@@ -153,7 +159,7 @@ flex-grow: 1;
    display: flex;
     flex-direction: column;
     flex-grow: 3;
-    background-color: red;
+/*    background-color: red;*/
       transition: width 0.4s linear;
       max-width: 400px;
       min-width: 400px;
@@ -174,7 +180,7 @@ align-items: center;
     display: flex;
     flex-wrap: wrap;
   justify-content: space-around;   
-    flex-grow: 7;
+/*    flex-grow: 7;*/
   
    
 }
@@ -182,7 +188,7 @@ align-items: center;
 
     display: flex;
     margin: 0.5em;
-    background-color: #83b339;
+/*    background-color: #83b339;*/
     flex-grow: 1;
 }
 .div-proyecto:hover{
@@ -208,12 +214,9 @@ align-items: center;
 
 ********************************************/
 
-/*#wrapper-proyecto{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-}
+#wrapper-proyecto{
+    flex-grow: 1;
+}/*
 #wrapper-proyecto  section {
     display: flex;
     flex-direction: row;
@@ -277,6 +280,10 @@ color: crimson;
     /* If you want to align tab titles center */
     text-align: center;
 }
+#bfinalizar{
+    float: right;
+}
+
     
 #stats{
     display: flex;

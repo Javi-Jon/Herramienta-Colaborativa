@@ -3,7 +3,7 @@ comprobarMisTareas();
 
 //console.log(tareas);
 //construirElemTareas();
-
+contarMensajes();
 buscarComps();
 $(document).ready(function () {
     
@@ -36,21 +36,22 @@ $(document).ready(function () {
     });
 
 
-    $('#subm-part').click(function (evt) {
+    $('.formuser').submit(function (evt) {
         evt.preventDefault();
+        var formulario=$(this);
 
         $.ajax({
             url: './index.php?controller=proyecto&action=ap&idproyecto=' + idproyecto,
             method: 'POST',
-            data: $('#formuser').serialize(),
+            data: formulario.serialize(),
             success: function (dato) {
                 if (dato === 'error') {
-                  $('#formuser').effect( "shake" );
+                  formulario.effect( "shake" );
                 } else {
                     persona = jQuery.parseJSON(dato);
                     console.log(persona);
-                    $('#participantes').append("<li  class='alert alert-success'>" + persona[0].fullname + " <button class='bborrar' idpart='" + persona.participacionID + "'>X</button></li>");
-                    $('#formuser')[0].reset();
+                    $('.participantes').append("<li  class=' d-flex justify-content-between'><div class='d-flex'><i class='material-icons'>perm_identity</i>"+persona[0].fullname+"</div><button class='bborrar' idpart='" + persona.participacionID + "'>X</button> </li>");
+                    formulario[0].reset();
                 }
 
             },
@@ -110,7 +111,7 @@ $(document).ready(function () {
         var selector='[value="'+idtarea+'"].realizar-tarea ';
         
         $.ajax({
-            url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idtarea,
+            url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idtarea+'&estado=1',
             success: function (datos) {
                 if (datos == 1) {
                    $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
@@ -206,7 +207,7 @@ function construirCompaneros(convers) {
  $('#ul-convers').empty();
 //   $('#mistareas-btn > .badge').html(convers.length);
     convers.forEach(function (persona) {
-        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'</div>');
+        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'('+persona.pendientes+')</div>');
     });
 
 }
@@ -215,7 +216,7 @@ function buscarComps() {
     $.ajax({
         url: "./index.php?controller=usuario&action=rcomp",
         success: function (convers) {
-           
+           console.log(convers);
             conversaciones = jQuery.parseJSON(convers);
             construirCompaneros(conversaciones);
         },
@@ -228,17 +229,19 @@ function buscarComps() {
 
 }
 function buscarConversavcion(id){
-  
+  console.log(id);
     $.ajax({
        url:"./index.php?controller=mensaje&action=rm&id="+id,
         success: function (convers) {
-    
+   console.log(convers);
             conversaciones = jQuery.parseJSON(convers);
             construirConversacion(conversaciones,id);
         },
         error: function () {
            alertify.error("Error log message");
         }
+        
+   //     crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
     });
     
 }
@@ -253,5 +256,17 @@ function construirConversacion(conversacion,id){
     });
     $('#wrap-conversacion').append('<form id="form-chat"><input type="text" name="mensaje"><input type="hidden" name="recibe" value="'+id+'"><input type="submit"></form>');
 }
-
+function contarMensajes(){
+    $.ajax({
+        url:'./index.php?controller=mensaje&action=notifMsjs',
+        success:function(data){
+            if(data>0){
+                  $('#msjs').html(data);
+            }               
+        },
+        error: function () {
+           alertify.error("Error log message");
+        }
+    });
+}
 

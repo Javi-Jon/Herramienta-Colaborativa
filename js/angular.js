@@ -5,7 +5,7 @@
  */
  
       $('fieldset').toggle( "drop" );
-      
+      idproyecto=$('[name="idproyecto"').val();
      
 $(document).ready(function(){
     
@@ -46,6 +46,8 @@ $('#formNuevaTarea').validetta({
         display:'inline',
          bubblePosition: 'right', // Bubble position // right / bottom
   bubbleGapLeft: 50,
+ 
+
      onValid : function() {
             event.preventDefault();
 var titulo=  $('#formNuevaTarea [name="titulo"]').val();
@@ -144,10 +146,14 @@ $('#form-muro').submit(function(e){
    
 });
 $('#abrir').click(function(){
-    $('fieldset').toggle( "drop" )
+    $('fieldset').toggle( "drop" );
 }) ;
 $('#adm-participantes').click(function(){
+    idproyecto=$('[name="idproyecto"').val();
     $('#adm-participantes-modal').modal('show');
+});
+$('#bfinalizar').click(function(){
+    $('#adm-participantes-modal').modal('hide');
 });
 
 });

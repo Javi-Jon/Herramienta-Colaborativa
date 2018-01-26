@@ -5,8 +5,9 @@
             <aside class="aside-index">
                 <div class="text-center">
                     <img src="https://www.sonypark360.net/wp-content/uploads/2017/08/profile-pictures.png" class="img-circle" alt="...">
+                    
                 </div>
-                <hr>
+                <hr>{{ datos.usuario.fullname}}
                 <div> 
                     <ul class="tareas-wrap"></ul>
                 </div>
@@ -19,6 +20,7 @@
             <hr>
             </article>
             <section class="proyectos-index-r">
+                {%if datos.proyectos%}
                  {%for proyecto in datos.proyectos%}
                  <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}" class="a-proyecto">
                     <div class="div-proyecto card">
@@ -26,12 +28,17 @@
                     <p>{{proyecto.descripcion}}</p> {{proyecto.prog}} %   
                     {%if proyecto.creador==datos.yo%}
                     <i class="material-icons">supervisor_account</i>
+                    {%else%}
+                    <i class="material-icons">perm_identity</i>
                     {%endif%}
                 </div>
                      </a>
 
                 
                  {% endfor %}
+                 {%else%}
+                 No participas en ningun proyecto aun haz click en nuevo Proyeco para empezar
+                 {%endif%}
             </section>
         </section>
     </div>

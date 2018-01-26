@@ -12,7 +12,7 @@
             <div id="proy-div">
                 <h1>{{datos.proyecto.nombre}}</h1>
                 {%if datos.proyecto.creador==datos.yo%}
-                <b>Eres el administrador de este proyecto</b>
+                <b> <i class="material-icons">supervisor_account</i>Eres el administrador de este proyecto</b>
                 <div class="d-flex justify-content-around">
                     <a href="index.php?controller=proyecto&action=d&idproyecto={{datos.proyecto.id}}" class="a-proyecto">
                         <button class="btn btn-danger d-flex align-items-center"> <i class="material-icons">delete_forever</i>Borrar Proyecto</button>                   
@@ -123,27 +123,33 @@
                 </div>
                 <div class="modal-body">
                     <div>
-                        <ul id="participantes">
-                            <li  class="alert alert-success">
-                                Yo</li>
+                        <ul class="participantes" style="list-style: none">
+                            
                             {%for persona in datos.participantes%}
                             {%if persona.id == datos.yo%}
-                            <li  class='alert alert-success'>{{persona.fullname}}</li>
+                            <li  class='alert-warning d-flex align-items-center'>
+                                <i class="material-icons">supervisor_account</i>{{persona.fullname}}
+                            </li>
                             {%else%}
-                            <li  class='alert alert-success'>{{persona.fullname}}<button class='bborrar' idpart='{{persona.participacion}}'>X</button></li>
+                            <li  class=' d-flex justify-content-between'>
+                                <div class="d-flex">
+                                    <i class="material-icons">perm_identity</i>{{persona.fullname}}
+                                </div>
+                                <button class='bborrar' idpart='{{persona.participacion}}'>X</button>
+                            </li>
                             {%endif%}
                             {% endfor %}
                         </ul>
 
 
 
-                        <form id='formuser'><div class="input-group ">
+                        <form class='formuser'><div class="input-group ">
                                 <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
                                 <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
-
+                                <input type="hidden" name="idproyecto" value="{{datos.proyecto.id}}">
                         </form> 
                         <br>
-                        <a href="" id="finalizar" class="btn btn-primary" style="float: right">finalizar</a>
+                        <button id="bfinalizar" class="btn btn-primary" >finalizar</button>
                     </div>
                 </div>                        
             </div>
