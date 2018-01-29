@@ -170,7 +170,7 @@ $(document).ready(function () {
                 alertify.error("Error log message");
             }
         });
-        $('#form-chat').prepend("<div class='msj self-msj'>"+$('[name="mensaje"]').val()+"</div>");
+        $('#form-chat').prev().after("<div class='msj self-msj'>"+$('[name="mensaje"]').val()+"<i class='material-icons'>timer</i></div>");
         $('#form-chat')[0].reset();
         
     });
@@ -249,12 +249,13 @@ function construirConversacion(conversacion,id){
     $('#wrap-conversacion').empty();
      conversacion.msjs.forEach(function (mensaje) {
       if(mensaje.envia==conversacion.idusuario){
-           $('#wrap-conversacion').append('<div class="msj self-msj">'+mensaje.mensaje+'</div>');
+         (mensaje.estado==0)?$('#wrap-conversacion').append('<div class="msj self-msj">'+mensaje.mensaje+'<i class="material-icons">timer</i></div>'):$('#wrap-conversacion').append('<div class="msj self-msj">'+mensaje.mensaje+'<i class="material-icons">check</i></div>')
+           
       }else{
         $('#wrap-conversacion').append('<div class="msj" >'+mensaje.mensaje+'</div>');
     }
     });
-    $('#wrap-conversacion').append('<form id="form-chat"><input type="text" name="mensaje"><input type="hidden" name="recibe" value="'+id+'"><input type="submit"></form>');
+    $('#wrap-conversacion').append('<form id="form-chat" class="d-flex"><input type="text" name="mensaje" class="form-control"><input type="hidden" name="recibe" value="'+id+'"><button><i class="material-icons">send</i></button></form>');
 }
 function contarMensajes(){
     $.ajax({

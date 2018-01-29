@@ -53,15 +53,16 @@ html{
 
   border-radius: 60px;
   font-family: Arial;
-  color: #ffffff;
+  color: #c43d4f;
   font-size: 15px;
-  background: #c43d4f;
+  background: #ffffff;
  border: 1px solid transparent;
   text-decoration: none;
 }
 
 .bborrar:hover {
-  background: #992020;
+  background: #c43d4f;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -119,14 +120,22 @@ html{
     flex-direction: column;
 }
 .msj{
-    border: solid 1px silver;
+    border: solid 1px white;
+    border-radius: 3px;
+   padding: 0.5em;
     align-self: flex-start ;
 }
 .self-msj{
     align-self: flex-end !important;
+    background-color: #aade86;
+    display: flex;
+    justify-content: flex-end;
 }
 #form-chat{
     align-self: stretch;
+}
+.msj > i {
+    font-size: 20px !important;
 }
 /*****************************************
 
@@ -144,6 +153,7 @@ align-items: stretch;
 
 .a-proyecto:hover{
     text-decoration: none;
+    
 }
 .a-proyecto{
     color: inherit;
@@ -192,7 +202,9 @@ align-items: center;
     flex-grow: 1;
 }
 .div-proyecto:hover{
-    background-color: #73ab58;
+
+        background-color: #94bad4;
+    box-shadow: 5px 5px 20px black;
 }
 .section-index{
     display: flex;
@@ -305,4 +317,49 @@ color: crimson;
 
 .ui-widget.ui-widget-content{
     border: 1px transparent !important;
+}
+
+.comentario{
+    margin: 1.5em;
+    border-radius: 5px;
+    padding: 0.5em;
+    border: solid 2px #a9a8ad;
+        box-shadow: 3px 3px 17px 0px black;
+}
+
+.comentario:hover{
+    background-color: activecaption;
+}
+.comentario > span:nth-child(1){
+margin: 0.5em;
+font-weight:normal;color:#000000;
+letter-spacing:0pt;
+word-spacing:0pt;
+font-size:22px;
+text-align:left;
+font-family:comic sans, comic sans ms, cursive, verdana, arial, sans-serif;
+line-height:1;
+
+
+}
+.comentario > span:nth-child(2),.comentario > span:nth-child(3){
+    align-self:  flex-end;
+    font-size: 13px;
+        color: #848484;
+}
+
+#upload{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   min-height: 20vh;
+   border-radius: 15px;
+   background-color: #a7a2e3;
+    border: dashed 4px #7d79b3;
+}
+#upload > div{
+    background-color: antiquewhite;
+    margin: 1.5em;
+    border-radius: 5px;
+    align-self: flex-start;
 }

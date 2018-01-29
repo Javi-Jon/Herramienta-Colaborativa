@@ -75,10 +75,61 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
             }
         });
      }});
+$("#upload").dropzone({
+    url: "index.php",
+    
+    clickable: "#upload",
+    paramName: "userfile",
+    success: function(file, response){
+        alertify.success('as');
+    },
+    error: function(file, response){
+        alertify.error("error: " +response); 
+    },
+    method: "post",
+previewTemplate:'<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size></div>    <img data-dz-thumbnail />  </div></div>',
+uploadprogress: function(file, progress, bytesSent) {
+    if (file.previewElement) {
+      
+        $('.dz-upload').css('width',progress + "%") ;
+//        $('.dz-progress').querySelector(".progress-text").textContent = progress + "%";
+    }
+}
+});
+
+
+//('#div-archivos').dropzone(
+//        {url:'./index.php',
+//    options:[{
+//     addedfile: function(file) {
+//    file.previewElement = $('#div-archivos').append('<p>'+file.name+'</p>\n\
+//<div class="progreso"></div>');},
+//uploadprogress: function(file, progress, bytesSent) {
+//    $('.progreso').progressbar({
+//      value: bytesSent
+//    })}       
+//            
+//    }]});
+    
 
 
 
-
+//$('#div-archivos').options = {
+// 
+//  // Specifing an event as an configuration option overwrites the default
+//  // `addedfile` event handler.
+//  addedfile: function(file) {
+//    file.previewElement = $('#div-archivos').createElement(this.options.previewTemplate);
+//    // Now attach this new element some where in your page
+//  },
+//  thumbnail: function(file, dataUrl) {
+//    // Display the image in your file.previewElement
+//  },
+//  uploadprogress: function(file, progress, bytesSent) {
+//    // Display the progress
+//  }
+//  // etc...
+//};
 
 
 
@@ -137,13 +188,14 @@ $('#form-muro').submit(function(e){
         method:'POST',
         success:function(data){
             console.log(data);
-            form.append('<div class="comentario card">'+$('[name="mensaje"]').val()+'</div>');
+            form.next().before('<div class="comentario card"><span>'+$('[name="mensaje"]').val()+'</span><span></span><span>ahora mismo</span></div>');
+            form[0].reset();
         },
         error: function () {
               alertify.error("Error log message");
             }
     });
-   
+
 });
 $('#abrir').click(function(){
     $('fieldset').toggle( "drop" );
