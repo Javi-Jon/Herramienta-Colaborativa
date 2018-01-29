@@ -4,9 +4,9 @@
 <div id="wrapper-proyecto">
  <div id="tabs">
   <ul>
-    <li><a href="#fragment-1"> Proyecto</a></li>
-    <li><a href="#fragment-2">Muro</a></li>
-    <li><a href="#fragment-3">Tareas</a></li>
+      <li><a href="#fragment-1"> Proyecto</a></li>
+      <li><a href="#fragment-2">Muro</a></li>
+      <li><a href="#fragment-3">Tareas</a></li>
   </ul>
   <div id="fragment-1">
    <div id="proy-div">
@@ -49,42 +49,67 @@
           </div>   
   </div>
   <div id="fragment-3">
-    <aside>
-        <div>
-           <button id="abrir">abrir</button>
-
-            
-                <fieldset>
-           <form id="formNuevaTarea">
-               <h3>Nueva Tarea</h3>
-               titulo <input class='form-control' type="text" name="titulo" >
-                descripcion<input class='form-control' type="text" name="descripcion">
-               plazo <input class='form-control' type="date" name="plazo">
-               <input  type="radio" name="dificultad" value="1" checked="checked" id="rbf"><label for="rbf">Facil </label> 
-                <input  type="radio" name="dificultad" value="2" id="rbm"><label for="rbf">Medio </label>              
-                <input  type="radio" name="dificultad" value="3" id="rbd"><label for="rbf">Dificil </label>
-                <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
-            </form>
-                     <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea"><i class="material-icons">add</i>Añadir Tarea</button>      
-            </fieldset>  
-            
-             <ul id="tareas-proyecto">
+      <div>
+          <button id="abrir">abrir</button>
+          <fieldset>
+              <label id="formNuevaTarea">
+                  <h3>Nueva Tarea</h3>
+              </label>
+                  <label for="titulo">Titulo: </label><input class='form-control' type="text" name="titulo" id="titulo">
+                  <label for="descripcion">Descripción: </label><input class='form-control' type="text" name="descripcion" id="descripcion">
+                  <label for="plazo">Plazo: </label><input class='form-control' type="date" name="plazo" id="plazo">
+                    <input  type="radio" name="dificultad" value="1" checked="checked" id="rbf"><label for="rbf">Facil </label>
+                    <input  type="radio" name="dificultad" value="2" id="rbm"><label for="rbm">Medio </label>
+                    <input  type="radio" name="dificultad" value="3" id="rbd"><label for="rbd">Dificil </label>
+                    <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
+                </form>
+                <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea"><i class="material-icons">add</i>Añadir Tarea</button>
+           </fieldset>
+            <br>
+            <div class="opcionesTareas">
+                <div class="card estiloTarjeta" id="pendiente">
+                    <h5 class="card-header">Pendiente</h5>
+                    <div class="card-body column">
+                        {%if tarea is empty%}
+                            {%for tarea in datos.tareas%}
+                                {% if tarea.estado==0%}
+                                    <div class="portlet" id="{{tarea.id}}">
+                                        <div class="portlet-header">{{tarea.titulo}}</div>
+                                        <div class="portlet-content">{{tarea.descripcion}}</div>
+                                    </div>
+                                {%endif%}
+                            {% endfor %}
+                        {%else%}
+                            <p>No hay tareas pendientes.</p>
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="card estiloTarjeta" id="terminado">
+                    <h5 class="card-header">Completado</h5>
+                    <div class="card-body column">
+                        {%if tarea is empty%}
+                            {%for tarea in datos.tareas%}
+                                {% if tarea.estado==1%}
+                                    <div class="portlet" id="{{tarea.id}}">
+                                        <div class="portlet-header">{{tarea.titulo}}</div>
+                                        <div class="portlet-content">{{tarea.descripcion}}</div>
+                                    </div>
+                                {%endif%}
+                            {% endfor %}
+                        {%else%}
+                            <p>No hay tareas pendientes.</p>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+             <!--<ul id="tareas-proyecto">
                 {%for tarea in datos.tareas%}
-               <li {% if tarea.estado==1%}
-                 class="tarea-realizada"
-                {%endif%}
-                 >{{tarea.titulo}}</li>
+               <li {% if tarea.estado==1%} class="tarea-realizada" {%endif%}>{{tarea.titulo}}</li>
                 {% endfor %}
-
-            </ul>
+            </ul>-->
         </div>
-    </aside>
   </div>
 </div>
-            
-                    
-    
-    
     <div class="modal fade" id="asignaciones-modal" tabindex="-1" role="dialog"  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
