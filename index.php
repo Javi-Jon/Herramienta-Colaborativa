@@ -6,7 +6,7 @@ require_once 'controller/ControllerGenerico.php';
 require_once './controller/MuroController.php';
 require_once 'controller/MensajesController.php';
 session_start();
-if(!isset($_SESSION['idusuario']) && !isset($_POST['username'])){
+if(!isset($_SESSION['idusuario']) && !isset($_POST['username']) && !isset($_GET['confirm'])){
     loginView();
 }elseif (isset ($_GET['controller']) || isset($_SESSION['idusuario'])) {
    switch (@$_GET['controller']) {
@@ -49,6 +49,6 @@ function loginView(){
 function index(){
     $ctrl=new Controller();
     $usuario=new UsuarioController();
-     $proyectos=$usuario->getInfoUsuario($_SESSION['idusuario']);
-    $ctrl->view('index', ['proyectos'=>$proyectos]);
+     $datos=$usuario->getInfoUsuario($_SESSION['idusuario']);
+    $ctrl->view('index', ['proyectos'=>$datos['proyectos'] ,'yo'=>$_SESSION['idusuario'],'usuario'=>$datos['usuario']]);
 }

@@ -76,7 +76,7 @@ class Proyecto extends BD{
         return $idParticipacion;
     }
     function getParticipaciones() {
-       $participantes= $this->fSelectN("SELECT usuarios.username, usuarios.id, usuarios.fullname FROM participaciones,usuarios WHERE usuarios.id=participaciones.idusuario AND participaciones.idproyecto=:idproyecto", ['idproyecto'=> $this->getId()]);
+       $participantes= $this->fSelectN("SELECT participaciones.id as 'participacion', usuarios.username, usuarios.id, usuarios.fullname FROM participaciones,usuarios WHERE usuarios.id=participaciones.idusuario AND participaciones.idproyecto=:idproyecto", ['idproyecto'=> $this->getId()]);
        return $participantes;
     }
     function deleteParti($id) {
@@ -96,6 +96,10 @@ class Proyecto extends BD{
         $stats= $this->fSelectN("SELECT COUNT(asignacion.id) as stat,usuarios.username FROM `asignacion`,usuarios,proyectos,tareas WHERE iduser=usuarios.id and tareas.proyecto=proyectos.id and asignacion.idtarea=tareas.id AND proyectos.id=:idproyecto GROUP BY usuarios.id",
                 ['idproyecto'=> $this->getId()]);
         return $stats;
+    }
+    function deleteProyecto(){
+        $filas= $this->delete("DELETE FROM $this->tabla WHERE id=:id",['id'=>$this->getId()]);
+        return $filas;
     }
     
 

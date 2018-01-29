@@ -8,8 +8,17 @@
 
 
 **************************************/
+html{
+    min-width: 615px;
+}
 
 
+
+#wrapper{
+    display: flex;
+    flex-grow: 1;
+    height: 94vh;
+}
 
 /*para hacer que los elementos del navbar tengan separacion */
 .m-top-nav{
@@ -40,7 +49,21 @@
     display: flex;
   
 }*/
+.bborrar {
 
+  border-radius: 60px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #c43d4f;
+ border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.bborrar:hover {
+  background: #992020;
+  text-decoration: none;
+}
 
 
 
@@ -118,6 +141,13 @@
      flex-direction: column;
 align-items: stretch;
 }*/
+
+.a-proyecto:hover{
+    text-decoration: none;
+}
+.a-proyecto{
+    color: inherit;
+}
 #wrap{
     display: flex;
 align-items: stretch;
@@ -129,7 +159,7 @@ flex-grow: 1;
    display: flex;
     flex-direction: column;
     flex-grow: 3;
-    background-color: red;
+/*    background-color: red;*/
       transition: width 0.4s linear;
       max-width: 400px;
       min-width: 400px;
@@ -149,16 +179,17 @@ align-items: center;
 .proyectos-index-r{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-   
-    flex-grow: 7;
+  justify-content: space-around;
+/*    flex-grow: 7;*/
   
    
 }
 .div-proyecto{
+
     display: flex;
     margin: 0.5em;
-    background-color: #83b339;
+/*    background-color: #83b339;*/
+    flex-grow: 1;
 }
 .div-proyecto:hover{
     background-color: #73ab58;
@@ -183,12 +214,9 @@ align-items: center;
 
 ********************************************/
 
-/*#wrapper-proyecto{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-}
+#wrapper-proyecto{
+    flex-grow: 1;
+}/*
 #wrapper-proyecto  section {
     display: flex;
     flex-direction: row;
@@ -252,11 +280,31 @@ color: crimson;
     /* If you want to align tab titles center */
     text-align: center;
 }
-    
+#bfinalizar{
+    float: right;
+}
+
+
 #stats{
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+@media screen and (max-width:1239px){
+    #stats{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-self: center; */
+    /* align-content: center; */
+    align-items: center;
+    }
+}
+
+
+
+.ui-widget.ui-widget-content{
+    border: 1px transparent !important;
 }
 /*****************************************
 

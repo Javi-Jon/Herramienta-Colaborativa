@@ -19,6 +19,9 @@ class ProyectoController extends Controller{
 //            case 'pp':
 //                $this->getProyectosUsuario($_GET['asd']);
 //                break;
+            case 'd':
+                $this->borrarProyecto();
+                break;
             case 'vp':
                 $this->verProyecto();
                 break;
@@ -89,8 +92,15 @@ class ProyectoController extends Controller{
      
      $mc= new MuroController();
     $mensajes= $mc->readMuro($_GET['id']);
-       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats];
+       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats,'yo'=>$_SESSION['idusuario']];
        $this->view('proyecto', $datos);
+    }
+    function borrarProyecto(){
+        $proyecto=new Proyecto();
+        $proyecto->setId($_GET['idproyecto']);
+         $proyecto->deleteProyecto();
+        header("Location:index.php");
+        
     }
     
 }

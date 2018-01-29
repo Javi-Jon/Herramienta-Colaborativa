@@ -3,30 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- $('#formAsign').validetta({
-        realTime : true
-//        onValid : function( event ) {
-//            event.preventDefault();
-//            alert('bien');
-////            $('#alert').empty()
-////                .append('<div class="alert alert-success">Nice, Form is valid</div>');
-//        },
-//       
-//            $('#alert').empty()
-//                .append('<div class="alert alert-danger">Stop bro !! There are some errors.</div>');
-//        }
-    });
-      $('fieldset').toggle( "drop" )
+ 
+      $('fieldset').toggle( "drop" );
+      idproyecto=$('[name="idproyecto"').val();
      
 $(document).ready(function(){
+    
+    
+    $('#formAsign').validetta({
+        realTime : true,
+        display:'bubble',
+         bubblePosition: 'right', // Bubble position // right / bottom
+  bubbleGapLeft: 50,
+     onValid : function() {
+            event.preventDefault();
+    //      $('#formAsign').submit(function(e){
+//       e.preventDefault();
+      var data=$('#formAsign').serialize();
+      $.ajax({
+          url: "./index.php?controller=tareas&action=assign",
+          method:'POST',
+          data:data,
+          success:function(dato){
+              $('#asignaciones-modal').modal('hide');
+          }
+      });
+//    $(this)[0].reset(); 
+//});
+     }});
+
     $('#tabs').tabs({
-  heightStyle: "auto",
+  heightStyle: "auto"
   
 });
-    $('#banadirTarea').click(function(){
-        
-        
-     var titulo=  $('#formNuevaTarea [name="titulo"]').val();
+
+
+
+
+
+$('#formNuevaTarea').validetta({
+        realTime : true,
+        display:'inline',
+         bubblePosition: 'right', // Bubble position // right / bottom
+  bubbleGapLeft: 50,
+ 
+
+     onValid : function() {
+            event.preventDefault();
+var titulo=  $('#formNuevaTarea [name="titulo"]').val();
         var tarea=$('#formNuevaTarea').serialize();
         $.ajax({
             url:'index.php?controller=tareas&action=ct',
@@ -50,23 +74,58 @@ $(document).ready(function(){
               alertify.error("Error log message");
             }
         });
+     }});
 
-    });
-    
-    
-    $('#formAsign').submit(function(e){
-       e.preventDefault();
-      var data=$(this).serialize();
-      $.ajax({
-          url: "./index.php?controller=tareas&action=assign",
-          method:'POST',
-          data:data,
-          success:function(dato){
-              $('#asignaciones-modal').modal('hide');
-          }
-      });
-    $(this)[0].reset(); 
-});
+
+
+
+
+
+
+//    $('#banadirTarea').click(function(){
+//        
+//        
+//     var titulo=  $('#formNuevaTarea [name="titulo"]').val();
+//        var tarea=$('#formNuevaTarea').serialize();
+//        $.ajax({
+//            url:'index.php?controller=tareas&action=ct',
+//            data: tarea,
+//            method:'POST',
+//            success:function(data){
+//               if(data!==0){
+//                   console.log(data);
+//                   $('#asignaciones-modal .modal-title').html(titulo); 
+//                   $('#formNuevaTarea')[0].reset();
+//                   $('[name="idtarea"]').val(data);
+//                   $('#tareas-proyecto').append('<li>'+titulo+'</li>');
+//                   $('#asignaciones-modal').modal('show');                   
+//         
+//               }else{
+//                alertify.error("Error log message");
+//               }
+//                
+//            },
+//             error: function () {
+//              alertify.error("Error log message");
+//            }
+//        });
+//
+//    });
+//    
+//    
+//    $('#formAsign').submit(function(e){
+//       e.preventDefault();
+//      var data=$(this).serialize();
+//      $.ajax({
+//          url: "./index.php?controller=tareas&action=assign",
+//          method:'POST',
+//          data:data,
+//          success:function(dato){
+//              $('#asignaciones-modal').modal('hide');
+//          }
+//      });
+//    $(this)[0].reset(); 
+//});
 $('#form-muro').submit(function(e){
     var datos=$(this).serialize();
     console.log(datos);
@@ -87,7 +146,14 @@ $('#form-muro').submit(function(e){
    
 });
 $('#abrir').click(function(){
-    $('fieldset').toggle( "drop" )
+    $('fieldset').toggle( "drop" );
 }) ;
+$('#adm-participantes').click(function(){
+    idproyecto=$('[name="idproyecto"').val();
+    $('#adm-participantes-modal').modal('show');
+});
+$('#bfinalizar').click(function(){
+    $('#adm-participantes-modal').modal('hide');
+});
 
 });

@@ -22,6 +22,9 @@ class UsuarioController extends Controller{
             case 'rcomp':
                 $this->buscarCompaneros();
                 break;
+            case 'confirm':
+                $this->confirmarCuenta();
+                break;
             default:
                 break;
         }
@@ -41,7 +44,7 @@ class UsuarioController extends Controller{
         $usuario->setPassword($_POST['password']);        
         if($usuario->login()){
           $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
-            $this->view('index',['proyectos'=>$proyectos]);
+            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
         }else{
             echo 'login incorrecto';
         }
@@ -61,10 +64,13 @@ class UsuarioController extends Controller{
 //        return $ausuario;      
         
     }
+
     function getInfoUsuario($idusuario){
          $pc=new ProyectoController();
           $proyectos=  $pc->getProyectosUsuario($idusuario);
-          
+          $usuario=new Usuario();
+          $usuario->setId($idusuario);
+         $datosusuario= $usuario->getUsuarioByID();
           $tc=new TareasController();
           foreach($proyectos as &$proyecto){
             $numeros=$tc->getProgreso($proyecto['id']);
@@ -78,13 +84,23 @@ class UsuarioController extends Controller{
           }
           unset($proyecto);
          
-          return $proyectos;
+          return ["proyectos"=>$proyectos,"usuario"=>$datosusuario];
     }
     function buscarCompaneros(){
         $usuario=new Usuario();
         $usuario->setId($_SESSION['idusuario']);
         $compas=$usuario->getCompaneros();
         echo json_encode($compas);        
+    }
+    function confirmarCuenta(){
+        $usuario=new Usuario();
+        $usuario->setId($_GET['id']);
+        $filas=$usuario->confirmAcc();
+        if($filas==1){
+            $_SESSION['idusuario']=$_GET['id'];
+            $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
+            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
+        }
     }
     
 }
