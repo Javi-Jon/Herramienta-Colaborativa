@@ -185,7 +185,7 @@ $(document).ready(function () {
         $(".column").sortable({
             receive: function (event, ui) {
                 elemento = ui.item.attr("id");
-                marcarTareaCompletada(elemento, donde);
+                actualizarEstadoTarea(elemento, donde);
             },
             connectWith: ".column",
             handle: ".portlet-header",
@@ -320,7 +320,7 @@ function contarMensajes(){
 }
 
 
-function marcarTareaCompletada(idTarea, estado) {
+function actualizarEstadoTarea(idTarea, estado) {
     switch (estado){
         case "pendiente":
             $.ajax({
@@ -342,3 +342,18 @@ function marcarTareaCompletada(idTarea, estado) {
                 url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idTarea,
                 success: function (datos) {
                     if (datos == 1) {
+                        alertify.success('Actualizado');
+                    }else {
+                        alertify.error("Error al actualizar el estado en la base de datos.");
+                    }
+                },
+                error: function () {
+                    alert("Error al actualizar el estado en la base de datos.");
+                }
+            });
+            break;
+        default:
+            alert("Ocurrió un error al actualizar la tarea, contacte con el administrador.");
+            break;
+    }
+}
