@@ -342,18 +342,3 @@ function marcarTareaCompletada(idTarea, estado) {
                 url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idTarea,
                 success: function (datos) {
                     if (datos == 1) {
-                        alertify.success('Actualizado');
-                    }else {
-                        alertify.error("Error al actualizar el estado en la base de datos.");
-                    }
-                },
-                error: function () {
-                    alert("Error al actualizar el estado en la base de datos.");
-                }
-            });
-            break;
-        default:
-            alert("Ocurrió un error al actualizar la tarea, contacte con el administrador.");
-            break;
-    }
-}
