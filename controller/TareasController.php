@@ -17,6 +17,9 @@ class TareasController extends Controller {
             case 'marcarDone':
                 $this->realizarTarea();
                 break;
+            case 'marcarPendiente':
+                $this->tareaPendiente();
+                break;
             case 'dbyID':
                 $this->deleteTarea();
                 break;
@@ -59,6 +62,16 @@ class TareasController extends Controller {
             echo '0';
         }
     }
+    function tareaPendiente() {
+    $tarea = new Tarea();
+    $tarea->setId($_GET['idtarea']);
+    $filas = $tarea->marcarPendiente();
+    if ($filas == 1) {
+        echo '1';
+    } else {
+        echo '0';
+    }
+}
      function deleteTarea() {
         $tarea = new Tarea();
         $tarea->setId($_GET['idtarea']);

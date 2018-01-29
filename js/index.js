@@ -6,7 +6,6 @@ comprobarMisTareas();
 contarMensajes();
 buscarComps();
 $(document).ready(function () {
-    
     //alertify.success("Success log message");
     $('#subm-newProy').click(function (e) {
         e.preventDefault();
@@ -20,7 +19,7 @@ $(document).ready(function () {
                 $('#proyect-modal').modal("hide");
                 $('#participantes-modal').modal("show");
                 $('#finalizar').attr("href",'index.php?controller=proyecto&action=vp&id='+data);
-           
+
             },
             error: function () {
                alertify.error("Error log message");
@@ -174,11 +173,61 @@ $(document).ready(function () {
         $('#form-chat')[0].reset();
         
     });
-    
-    
+
+    /* *********************************************
+     Mover tareas
+ ********************************************* */
+
+    $(function() {
+        //var donde;
+        //var elemento;
+
+        $(".column").sortable({
+            receive: function (event, ui) {
+                elemento = ui.item.attr("id");
+                marcarTareaCompletada(elemento, donde);
+            },
+            connectWith: ".column",
+            handle: ".portlet-header",
+            cancel: ".portlet-toggle",
+            placeholder: "portlet-placeholder ui-corner-all"
+        });
+
+        $(".portlet")
+            .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+            .find(".portlet-header")
+            .addClass("ui-widget-header ui-corner-all")
+            .prepend("<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+
+        $(".estiloTarjeta").droppable({
+            drop: function(event, ui) {
+                // $(this).addClass("ui-state-highlight");
+                donde = this.id;
+            }/* ,
+        over: function(event, ui) {
+            $('.display').html( this.id );
+        } */
+
+        });
+
+        $(".portlet-toggle").on("click", function() {
+            var icon = $(this);
+            icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
+            icon
+                .closest(".portlet")
+                .find(".portlet-content")
+                .toggle();
+        });
+    });
+    /* *********************************************
+         Fin mover tareas
+    ********************************************* */
     
  
 });
+
+
+
 function comprobarMisTareas() {
 
     $.ajax({
@@ -240,7 +289,7 @@ function buscarConversavcion(id){
         error: function () {
            alertify.error("Error log message");
         }
-        
+
    //     crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
     });
     
@@ -263,7 +312,7 @@ function contarMensajes(){
         success:function(data){
             if(data>0){
                   $('#msjs').html(data);
-            }               
+            }
         },
         error: function () {
            alertify.error("Error log message");
@@ -271,3 +320,26 @@ function contarMensajes(){
     });
 }
 
+
+//function marcarTareaCompletada(idTarea, estado) {
+//    switch (estado){
+//        case "pendiente":
+//            $.ajax({
+//                url: 'index.php?controller=tareas&action=marcarPendiente&idtarea=' + idTarea,
+//                success: function (datos) {
+//                    if (datos == 1) {
+//                        alertify.success('Actualizado');
+//                    }else {
+//                        alertify.error("Error al actualizar el estado en la base de datos.");
+//                    }
+//                },
+//                error: function () {
+//                    alert("Error al actualizar el estado en la base de datos");
+//                }
+//            });
+//            break;
+//        case "terminado":
+//            $.ajax({
+//                url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idTarea,
+//                success: function (datos) {
+//                    if (datos == 1) {

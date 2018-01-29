@@ -20,7 +20,7 @@
                 <hr>
                 <div class="d-flex justify-content-around">
                     <a href="index.php?controller=proyecto&action=d&idproyecto={{datos.proyecto.id}}" class="a-proyecto">
-                        <button class="btn btn-danger d-flex align-items-center"> <i class="material-icons">delete_forever</i>Borrar Proyecto</button>                   
+                        <button class="btn btn-danger d-flex align-items-center"> <i class="material-icons">delete_forever</i>Borrar Proyecto</button>
                     </a>
                     <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i>   Administrar Participantes</button>
                 </div>
@@ -56,7 +56,7 @@
                     {%else%}
                     <li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>{{persona.username}}
                         {%if datos.proyecto.creador==datos.yo%}
-                        <button class=" bborrar" idpart="{{persona.participacion}}">X</button> 
+                        <button class=" bborrar" idpart="{{persona.participacion}}">X</button>
                         {%endif%}
                     </li>
                     {%endif%}
@@ -67,7 +67,7 @@
 </div>
             </div>   
         </div>
-        <div id="fragment-2">    
+        <div id="fragment-2">
             <form id="form-muro" action="index.php?controller=muro&action=cm" method="POST">
                 <input class='form-control' type="text" name="mensaje" >
                 <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
@@ -76,15 +76,14 @@
             <div>
                 {%for comentario in datos.muro%}
                 <div class="card comentario">
-                    <span>{{comentario.mensaje}}</span> 
-                    <span> {{comentario.fullname}}</span> 
+                    <span>{{comentario.mensaje}}</span>
+                    <span> {{comentario.fullname}}</span>
                     <span> {{comentario.hora}}</span></div>
                 {% endfor %}
 
-            </div>   
+            </div>
         </div>
         <div id="fragment-3">
-            <aside>
                 <div>
                     <button id="abrir">abrir</button>
 
@@ -92,37 +91,65 @@
                     <fieldset>
                         <form id="formNuevaTarea">
                             <h3>Nueva Tarea</h3>
-                            titulo <input class='form-control' type="text" name="titulo" data-validetta="required">
-                            descripcion<input class='form-control' type="text" name="descripcion" data-validetta="required">
-                            plazo <input class='form-control' type="date" name="plazo" data-validetta="required">
+                            <label for="titulo">Titulo: </label><input class='form-control' type="text" name="titulo" id="titulo" data-validetta="required">
+                            <label for="descripcion">Descripción: </label><input class='form-control' type="text" name="descripcion" id="descripcion" data-validetta="required">
+                            <label for="plazo">Plazo: </label><input class='form-control' type="date" name="plazo" id="plazo" data-validetta="required">
                             <input  type="radio" name="dificultad" value="1" id="rbf" data-validetta="required">
-                            <label for="rbf">Facil </label> 
+                            <label for="rbf">Facil </label>
                             <input  type="radio" name="dificultad" value="2" id="rbm" data-validetta="required">
-                            <label for="rbf">Medio </label>              
+                            <label for="rbf">Medio </label>
                             <input  type="radio" name="dificultad" value="3" id="rbd" data-validetta="required">
                             <label for="rbf">Dificil </label>
                             <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
                         <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea">
                             <i class="material-icons">add</i>Añadir Tarea
-                        </button> 
+                        </button>
                         </form>
-                             
-                    </fieldset>  
 
-                    <ul id="tareas-proyecto">
-                        {%for tarea in datos.tareas%}
-                         {% if tarea.estado==1%}
-                          <li class=" d-flex align-items-center"  ><i class="material-icons">assignment_turned_in</i> {{tarea.titulo}}</li>
-                          {%else%} 
-                          <li class=" d-flex align-items-center"  ><i class="material-icons ">assignment</i> {{tarea.titulo}}</li>
-                            {%endif%}
-                        
-                        {% endfor %}
-
-                    </ul>
-
+                    </fieldset>
+                    <br>
+                    <div class="opcionesTareas">
+                        <div class="card estiloTarjeta" id="pendiente">
+                            <h5 class="card-header">Pendiente</h5>
+                            <div class="card-body column">
+                                {%if tarea is empty%}
+                                {%for tarea in datos.tareas%}
+                                {% if tarea.estado==0%}
+                                <div class="portlet" id="{{tarea.id}}">
+                                    <div class="portlet-header">{{tarea.titulo}}</div>
+                                    <div class="portlet-content">{{tarea.descripcion}}</div>
+                                </div>
+                                {%endif%}
+                                {% endfor %}
+                                {%else%}
+                                <p>No hay tareas pendientes.</p>
+                                {%endif%}
+                            </div>
+                        </div>
+                        <div class="card estiloTarjeta" id="terminado">
+                            <h5 class="card-header">Completado</h5>
+                            <div class="card-body column">
+                                {%if tarea is empty%}
+                                {%for tarea in datos.tareas%}
+                                {% if tarea.estado==1%}
+                                <div class="portlet" id="{{tarea.id}}">
+                                    <div class="portlet-header">{{tarea.titulo}}</div>
+                                    <div class="portlet-content">{{tarea.descripcion}}</div>
+                                </div>
+                                {%endif%}
+                                {% endfor %}
+                                {%else%}
+                                <p>No hay tareas pendientes.</p>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                    <!--<ul id="tareas-proyecto">
+                       {%for tarea in datos.tareas%}
+                      <li {% if tarea.estado==1%} class="tarea-realizada" {%endif%}>{{tarea.titulo}}</li>
+                       {% endfor %}
+                   </ul>-->
                 </div>
-            </aside>
         </div>
     
     
@@ -152,7 +179,7 @@
                 <div class="modal-body">
                     <div>
                         <ul class="participantes" style="list-style: none">
-                            
+
                             {%for persona in datos.participantes%}
                             {%if persona.id == datos.yo%}
                             <li  class='alert-warning d-flex align-items-center'>
@@ -175,11 +202,11 @@
                                 <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
                                 <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
                                 <input type="hidden" name="idproyecto" value="{{datos.proyecto.id}}">
-                        </form> 
+                        </form>
                         <br>
                         <button id="bfinalizar" class="btn btn-primary" >finalizar</button>
                     </div>
-                </div>                        
+                </div>
             </div>
         </div>
     </div>
@@ -206,13 +233,14 @@
                         <input type="submit">
                     </form>
 
-                </div>                        
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="js/validetta.min.js" type="text/javascript"></script>
 <script src="js/angular.js"></script>
 <script type="text/javascript">
 

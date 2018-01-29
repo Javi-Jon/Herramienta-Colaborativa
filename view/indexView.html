@@ -5,7 +5,6 @@
             <aside class="aside-index">
                 <div class="text-center">
                     <img src="https://www.sonypark360.net/wp-content/uploads/2017/08/profile-pictures.png" class="img-circle" alt="...">
-                    
                 </div>
                 <hr>{{ datos.usuario.fullname}}
                 <div> 
@@ -25,7 +24,7 @@
                  <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}" class="a-proyecto">
                     <div class="div-proyecto card">
                     <h3>{{proyecto.nombre}}</h3>
-                    <p>{{proyecto.descripcion}}</p> {{proyecto.prog}} %   
+                    <p>{{proyecto.descripcion}}</p> {{proyecto.prog}} %
                     {%if proyecto.creador==datos.yo%}
                     <i class="material-icons">supervisor_account</i>
                     {%else%}
