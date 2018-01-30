@@ -54,7 +54,6 @@ class TareasController extends Controller {
     function realizarTarea() {
         $tarea = new Tarea();
         $tarea->setId($_GET['idtarea']);
-        $tarea->setEstado($_GET['estado']);
         $filas = $tarea->marcarRealizada();
         if ($filas == 1) {
             echo '1';
