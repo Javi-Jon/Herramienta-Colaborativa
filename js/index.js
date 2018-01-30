@@ -185,7 +185,7 @@ $(document).ready(function () {
         $(".column").sortable({
             receive: function (event, ui) {
                 elemento = ui.item.attr("id");
-                marcarTareaCompletada(elemento, donde);
+                actualizarEstadoTarea(elemento, donde);
             },
             connectWith: ".column",
             handle: ".portlet-header",
@@ -321,25 +321,40 @@ function contarMensajes(){
 }
 
 
-//function marcarTareaCompletada(idTarea, estado) {
-//    switch (estado){
-//        case "pendiente":
-//            $.ajax({
-//                url: 'index.php?controller=tareas&action=marcarPendiente&idtarea=' + idTarea,
-//                success: function (datos) {
-//                    if (datos == 1) {
-//                        alertify.success('Actualizado');
-//                    }else {
-//                        alertify.error("Error al actualizar el estado en la base de datos.");
-//                    }
-//                },
-//                error: function () {
-//                    alert("Error al actualizar el estado en la base de datos");
-//                }
-//            });
-//            break;
-//        case "terminado":
-//            $.ajax({
-//                url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idTarea,
-//                success: function (datos) {
-//                    if (datos == 1) {
+function actualizarEstadoTarea(idTarea, estado) {
+    switch (estado){
+        case "pendiente":
+            $.ajax({
+                url: 'index.php?controller=tareas&action=marcarPendiente&idtarea=' + idTarea,
+                success: function (datos) {
+                    if (datos == 1) {
+                        alertify.success('Actualizado');
+                    }else {
+                        alertify.error("Error al actualizar el estado en la base de datos.");
+                    }
+                },
+                error: function () {
+                    alert("Error al actualizar el estado en la base de datos");
+                }
+            });
+            break;
+        case "terminado":
+            $.ajax({
+                url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idTarea,
+                success: function (datos) {
+                    if (datos == 1) {
+                        alertify.success('Actualizado');
+                    }else {
+                        alertify.error("Error al actualizar el estado en la base de datos.1");
+                    }
+                },
+                error: function () {
+                    alert("Error al actualizar el estado en la base de datos.");
+                }
+            });
+            break;
+        default:
+            alert("Ocurrió un error al actualizar la tarea, contacte con el administrador.");
+            break;
+    }
+}
