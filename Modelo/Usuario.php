@@ -71,7 +71,7 @@ class Usuario extends BD {
         $id= $this->insert("INSERT INTO $this->tabla (username, password, tipo,fullname,correo) VALUES (:username,:password,:tipo,:fullname,:correo)", ['username' => $this->getUsername(), 'password' => $password, "tipo" => $this->getTipo(), "fullname" => $this->getFullname(), 'correo' => $this->getCorreo()]);
         //mail($usuario->getCorreo(), "registro", "te has registrado");  //METER MAIL AQUI?
 
-        $mensaje = '<a href="http://172.20.224.102/HColaborativ/index.php?confirm=afusdfiunsdug&controller=usuario&action=confirm&id='.$id.'">te has registrado con exito</div> ';
+        $mensaje = '<a href="http://172.20.224.102/HColaborativ/index.php?confirm=afusdfiunsdug&controller=usuario&action=confirm&id='.$id.'">te has registrado con exito</a> ';
 
         //para el envío en formato HTML 
         $headers = "MIME-Version: 1.0\r\n";

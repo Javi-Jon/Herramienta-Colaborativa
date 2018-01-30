@@ -82,12 +82,13 @@ $("#upload").dropzone({
     paramName: "userfile",
     success: function(file, response){
         alertify.success('as');
+        console.log(response);
     },
     error: function(file, response){
         alertify.error("error: " +response); 
     },
     method: "post",
-previewTemplate:'<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size></div>    <img data-dz-thumbnail />  </div></div>',
+previewTemplate:'<div class="dz-preview dz-file-preview"><img src="img/file.png" class="file"/><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size></div>      </div></div>',
 uploadprogress: function(file, progress, bytesSent) {
     if (file.previewElement) {
       

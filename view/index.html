@@ -60,11 +60,20 @@ and open the template in the editor.
                         <li class="nav-item active">
                             <span class="nav-link" id="nvb-msjs"><i class="material-icons">email</i><span class="badge badge-danger" id="msjs"></span></span>
                         </li>
-                       
+
                     </ul>
                     <div class="navbar-nav "><button class="btn btn-success d-flex align-items-center m-top-nav" data-toggle="modal" data-target="#proyect-modal" ><i class="material-icons">add_box</i>Nuevo Proyecto</button>
                         <button class="btn btn-warning d-flex align-items-center m-top-nav "  id="mistareas-btn"><i class="material-icons">assignment</i> <span class="badge badge-danger">4</span>Mis tareas </button>
-                        <a class="nav-link nav-item  d-flex align-items-center" href="#"><i class="material-icons">account_circle</i>Bienvenido </a>
+                       
+                            <div class="dropdown">
+                                <button class="btn btn-dark  d-flex align-items-center dropdown-toggle m-top-nav" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   <i class="material-icons">account_circle</i>Bienvenido 
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                   
+                                    <a class="dropdown-item" href="index.php?controller=usuario&action=logout">Cerrar Sesion</a>
+                                </div>
+                            </div>
                     </div>
 
 
@@ -83,7 +92,7 @@ and open the template in the editor.
                             <form action="../index.php?controller=proyecto&action=c" method="POST" id="newProy">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Nombre del Proyecto</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="nombre">
+                                    <input type="text" class="form-control" id="recipient-name" name="nombre" data-validetta="required">
                                 </div>
                                 <div class="form-group">
                                     <label for="desc-proj" class="col-form-label">Descripcion del Proyecto</label>
@@ -104,7 +113,7 @@ and open the template in the editor.
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Añadir participantes</h5>
-                            
+
                         </div>
                         <div class="modal-body">
                             <div>
@@ -112,13 +121,13 @@ and open the template in the editor.
                                     <li  class="alert alert-success">
                                         Yo</li>
                                 </ul>
-                                
-                                    
-                               
+
+
+
                                 <form class='formuser'><div class="input-group ">
-                                    <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
-                                   <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
-                                   
+                                        <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
+                                        <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
+
                                 </form> 
                                 <br>
                                 <a href="" id="finalizar" class="btn btn-primary" style="float: right">finalizar</a>
@@ -127,8 +136,8 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <div class="modal fade" id="mistareas-modal" tabindex="-1" role="dialog"  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -141,8 +150,8 @@ and open the template in the editor.
                         <div class="modal-body">
                             <div>
                                 <ul class="tareas-wrap">
-                                    
-                                   
+
+
                                 </ul>
                                 <hr>todo
                             </div>
@@ -150,48 +159,48 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>                
-            
 
-<!-- Modal mensajes -->
-<div class="modal fade bd-example-modal-lg" id="mensajes-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="chat-wrap">
-          <div>
-              <div id="div-convers">
-                  
-                  
-              </div>
-          </div>
-          <div id='wrap-conversacion'>
-              
-          </div>
-              
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-        <!--ESTO ES EL CUERPO -->
-        <div id="wrapper">      
-{% block content %}
-{% endblock %}
 
-           </div>
-        
-        
+            <!-- Modal mensajes -->
+            <div class="modal fade bd-example-modal-lg" id="mensajes-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Mensajes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="chat-wrap">
+                            <div>
+                                <div id="div-convers">
+
+
+                                </div>
+                            </div>
+                            <div id='wrap-conversacion'>
+
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ESTO ES EL CUERPO -->
+            <div id="wrapper">      
+                {% block content %}
+                {% endblock %}
+
+            </div>
+
+
         </div>
-        
-            <script src="js/index.js"></script>
+
+        <script src="js/index.js"></script>
     </body>
 
 </html>

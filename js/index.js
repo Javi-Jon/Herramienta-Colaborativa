@@ -7,8 +7,14 @@ contarMensajes();
 buscarComps();
 $(document).ready(function () {
     //alertify.success("Success log message");
-    $('#subm-newProy').click(function (e) {
-        e.preventDefault();
+    
+    $('#newProy').validetta({
+         realTime : true,
+        display:'bubble',
+         bubblePosition: 'right', // Bubble position // right / bottom
+  bubbleGapLeft: 50,
+  onValid : function(e) {
+      e.preventDefault();
         $.ajax({
             url: "index.php?controller=proyecto&action=c",
             method: 'POST',
@@ -22,10 +28,30 @@ $(document).ready(function () {
 
             },
             error: function () {
-               alertify.error("Error log message");
+               alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
+  }
     });
+//    $('#subm-newProy').click(function (e) {
+//        e.preventDefault();
+//        $.ajax({
+//            url: "index.php?controller=proyecto&action=c",
+//            method: 'POST',
+//            data: $('#newProy').serialize(),
+//            success: function (data) {
+//                console.log('idproyecto' + data);
+//                idproyecto = data;
+//                $('#proyect-modal').modal("hide");
+//                $('#participantes-modal').modal("show");
+//                $('#finalizar').attr("href",'index.php?controller=proyecto&action=vp&id='+data);
+//
+//            },
+//            error: function () {
+//               alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
+//            }
+//        });
+   
     $('#participantes-modal').on('hide.bs.modal',function(e){
         e.preventDefault();
     });
@@ -55,7 +81,7 @@ $(document).ready(function () {
 
             },
             error: function () {
-              alertify.error("Error log message");
+              alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
     });
@@ -71,7 +97,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-               alertify.error("Error log message");
+               alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
 
@@ -99,7 +125,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-              alertify.error("Error log message");
+              alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
 
@@ -115,11 +141,11 @@ $(document).ready(function () {
                 if (datos == 1) {
                    $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
-                   alertify.error("Error log message");
+                   alertify.error("Error desconocido vuelva a intentarlo mas adelante");
                 }
             },
             error: function () {
-               alertify.error("Error log message");
+               alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
 
@@ -138,11 +164,11 @@ $(document).ready(function () {
                 if (datos == 1) {
                    $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
-                   alertify.error("Error log message");
+                   alertify.error("Error desconocido vuelva a intentarlo mas adelante");
                 }
             },
             error: function () {
-                alertify.error("Error log message");
+                alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
         
@@ -162,13 +188,15 @@ $(document).ready(function () {
             success:function(data){
                 
                 if(data!=0){
-                    alertify.success('asdas');
+                    alertify.success('mensaje enviado');
+             
                 }
             },
             error: function () {
-                alertify.error("Error log message");
+                alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
             }
         });
+
         $('#form-chat').prev().after("<div class='msj self-msj'>"+$('[name="mensaje"]').val()+"<i class='material-icons'>timer</i></div>");
         $('#form-chat')[0].reset();
         
@@ -237,7 +265,7 @@ function comprobarMisTareas() {
             construirElemTareas(tarea);
         },
         error: function () {
-           alertify.error("Error log message");
+           alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
 
 
@@ -270,7 +298,7 @@ function buscarComps() {
             construirCompaneros(conversaciones);
         },
         error: function () {
-           alertify.error("Error log message");
+           alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
 
 
@@ -287,7 +315,7 @@ function buscarConversavcion(id){
             construirConversacion(conversaciones,id);
         },
         error: function () {
-           alertify.error("Error log message");
+           alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
 
    //     crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
@@ -315,7 +343,7 @@ function contarMensajes(){
             }
         },
         error: function () {
-           alertify.error("Error log message");
+           alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
     });
 }

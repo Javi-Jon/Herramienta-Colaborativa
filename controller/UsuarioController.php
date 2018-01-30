@@ -25,6 +25,10 @@ class UsuarioController extends Controller{
             case 'confirm':
                 $this->confirmarCuenta();
                 break;
+            case 'logout':
+                unset($_SESSION['idusuario']);
+                header("Location: index.php");
+                break;
             default:
                 break;
         }
@@ -43,8 +47,9 @@ class UsuarioController extends Controller{
         $usuario->setUsername($_POST['username']);
         $usuario->setPassword($_POST['password']);        
         if($usuario->login()){
-          $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
-            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
+            index();
+//          $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
+//            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
         }else{
             echo 'login incorrecto';
         }
@@ -98,8 +103,9 @@ class UsuarioController extends Controller{
         $filas=$usuario->confirmAcc();
         if($filas==1){
             $_SESSION['idusuario']=$_GET['id'];
-            $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
-            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
+      
+            header('Location:index.php');
+      
         }
     }
     

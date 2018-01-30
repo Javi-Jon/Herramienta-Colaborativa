@@ -43,9 +43,9 @@
                     <!--<canvas id="myChart" width="400" height="400"></canvas>-->
                     {%endif%}
                 </div>
-                <div class="card" >
+                <div class="card " >
   <div class="card-body">
-   
+      <h2>Partipantes</h2>
 
                 <ul id="participantes">
                     {%for persona in datos.participantes%}
@@ -97,9 +97,9 @@
                             <input  type="radio" name="dificultad" value="1" id="rbf" data-validetta="required">
                             <label for="rbf">Facil </label>
                             <input  type="radio" name="dificultad" value="2" id="rbm" data-validetta="required">
-                            <label for="rbf">Medio </label>
+                            <label for="rbm">Medio </label>
                             <input  type="radio" name="dificultad" value="3" id="rbd" data-validetta="required">
-                            <label for="rbf">Dificil </label>
+                            <label for="rbd">Dificil </label>
                             <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
                         <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea">
                             <i class="material-icons">add</i>Añadir Tarea
@@ -159,8 +159,49 @@
                 <div>
                     <h1>Archivos</h1>
                     <div id="upload">
-                        Pincha o arrastra aqui
+                       
                     </div>
+                    <hr>
+                    <div class="d-flex flex-wrap " id="archivos">
+                        <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                        <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombradasdadasdadasdasdadsasds</span></a><a><img src="img/file.png" class="file img-responsive"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
 
                 </div>
         </div>
@@ -241,6 +282,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="js/validetta.min.js" type="text/javascript"></script>
 <script src="js/angular.js"></script>
+
+{% if datos.tareas%}
 <script type="text/javascript">
 
 var ctx = document.getElementById("myChart").getContext("2d");
@@ -307,5 +350,6 @@ type: 'horizontalBar',
 });
 
 </script>
+{%endif%}
 
 {%endblock%}
