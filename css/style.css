@@ -330,6 +330,7 @@ fieldset{
 .opcionesTareas{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .portlet {
     margin: 1em;

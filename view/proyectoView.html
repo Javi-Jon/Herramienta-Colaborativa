@@ -71,7 +71,7 @@
             <form id="form-muro" action="index.php?controller=muro&action=cm" method="POST">
                 <input class='form-control' type="text" name="mensaje" >
                 <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
-                <input type="submit">
+                <input type="submit" class="btn btn-success m-top-nav" value="Publicar">
             </form>
             <div>
                 {%for comentario in datos.muro%}
@@ -85,7 +85,7 @@
         </div>
         <div id="fragment-3">
                 <div>
-                    <button id="abrir">abrir</button>
+                    <button id="abrir" class="btn-primary btn d-flex align-items-center"><i class="material-icons" >add</i>Nueva Tarea</button>
 
 
                     <fieldset>
