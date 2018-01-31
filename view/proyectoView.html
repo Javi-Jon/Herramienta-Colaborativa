@@ -8,8 +8,11 @@
             <li><a href="#fragment-2">Muro</a></li>
             <li><a href="#fragment-3">Tareas</a></li>
             <li><a href="#fragment-4">Archivos</a></li>
-            
-            
+             {%if datos.proyecto.creador==datos.yo%}
+             {%if datos.proyecto.tipo==0%}
+             <li><a href="#fragment-5">Solicitudes<span class="badge-danger badge">{{datos.solicitudes|length}}</span></a></li>
+            {%endif%}
+            {%endif%}
         </ul>
               <div id="fragment-1">
             <div id="proy-div">
@@ -24,6 +27,11 @@
                     </a>
                     <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i>   Administrar Participantes</button>
                 </div>
+                {%if datos.proyecto.tipo ==0%}
+                <b>este proyecto es publico lo que significa que cualquier usuario podrá solicitar acceso a colaborar con el proyecto</b><i class="material-icons">public</i>
+                {%else%}
+                <i class="material-icons">lock</i>
+                {%endif%}
                 {%endif%}
                 <hr>
                 <p>{{datos.proyecto.descripcion}}</p>
@@ -155,7 +163,7 @@
     
     
         <div id="fragment-4">
-            <aside>
+       
                 <div>
                     <h1>Archivos</h1>
                     <div id="upload">
@@ -194,20 +202,38 @@
                     <a><img src="img/file.png" class="file"/>
                         <span>nombr</span></a><a><img src="img/file.png" class="file"/>
                         <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                        
-                        
-                        
-                        
-                        
-                    </div>
-                    
-
+                        <span>nombr</span></a>                                               
+                    </div>                
                 </div>
+            </div>
+            <div id="fragment-5">
+                <div class="d-flex justify-content-center">
+                    {%for solicitud in datos.solicitudes%}
+                        <div style="background-color: #73ab58; border: solid 1px #848484 ">
+                            {{solicitud.fullname}}
+                            <div>
+                            <form class="aceptar-solicitud">
+                                <input type="hidden" name="id" value="{{solicitud.id}}">
+                                <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
+                                <input type="hidden" name="usuario" value="{{solicitud.idusuario}}">
+                                <button  class="btn "> 
+                                    <i class="material-icons">check</i>
+                                </button>
+                            </form>
+                            <form class="rechazar-solicitud">
+                                <input type="hidden" name="id" value="{{solicitud.id}}">                                
+                                <button  class="btn "> 
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </form>
+                            </div>
+                              
+                            
+                        </div>
+                    {%endfor%}
+                </div>    
+            </div>
         </div>
-   
-    
-</div>
 
     <div class="modal fade" id="adm-participantes-modal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">

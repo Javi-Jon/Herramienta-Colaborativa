@@ -284,7 +284,7 @@ function construirCompaneros(convers) {
  $('#ul-convers').empty();
 //   $('#mistareas-btn > .badge').html(convers.length);
     convers.forEach(function (persona) {
-        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'<span class="badge badge-success">'+persona.pendientes+'</span></div>');
+        $('#div-convers').append('<div class="conver d-flex justify-content-between" dataVal="'+persona.id+'"><span>'+persona.username+'</span><span class="badge badge-success">'+persona.pendientes+'</span></div>');
     });
 
 }

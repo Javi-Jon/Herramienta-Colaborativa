@@ -426,6 +426,11 @@ fieldset{
     background-color: darkslateblue;
     border-radius: 72px;
     }
+    [id*="fragment"]{
+            height: 88vh;
+    overflow-y: scroll;
+    
+    }
     
     
 @keyframes cssAnimation {

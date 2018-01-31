@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+ {%for proyecto in datos.proyectos%}
+ 
+<div class="card" style="width: 18rem;">
+  
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <form class="form-solicitar">
+        <input type="hidden" value="{{proyecto.id}}" name="id">
+        <button class="btn-primary btn">SolicitarAcceso</button>
+        
+    </form>
+  </div>
+</div>
+
+ {%endfor%}
+ <script src="js/validetta.min.js"></script>
+  <script type="text/javascript" src="js/publicos.js"></script>
+
+{%endblock%}

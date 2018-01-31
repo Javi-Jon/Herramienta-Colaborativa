@@ -209,4 +209,29 @@ $('#bfinalizar').click(function(){
     $('#adm-participantes-modal').modal('hide');
 });
 
+
+$('.aceptar-solicitud').submit(function(e){
+    e.preventDefault();
+var datos=$(this).serialize();
+  $.ajax({
+      url:'index.php?controller=proyecto&action=aceptar',
+      data:datos,
+      success:function(datos){
+          console.log(datos);
+      }
+  });
+});
+
+$('.rechazar-solicitud').submit(function(e){
+
+    e.preventDefault();
+var datos=$(this).serialize();
+  $.ajax({
+      url:'index.php?controller=proyecto&action=rechazar',
+      data:datos,
+      success:function(datos){
+          console.log(datos);
+      }
+  });
+});
 });
