@@ -7,7 +7,7 @@ class Proyecto extends BD{
     private $descripcion;
     private $creacion;
     private $creador;
-    
+    private $tipo;
     private $participantes;
 
 
@@ -64,10 +64,17 @@ class Proyecto extends BD{
                     $this->participantes = $participantes;
                 }
 
-    
-        
+                function getTipo() {
+                    return $this->tipo;
+                }
+
+                function setTipo($tipo) {
+                    $this->tipo = $tipo;
+                }
+
+                        
     function nuevoProyecto(){
-        $id=$this->insert("INSERT INTO $this->tabla (nombre,descripcion,creacion,creador) VALUES (:nombre,:descripcion,:creacion,:creador)", ['nombre'=> $this->getNombre(),'descripcion'=> $this->getDescripcion(),'creacion'=>date("Y-n-j"),'creador'=> $this->getCreador()]);
+        $id=$this->insert("INSERT INTO $this->tabla (nombre,descripcion,creacion,creador,tipo) VALUES (:nombre,:descripcion,:creacion,:creador,:tipo)", ['nombre'=> $this->getNombre(),'descripcion'=> $this->getDescripcion(),'creacion'=>date("Y-n-j"),'creador'=> $this->getCreador(),'tipo'=> $this->getTipo()]);
         return $id;
     }
     function anadirParticipante($idusuario){
