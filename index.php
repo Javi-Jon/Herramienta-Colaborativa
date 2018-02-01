@@ -5,6 +5,7 @@ require_once './controller/TareasController.php';
 require_once 'controller/ControllerGenerico.php';
 require_once './controller/MuroController.php';
 require_once 'controller/MensajesController.php';
+require_once 'controller/ArchivosController.php';
 session_start();
 if(!isset($_SESSION['idusuario']) && !isset($_POST['username']) && !isset($_GET['confirm'])){
     loginView();
@@ -30,7 +31,10 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username']) && !isset($_GET[
             $controller=new MensajesController();
              action($controller);  
         break;
-    
+       case 'archivo':
+           $controller=new ArchivosController();
+           action($controller);
+           break;
     default:
         index();
         break;       

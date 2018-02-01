@@ -430,12 +430,10 @@ fieldset{
     border-radius: 72px;
     }
     [id*="fragment"]{
-            height: 88vh;
+    height: 88vh;
     overflow-y: scroll;
     
     }
-    
-    
 @keyframes cssAnimation {
 from { -webkit-transform: rotate(0deg) scale(0.856) skew(-6deg) translate(-13px) opacity(0)); }
 to { -webkit-transform: rotate(4deg) scale(0.935) skew(1deg) translate(0px) opacity(1); }

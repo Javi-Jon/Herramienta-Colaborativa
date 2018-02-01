@@ -29,11 +29,6 @@
                     </a>
                     <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i> Administrar Participantes</button>
                 </div>
-                {%if datos.proyecto.tipo ==0%}
-                <b>este proyecto es publico lo que significa que cualquier usuario podrá solicitar acceso a colaborar con el proyecto</b><i class="material-icons">public</i>
-                {%else%}
-                <i class="material-icons">lock</i>
-                {%endif%}
                 {%endif%}
                 <hr>
                 <p>{{datos.proyecto.descripcion}}</p>
@@ -165,7 +160,7 @@
     
     
         <div id="fragment-4">
-       
+            <aside>
                 <div>
                     <h1>Archivos</h1>
                     <div id="upload">
@@ -175,10 +170,21 @@
                     <div class="d-flex flex-wrap " id="archivos">
                         <a><img src="img/file.png" class="file" alt="archivo"/>
                         <span>nombr</span></a>
+
                                                            
                     </div>                
+
+                    
+                        
+                        
+                        
+                        
+                    </div>
+                    
+
+
                 </div>
-            </div>
+       
         {%if datos.solicitudes|length >0%}
             <div id="fragment-5">
                 <div class="d-flex justify-content-center fd-c">
@@ -211,6 +217,9 @@
             </div>
         {%endif%}
         </div>
+   
+     </div>
+
 
     <div class="modal fade" id="adm-participantes-modal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -356,3 +365,8 @@ type: 'horizontalBar',
 {%endif%}
 
 {%endblock%}
+
+            
+
+
+

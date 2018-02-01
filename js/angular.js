@@ -76,7 +76,7 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
         });
      }});
 $("#upload").dropzone({
-    url: "index.php",
+    url: "index.php?controller=archivo&action=nArch&idProyecto=" + idproyecto,
     
     clickable: "#upload",
     paramName: "userfile",
