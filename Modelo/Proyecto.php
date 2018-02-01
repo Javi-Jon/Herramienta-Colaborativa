@@ -115,7 +115,7 @@ class Proyecto extends BD{
         return $proyectos;
     }
     function getSolicitudes(){
-        $solicitudes= $this->fSelectN("SELECT solicitudes.id, usuarios.fullname,usuarios.username,solicitudes.idusuario FROM `solicitudes`,usuarios WHERE idproyecto=:proyecto AND solicitudes.idusuario=usuarios.id",['proyecto'=> $this->getId()] );
+        $solicitudes= $this->fSelectN("SELECT solicitudes.id, usuarios.fullname,usuarios.username,solicitudes.idusuario,usuarios.correo FROM `solicitudes`,usuarios WHERE idproyecto=:proyecto AND solicitudes.idusuario=usuarios.id",['proyecto'=> $this->getId()] );
         return $solicitudes;
     }
     function solicitarParticipacion($idusuario) {
@@ -123,7 +123,8 @@ class Proyecto extends BD{
       return $id;
     }
     function borrarSolicitud($id){
-        $this->delete("DELETE FROM solicitudes WHERE id=:id", ['id'=>$id]);
+        $filas=$this->delete("DELETE FROM solicitudes WHERE id=:id", ['id'=>$id]);
+        return $filas;
     }
 
 

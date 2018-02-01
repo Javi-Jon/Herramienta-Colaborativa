@@ -10,7 +10,9 @@
             <li><a href="#fragment-4">Archivos</a></li>
              {%if datos.proyecto.creador==datos.yo%}
              {%if datos.proyecto.tipo==0%}
+             {%if datos.solicitudes|length >0%}
              <li><a href="#fragment-5">Solicitudes<span class="badge-danger badge">{{datos.solicitudes|length}}</span></a></li>
+             {%endif%}
             {%endif%}
             {%endif%}
         </ul>
@@ -21,11 +23,11 @@
                 {%if datos.proyecto.creador==datos.yo%}
                 <b class="d-flex align-items-center"> <i class="material-icons">supervisor_account</i>Eres el administrador de este proyecto</b>
                 <hr>
-                <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around" id="botones-admin">
                     <a href="index.php?controller=proyecto&action=d&idproyecto={{datos.proyecto.id}}" class="a-proyecto">
                         <button class="btn btn-danger d-flex align-items-center"> <i class="material-icons">delete_forever</i>Borrar Proyecto</button>
                     </a>
-                    <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i>   Administrar Participantes</button>
+                    <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i> Administrar Participantes</button>
                 </div>
                 {%if datos.proyecto.tipo ==0%}
                 <b>este proyecto es publico lo que significa que cualquier usuario podrá solicitar acceso a colaborar con el proyecto</b><i class="material-icons">public</i>
@@ -171,58 +173,32 @@
                     </div>
                     <hr>
                     <div class="d-flex flex-wrap " id="archivos">
-                        <a><img src="img/file.png" class="file"/>
+                        <a><img src="img/file.png" class="file" alt="archivo"/>
                         <span>nombr</span></a>
-                    <a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                        <a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                    <a><img src="img/file.png" class="file"/>
-                        <span>nombradasdadasdadasdasdadsasds</span></a><a><img src="img/file.png" class="file img-responsive"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                    <a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                    <a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                    <a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>
-                    <a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
-                        <span>nombr</span></a>                                               
+                                                           
                     </div>                
                 </div>
             </div>
+        {%if datos.solicitudes|length >0%}
             <div id="fragment-5">
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center fd-c">
                     {%for solicitud in datos.solicitudes%}
-                        <div style="background-color: #73ab58; border: solid 1px #848484 ">
+                    <div style="background-color: #73ab58; border: solid 1px #848484 " class="d-flex justify-content-between">
                             {{solicitud.fullname}}
-                            <div>
+                            {{solicitud.username}}
+                            {{solicitud.correo}}
+                            <div class="d-flex">
                             <form class="aceptar-solicitud">
                                 <input type="hidden" name="id" value="{{solicitud.id}}">
                                 <input type="hidden" name="proyecto" value="{{datos.proyecto.id}}">
                                 <input type="hidden" name="usuario" value="{{solicitud.idusuario}}">
-                                <button  class="btn "> 
+                                <button  class="btn btn-primary"> 
                                     <i class="material-icons">check</i>
                                 </button>
                             </form>
                             <form class="rechazar-solicitud">
                                 <input type="hidden" name="id" value="{{solicitud.id}}">                                
-                                <button  class="btn "> 
+                                <button  class="btn btn-danger"> 
                                     <i class="material-icons">close</i>
                                 </button>
                             </form>
@@ -233,6 +209,7 @@
                     {%endfor%}
                 </div>    
             </div>
+        {%endif%}
         </div>
 
     <div class="modal fade" id="adm-participantes-modal" tabindex="-1" role="dialog"  aria-hidden="true">

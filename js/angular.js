@@ -212,13 +212,20 @@ $('#bfinalizar').click(function(){
 
 $('.aceptar-solicitud').submit(function(e){
     e.preventDefault();
+    var form=$(this);
 var datos=$(this).serialize();
   $.ajax({
       url:'index.php?controller=proyecto&action=aceptar',
       data:datos,
       success:function(datos){
           console.log(datos);
-      }
+          if(datos!=0){              
+               form.parent().parent().parent().remove();
+          }
+      },
+       error: function () {
+              alertify.error("Algo no ha ido como deberia");
+            }
   });
 });
 
@@ -226,12 +233,22 @@ $('.rechazar-solicitud').submit(function(e){
 
     e.preventDefault();
 var datos=$(this).serialize();
+var form=$(this);
   $.ajax({
       url:'index.php?controller=proyecto&action=rechazar',
       data:datos,
       success:function(datos){
           console.log(datos);
-      }
+          if(datos==1){
+              form.parent().parent().parent().remove();
+          }
+      },
+       error: function () {
+              alertify.error("Algo no ha ido como deberia");
+            }
   });
+});
+$('a[href="#fragment-5"]').click(function(){
+   $(this).children().remove(); 
 });
 });

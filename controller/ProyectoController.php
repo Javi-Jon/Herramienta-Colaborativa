@@ -34,6 +34,9 @@ class ProyectoController extends Controller{
             case 'aceptar':
                 $this->aceptarSolicitud();
                 break;
+            case 'rechazar':
+                $this->rechazarSolicitud();
+                break;
             default:
                 break;
         }
@@ -127,19 +130,22 @@ class ProyectoController extends Controller{
     }
     function aceptarSolicitud() {
         $proyecto=new Proyecto();
-        $this->anadirParticipacion2($_GET['usuario'],$_GET['proyecto']);
+        $id=$this->anadirParticipacion2($_GET['usuario'],$_GET['proyecto']);
         $proyecto->borrarSolicitud($_GET['id']);
+        echo $id;
     }
     
     function anadirParticipacion2($usuario,$proyecto){
     $p=new Proyecto();
     $p->setId($proyecto);
-  $p->anadirParticipante($usuario);   
+    $id=$p->anadirParticipante($usuario);
+    return $id;
 
     }
     function rechazarSolicitud(){
         $proyecto=new Proyecto();
-        $proyecto->borrarSolicitud($_GET['id']);
+        $filas=$proyecto->borrarSolicitud($_GET['id']);
+        echo $filas;
     }
     
         
