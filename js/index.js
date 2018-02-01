@@ -247,9 +247,11 @@ $(document).ready(function () {
                 .toggle();
         });
     });
-/* *********************************************
+    /* *********************************************
          Fin mover tareas
-********************************************* */
+    ********************************************* */
+    
+ 
 });
 
 
@@ -265,7 +267,10 @@ function comprobarMisTareas() {
         error: function () {
            alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
+
+
     });
+
 }
 function construirElemTareas(tareas) {
     $('.tareas-wrap').empty();
@@ -279,7 +284,7 @@ function construirCompaneros(convers) {
  $('#ul-convers').empty();
 //   $('#mistareas-btn > .badge').html(convers.length);
     convers.forEach(function (persona) {
-        $('#div-convers').append('<div class="conver d-flex justify-content-between" dataVal="'+persona.id+'"><span>'+persona.username+'</span><span class="badge badge-success">'+persona.pendientes+'</span></div>');
+        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'<span class="badge badge-success">'+persona.pendientes+'</span></div>');
     });
 
 }
@@ -295,11 +300,14 @@ function buscarComps() {
         error: function () {
            alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
+
+
     });
+
 }
 function buscarConversavcion(id){
-  //console.log(id);
-  $.ajax({
+  console.log(id);
+    $.ajax({
        url:"./index.php?controller=mensaje&action=rm&id="+id,
         success: function (convers) {
    console.log(convers);
@@ -309,7 +317,8 @@ function buscarConversavcion(id){
         error: function () {
            alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
-        // crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
+
+   //     crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
     });
     
 }
@@ -377,5 +386,3 @@ function actualizarEstadoTarea(idTarea, estado) {
             break;
     }
 }
-
-

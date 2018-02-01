@@ -25,15 +25,6 @@ class ProyectoController extends Controller{
             case 'vp':
                 $this->verProyecto();
                 break;
-            case 'vpubl':
-                $this->verPublicos();
-                break;
-            case 'solicitar':
-                $this->solicitarParticipacion();
-                break;
-            case 'aceptar':
-                $this->aceptarSolicitud();
-                break;
             default:
                 break;
         }
@@ -43,7 +34,7 @@ class ProyectoController extends Controller{
         $proyecto->setNombre($_POST['nombre']);
         $proyecto->setDescripcion($_POST['descripcion']);
         $proyecto->setCreador($_SESSION['idusuario']);
-        $proyecto->setTipo($_POST['tipo']);
+        
        $id= $proyecto->nuevoProyecto();
        echo $id;
     }
@@ -90,7 +81,6 @@ class ProyectoController extends Controller{
        $proyecto= $p->getProyectoById();
        $participantes=$p->getParticipaciones();
        $stats=$p->getStatsProyecto();
-       $solicitudes=$p->getSolicitudes();
       $tc=new TareasController();
       $numeros=$tc->getProgreso($_GET['id']);
       
@@ -102,7 +92,7 @@ class ProyectoController extends Controller{
      
      $mc= new MuroController();
     $mensajes= $mc->readMuro($_GET['id']);
-       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats,'yo'=>$_SESSION['idusuario'],'solicitudes'=>$solicitudes];
+       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats,'yo'=>$_SESSION['idusuario']];
        $this->view('proyecto', $datos);
     }
     function borrarProyecto(){
@@ -112,38 +102,5 @@ class ProyectoController extends Controller{
         header("Location:index.php");
         
     }
-    function verPublicos() {
-        $proyecto=new Proyecto();
-        $proyectos=$proyecto->getPublicos($_SESSION['idusuario']);
-        $this->view('publicos', ['proyectos'=>$proyectos]);
-        
-    }
-    function solicitarParticipacion() {
-        $proyecto=new Proyecto();       
-        $proyecto->setId($_GET['id']);
-        $id=$proyecto->solicitarParticipacion($_SESSION['idusuario']);
-        echo $id;       
-        
-    }
-    function aceptarSolicitud() {
-        $proyecto=new Proyecto();
-        $this->anadirParticipacion2($_GET['usuario'],$_GET['proyecto']);
-        $proyecto->borrarSolicitud($_GET['id']);
-    }
     
-    function anadirParticipacion2($usuario,$proyecto){
-    $p=new Proyecto();
-    $p->setId($proyecto);
-  $p->anadirParticipante($usuario);   
-
-    }
-    function rechazarSolicitud(){
-        $proyecto=new Proyecto();
-        $proyecto->borrarSolicitud($_GET['id']);
-    }
-    
-        
-    }
-    
-    
-
+}

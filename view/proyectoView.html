@@ -8,17 +8,13 @@
             <li><a href="#fragment-2">Muro</a></li>
             <li><a href="#fragment-3">Tareas</a></li>
             <li><a href="#fragment-4">Archivos</a></li>
-             {%if datos.proyecto.creador==datos.yo%}
-             {%if datos.proyecto.tipo==0%}
-             <li><a href="#fragment-5">Solicitudes<span class="badge-danger badge">{{datos.solicitudes|length}}</span></a></li>
-            {%endif%}
-            {%endif%}
+            
+            
         </ul>
-        <div id="fragment-1">
+              <div id="fragment-1">
             <div id="proy-div">
-                <h1>
-                    {{datos.proyecto.nombre}}
-                </h1>
+                <h1>{{datos.proyecto.nombre}}</h1>
+                
                 {%if datos.proyecto.creador==datos.yo%}
                 <b class="d-flex align-items-center"> <i class="material-icons">supervisor_account</i>Eres el administrador de este proyecto</b>
                 <hr>
@@ -28,51 +24,47 @@
                     </a>
                     <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i>   Administrar Participantes</button>
                 </div>
-                {%if datos.proyecto.tipo ==0%}
-                <b>este proyecto es publico lo que significa que cualquier usuario podrá solicitar acceso a colaborar con el proyecto</b><i class="material-icons">public</i>
-                {%else%}
-                <i class="material-icons">lock</i>
-                {%endif%}
                 {%endif%}
                 <hr>
-                <p>
-                    {{datos.proyecto.descripcion}}
-                </p>
-                <div>
-                    {% if datos.tareas%}
-                        <div id="stats">
-                            <div class="chart-container" >
-                                <canvas id="myChart"></canvas></div>
-                            <div class="chart-container" >
-                                <canvas id="myChart2"></canvas>
-                            </div>
+                <p>{{datos.proyecto.descripcion}}</p>
+                <div> {% if datos.tareas%}
+                    <div id="stats">
+                        <div class="chart-container" >
+                            <canvas id="myChart"></canvas></div>
+                        <div class="chart-container" >
+                            <canvas id="myChart2"></canvas>
+
                         </div>
+                    </div>
                     {%else%}
-                        <div class="alert alert-warning" role="alert">
-                            No hay estadísticas disponibles aún añade tareas y recarga la página para comenzar a usar esta funcionalidad.
-                        </div>
+                   <div class="alert alert-warning" role="alert">
+  No hay estadísticas disponibles aún añade tareas y recarga la página para comenzar a usar esta funcionalidad.
+</div>
+                    <!--<canvas id="myChart" width="400" height="400"></canvas>-->
                     {%endif%}
                 </div>
-                <div class="card" >
-                    <div class="card-body">
-                        <ul id="participantes">
-                            {%for persona in datos.participantes%}
-                                {%if persona.id==datos.proyecto.creador%}
-                                    <li class="d-flex align-items-center">
-                                        <i class="material-icons">supervisor_account</i>
-                                        {{persona.username}}
-                                    </li>
-                                {%else%}
-                                    <li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>{{persona.username}}
-                                        {%if datos.proyecto.creador==datos.yo%}
-                                        <button class=" bborrar" idpart="{{persona.participacion}}">X</button>
-                                        {%endif%}
-                                    </li>
-                                {%endif%}
-                            {%endfor %}
-                        </ul>
-                    </div>
-                </div>
+                <div class="card " >
+  <div class="card-body">
+      <h2>Partipantes</h2>
+
+                <ul id="participantes">
+                    {%for persona in datos.participantes%}
+                    {%if persona.id==datos.proyecto.creador%}
+                    <li class="d-flex align-items-center">
+                        <i class="material-icons">supervisor_account</i>{{persona.username}}
+                    </li>
+                    {%else%}
+                    <li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>{{persona.username}}
+                        {%if datos.proyecto.creador==datos.yo%}
+                        <button class=" bborrar" idpart="{{persona.participacion}}">X</button>
+                        {%endif%}
+                    </li>
+                    {%endif%}
+                    {% endfor %}
+
+                </ul>
+        </div>
+</div>
             </div>   
         </div>
         <div id="fragment-2">
@@ -112,84 +104,144 @@
                         <button class="btn btn-primary  d-flex align-items-center" id="banadirTarea">
                             <i class="material-icons">add</i>Añadir Tarea
                         </button>
-                    </form>
-                </fieldset>
-                <br>
-                <div class="opcionesTareas">
-                    <div class="card estiloTarjeta" id="pendiente">
-                        <h5 class="card-header">Pendiente</h5>
-                        <div class="card-body column">
-                            {%if tarea is empty%}
+                        </form>
+
+                    </fieldset>
+                    <br>
+                    <div class="opcionesTareas">
+                        <div class="card estiloTarjeta" id="pendiente">
+                            <h5 class="card-header">Pendiente</h5>
+                            <div class="card-body column">
+                                {%if tarea is empty%}
                                 {%for tarea in datos.tareas%}
-                                    {% if tarea.estado==0%}
-                                        <div class="portlet" id="{{tarea.id}}">
-                                            <div class="portlet-header">{{tarea.titulo}}</div>
-                                            <div class="portlet-content">{{tarea.descripcion}}</div>
-                                        </div>
-                                    {%endif%}
+                                {% if tarea.estado==0%}
+                                <div class="portlet" id="{{tarea.id}}">
+                                    <div class="portlet-header">{{tarea.titulo}}</div>
+                                    <div class="portlet-content">{{tarea.descripcion}}</div>
+                                </div>
+                                {%endif%}
                                 {% endfor %}
-                            {%else%}
+                                {%else%}
                                 <p>No hay tareas pendientes.</p>
-                            {%endif%}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <div class="card estiloTarjeta" id="terminado">
+                            <h5 class="card-header">Completado</h5>
+                            <div class="card-body column">
+                                {%if tarea is empty%}
+                                {%for tarea in datos.tareas%}
+                                {% if tarea.estado==1%}
+                                <div class="portlet" id="{{tarea.id}}">
+                                    <div class="portlet-header">{{tarea.titulo}}</div>
+                                    <div class="portlet-content">{{tarea.descripcion}}</div>
+                                </div>
+                                {%endif%}
+                                {% endfor %}
+                                {%else%}
+                                <p>No hay tareas pendientes.</p>
+                                {%endif%}
+                            </div>
                         </div>
                     </div>
-                    <div class="card estiloTarjeta" id="terminado">
-                        <h5 class="card-header">Completado</h5>
-                        <div class="card-body column">
-                            {%if tarea is empty%}
-                                {%for tarea in datos.tareas%}
-                                    {% if tarea.estado==1%}
-                                        <div class="portlet" id="{{tarea.id}}">
-                                            <div class="portlet-header">{{tarea.titulo}}</div>
-                                            <div class="portlet-content">{{tarea.descripcion}}</div>
-                                        </div>
-                                    {%endif%}
-                                {% endfor %}
-                            {%else%}
-                                <p>No hay tareas pendientes.</p>
-                            {%endif%}
-                        </div>
-                    </div>
+                    <!--<ul id="tareas-proyecto">
+                       {%for tarea in datos.tareas%}
+                      <li {% if tarea.estado==1%} class="tarea-realizada" {%endif%}>{{tarea.titulo}}</li>
+                       {% endfor %}
+                   </ul>-->
                 </div>
-            </div>
         </div>
+    
+    
+    
         <div id="fragment-4">
-            <div>
-                <h1>Archivos</h1>
-                <div id="upload">
-                    Pincha o arrastra aqui
+            <aside>
+                <div>
+                    <h1>Archivos</h1>
+                    <div id="upload">
+                       
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-wrap " id="archivos">
+                        <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                        <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombradasdadasdadasdasdadsasds</span></a><a><img src="img/file.png" class="file img-responsive"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                    <a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a><a><img src="img/file.png" class="file"/>
+                        <span>nombr</span></a>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+
                 </div>
-            </div>
         </div>
-    </div>
+   
+    
+</div>
+
     <div class="modal fade" id="adm-participantes-modal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Añadir participantes</h5>
+
                 </div>
                 <div class="modal-body">
                     <div>
                         <ul class="participantes" style="list-style: none">
+
                             {%for persona in datos.participantes%}
-                                {%if persona.id == datos.yo%}
-                                    <li  class='alert-warning d-flex align-items-center'>
-                                        <i class="material-icons">supervisor_account</i>{{persona.fullname}}
-                                    </li>
-                                {%else%}
-                                    <li  class=' d-flex justify-content-between'>
-                                        <div class="d-flex">
-                                            <i class="material-icons">perm_identity</i>{{persona.fullname}}
-                                        </div>
-                                        <button class='bborrar' idpart='{{persona.participacion}}'>X</button>
-                                    </li>
-                                {%endif%}
+                            {%if persona.id == datos.yo%}
+                            <li  class='alert-warning d-flex align-items-center'>
+                                <i class="material-icons">supervisor_account</i>{{persona.fullname}}
+                            </li>
+                            {%else%}
+                            <li  class=' d-flex justify-content-between'>
+                                <div class="d-flex">
+                                    <i class="material-icons">perm_identity</i>{{persona.fullname}}
+                                </div>
+                                <button class='bborrar' idpart='{{persona.participacion}}'>X</button>
+                            </li>
+                            {%endif%}
                             {% endfor %}
                         </ul>
+
+
+
                         <form class='formuser'><div class="input-group ">
-                            <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
-                            <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
-                            <input type="hidden" name="idproyecto" value="{{datos.proyecto.id}}">
+                                <div class="input-group-addon"><button class="btn btn-success d-flex align-items-center" id="subm-part"><i class="material-icons">person_add</i></button></div>
+                                <input type="text" class="form-control" name="username" id="inlineFormInputGroup" placeholder="Username"></div>
+                                <input type="hidden" name="idproyecto" value="{{datos.proyecto.id}}">
                         </form>
                         <br>
                         <button id="bfinalizar" class="btn btn-primary" >finalizar</button>
@@ -198,6 +250,10 @@
             </div>
         </div>
     </div>
+
+
+
+
     <div class="modal fade" id="asignaciones-modal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -211,10 +267,12 @@
                     <form id="formAsign" >
                         <input type="hidden" name="idtarea">
                         {%for persona in datos.participantes%}
-                            <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
+                        <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
+
                         {% endfor %}
                         <input type="submit">
                     </form>
+
                 </div>
             </div>
         </div>
@@ -228,44 +286,69 @@
 {% if datos.tareas%}
 <script type="text/javascript">
 
-    var ctx = document.getElementById("myChart").getContext("2d");
-    //ctx.canvas.width = 300;
-    //ctx.canvas.height = 300;
+var ctx = document.getElementById("myChart").getContext("2d");
+//ctx.canvas.width = 300;
+//ctx.canvas.height = 300;
 
-    data = {
-        datasets: [{
-            data: [{{datos.progreso}}, {{datos.totales}}],
-            backgroundColor: ['#003fed'],
-            responsive: true,
-            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio: false
-        }],
+data = {
+datasets: [{
+data: [{{datos.progreso}}, {{datos.totales}}],
+        backgroundColor: ['#003fed'],
+        responsive: true,
+        // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+
+        maintainAspectRatio: false
+
+}],
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
-            '%completed',
-            '%missing'
+                '%completed',
+                '%missing'
         ]
-    };
-    //var myDoughnut = new Chart(ctx).Doughnut(data);
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
+};
+//var myDoughnut = new Chart(ctx).Doughnut(data);
+
+var myChart = new Chart(ctx, {
+
+type: 'doughnut',
         data: data
-    });
-    var ctx2 = document.getElementById("myChart2").getContext("2d");
-    var myBarChart = new Chart(ctx2, {
-    type: 'horizontalBar',
+
+});
+var ctx2 = document.getElementById("myChart2").getContext("2d");
+var myBarChart = new Chart(ctx2, {
+type: 'horizontalBar',
         data: {
-            datasets: [{
-                data: [0{%for stat in datos.stats%},{{stat.stat}}{%endfor%}],
-                backgroundColor: ['#003fed'{%for stat in datos.stats%}, '#003fed'{% endfor %}]
-                    // responsive: true,
-                    // maintainAspectRatio: false
-            }],
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: ['tareas recibidas'{%for stat in datos.stats%}, '{{stat.username}}'{% endfor %}],
-            options : {scales: {xAxes: [{gridLines: {offsetGridLines: true}}]}}
+        datasets: [{
+
+
+
+
+        data: [0{%for stat in datos.stats%}
+        , {{stat.stat}}
+        {%endfor%}
+        ],
+                backgroundColor: ['#003fed'{%for stat in datos.stats%}
+                , '#003fed'
+                {% endfor %}],
+                // responsive: true,
+                // maintainAspectRatio: false
+        }],
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: ['tareas recibidas'{%for stat in datos.stats%}
+                , '{{stat.username}}'
+                {% endfor %}],
+                options : {
+                scales: {
+                xAxes: [{
+                gridLines: {
+                offsetGridLines: true
+                }
+                }]
+                }
+                }
         },
-    });
+});
+
 </script>
 {%endif%}
 

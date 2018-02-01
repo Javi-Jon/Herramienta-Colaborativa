@@ -7,7 +7,6 @@ class Proyecto extends BD{
     private $descripcion;
     private $creacion;
     private $creador;
-    private $tipo;
     
     private $participantes;
 
@@ -64,19 +63,11 @@ class Proyecto extends BD{
                 function setParticipantes($participantes) {
                     $this->participantes = $participantes;
                 }
-    function getTipo() {
-        return $this->tipo;
-    }
 
-    function setTipo($tipo) {
-        $this->tipo = $tipo;
-    }
-
-                
     
         
     function nuevoProyecto(){
-        $id=$this->insert("INSERT INTO $this->tabla (nombre,descripcion,creacion,creador,tipo) VALUES (:nombre,:descripcion,:creacion,:creador,:tipo)", ['nombre'=> $this->getNombre(),'descripcion'=> $this->getDescripcion(),'creacion'=>date("Y-n-j"),'creador'=> $this->getCreador(),'tipo'=> $this->getTipo()]);
+        $id=$this->insert("INSERT INTO $this->tabla (nombre,descripcion,creacion,creador) VALUES (:nombre,:descripcion,:creacion,:creador)", ['nombre'=> $this->getNombre(),'descripcion'=> $this->getDescripcion(),'creacion'=>date("Y-n-j"),'creador'=> $this->getCreador()]);
         return $id;
     }
     function anadirParticipante($idusuario){
@@ -93,7 +84,7 @@ class Proyecto extends BD{
         return $filas;
     }
     function getProyectosByUsuario($idusuario){
-        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador`,tipo FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario ORDER BY proyectos.id DESC ", ['idusuario'=>$idusuario]);
+        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador` FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario ORDER BY proyectos.id DESC ", ['idusuario'=>$idusuario]);
     
        return $proyectos;
     }
@@ -110,21 +101,7 @@ class Proyecto extends BD{
         $filas= $this->delete("DELETE FROM $this->tabla WHERE id=:id",['id'=>$this->getId()]);
         return $filas;
     }
-    function getPublicos($idusuario){
-        $proyectos=$this->fSelectN("SELECT * FROM $this->tabla WHERE tipo=0 AND id NOT IN (select idproyecto from participaciones WHERE idusuario=:idusuario)", ['idusuario'=>$idusuario]);
-        return $proyectos;
-    }
-    function getSolicitudes(){
-        $solicitudes= $this->fSelectN("SELECT solicitudes.id, usuarios.fullname,usuarios.username,solicitudes.idusuario FROM `solicitudes`,usuarios WHERE idproyecto=:proyecto AND solicitudes.idusuario=usuarios.id",['proyecto'=> $this->getId()] );
-        return $solicitudes;
-    }
-    function solicitarParticipacion($idusuario) {
-      $id=$this->insert("INSERT INTO `solicitudes`( `idproyecto`, `idusuario`) VALUES (:idproyecto,:idusuario)", ['idproyecto'=> $this->getId(),'idusuario'=>$idusuario]);
-      return $id;
-    }
-    function borrarSolicitud($id){
-        $this->delete("DELETE FROM solicitudes WHERE id=:id", ['id'=>$id]);
-    }
+    
 
 
    

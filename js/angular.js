@@ -5,7 +5,7 @@
  */
  
       $('fieldset').toggle( "drop" );
-      idproyecto=$('[name="idproyecto"]').val();
+      idproyecto=$('[name="idproyecto"').val();
      
 $(document).ready(function(){
     
@@ -75,13 +75,9 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
             }
         });
      }});
-
-/* *********************************************
-             Subir archivos
-********************************************* */
 $("#upload").dropzone({
-    url: "index.php?controller=archivo&action=nArch&idProyecto=" + idproyecto,
-    method: "post",
+    url: "index.php",
+    
     clickable: "#upload",
     paramName: "userfile",
     success: function(file, response){
@@ -89,21 +85,19 @@ $("#upload").dropzone({
         console.log(response);
     },
     error: function(file, response){
-        alertify.error("error: " +response);
+        alertify.error("error: " +response); 
     },
-
-    previewTemplate:'<div class="dz-preview dz-file-preview"><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size></div>    <img data-dz-thumbnail />  </div></div>',
-    uploadprogress: function(file, progress, bytesSent) {
-        if (file.previewElement) {
-            $('.dz-upload').css('width',progress + "%") ;
-            //$('.dz-progress').querySelector(".progress-text").textContent = progress + "%";
-        }
+    method: "post",
+previewTemplate:'<div class="dz-preview dz-file-preview"><img src="img/file.png" class="file"/><div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size></div>      </div></div>',
+uploadprogress: function(file, progress, bytesSent) {
+    if (file.previewElement) {
+      
+        $('.dz-upload').css('width',progress + "%") ;
+//        $('.dz-progress').querySelector(".progress-text").textContent = progress + "%";
     }
+}
 });
 
-/* *********************************************
-              Fin subir archivos
-********************************************* */
 
 //('#div-archivos').dropzone(
 //        {url:'./index.php',
@@ -215,29 +209,4 @@ $('#bfinalizar').click(function(){
     $('#adm-participantes-modal').modal('hide');
 });
 
-
-$('.aceptar-solicitud').submit(function(e){
-    e.preventDefault();
-var datos=$(this).serialize();
-  $.ajax({
-      url:'index.php?controller=proyecto&action=aceptar',
-      data:datos,
-      success:function(datos){
-          console.log(datos);
-      }
-  });
-});
-
-$('.rechazar-solicitud').submit(function(e){
-
-    e.preventDefault();
-var datos=$(this).serialize();
-  $.ajax({
-      url:'index.php?controller=proyecto&action=rechazar',
-      data:datos,
-      success:function(datos){
-          console.log(datos);
-      }
-  });
-});
 });
