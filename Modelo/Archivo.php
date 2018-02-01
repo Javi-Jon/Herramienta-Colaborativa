@@ -1,6 +1,6 @@
 <?php
 
-require_once './ModeloBD.php';
+require_once __DIR__ .'./ModeloBD.php';
 class Archivo extends BD {
     private $id;
     private $nombre;
@@ -77,7 +77,21 @@ class Archivo extends BD {
         $this->proyecto = $proyecto;
     }
 
+    function nuevoArchivo() {
+        $id= $this->insert("INSERT INTO $this->tabla (nombre, ruta, proyecto) VALUES (:nombre, :ruta, :proyecto)", ["nombre"=>$this->getNombre(), "ruta"=>$this->getRuta(), "proyecto"=>$this->getProyecto()]);
+        return $id;
+    }
 
+    function borrarArchivo() {
+        $filas=  $this->delete("DELETE FROM `tareas` WHERE id=:id",['id'=> $this->getId()]);
+        return $filas;
+    }
+
+    function getArchivosByProyecto(){
+        $tareas=$this->fSelectN("SELECT nombre, ruta, proyecto FROM $this->tabla WHERE  proyecto = :idProyecto", ['idProyecto'=>$this->getProyecto()]);
+        return $tareas;
+
+    }
 
 
 }

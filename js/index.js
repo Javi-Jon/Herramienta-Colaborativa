@@ -247,11 +247,9 @@ $(document).ready(function () {
                 .toggle();
         });
     });
-    /* *********************************************
+/* *********************************************
          Fin mover tareas
-    ********************************************* */
-    
- 
+********************************************* */
 });
 
 
@@ -267,10 +265,7 @@ function comprobarMisTareas() {
         error: function () {
            alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
-
-
     });
-
 }
 function construirElemTareas(tareas) {
     $('.tareas-wrap').empty();
@@ -300,14 +295,11 @@ function buscarComps() {
         error: function () {
            alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
-
-
     });
-
 }
 function buscarConversavcion(id){
-  console.log(id);
-    $.ajax({
+  //console.log(id);
+  $.ajax({
        url:"./index.php?controller=mensaje&action=rm&id="+id,
         success: function (convers) {
    console.log(convers);
@@ -317,8 +309,7 @@ function buscarConversavcion(id){
         error: function () {
            alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
         }
-
-   //     crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
+        // crear alerta de mensajes que faltan por leer y borrarlo usando el data val y el id que me pasan
     });
     
 }
@@ -386,3 +377,5 @@ function actualizarEstadoTarea(idTarea, estado) {
             break;
     }
 }
+
+

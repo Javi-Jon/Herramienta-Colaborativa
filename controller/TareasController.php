@@ -62,13 +62,13 @@ class TareasController extends Controller {
         }
     }
     function tareaPendiente() {
-    $tarea = new Tarea();
-    $tarea->setId($_GET['idtarea']);
-    $filas = $tarea->marcarPendiente();
-    if ($filas == 1) {
-        echo '1';
-    } else {
-        echo '0';
+        $tarea = new Tarea();
+        $tarea->setId($_GET['idtarea']);
+        $filas = $tarea->marcarPendiente();
+        if ($filas == 1) {
+            echo '1';
+        } else {
+            echo '0';
     }
 }
      function deleteTarea() {
