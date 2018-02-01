@@ -22,6 +22,9 @@
                 
                 {%if datos.proyecto.creador==datos.yo%}
                 <b class="d-flex align-items-center"> <i class="material-icons">supervisor_account</i>Eres el administrador de este proyecto</b>
+                {%if datos.proyecto.tipo==0%}
+                <b>este proyecto es publico</b>
+                {%endif%}
                 <hr>
                 <div class="d-flex justify-content-around" id="botones-admin">
                     <a href="index.php?controller=proyecto&action=d&idproyecto={{datos.proyecto.id}}" class="a-proyecto">

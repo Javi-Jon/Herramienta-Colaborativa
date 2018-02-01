@@ -47,6 +47,7 @@ class ProyectoController extends Controller{
         $proyecto->setNombre($_POST['nombre']);
         $proyecto->setDescripcion($_POST['descripcion']);
         $proyecto->setCreador($_SESSION['idusuario']);
+        $proyecto->setTipo($_POST['tipo']);
         
        $id= $proyecto->nuevoProyecto();
        echo $id;
