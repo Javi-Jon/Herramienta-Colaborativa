@@ -27,7 +27,7 @@
                     <a href="index.php?controller=proyecto&action=d&idproyecto={{datos.proyecto.id}}" class="a-proyecto">
                         <button class="btn btn-danger d-flex align-items-center"> <i class="material-icons">delete_forever</i>Borrar Proyecto</button>
                     </a>
-                    <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add</i> Administrar Participantes</button>
+                    <button class="btn-warning btn d-flex align-items-center" id="adm-participantes"><i class="material-icons">group_add </i> Administrar Participantes</button>
                 </div>
                 {%endif%}
                 <hr>
@@ -168,10 +168,12 @@
                     </div>
                     <hr>
                     <div class="d-flex flex-wrap " id="archivos">
-                        <a><img src="img/file.png" class="file" alt="archivo"/>
-                        <span>nombr</span></a>
+                        {% for archivo in datos.archivos%}
+                        
+                        <a href="{{archivo.ruta}}" download="{{archivo.nombre}}" ><img src="img/file.png" class="file" alt="archivo"/>
+                       {{archivo.nombre}}</a>
 
-                                                           
+                                  {% endfor %}                          
                     </div>                
 
                     

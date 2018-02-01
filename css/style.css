@@ -422,6 +422,7 @@ fieldset{
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
+        align-items: center;
     }
     #archivos > a:hover{
        

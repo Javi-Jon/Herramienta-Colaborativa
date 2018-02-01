@@ -1,6 +1,7 @@
 <?php
 require_once 'ControllerGenerico.php';
 require_once __DIR__ .'/../Modelo/Proyecto.php';
+require_once __DIR__ .'/../Modelo/Archivo.php';
 require_once 'TareasController.php';
 require_once 'MuroController.php';
 class ProyectoController extends Controller{
@@ -91,6 +92,7 @@ class ProyectoController extends Controller{
         $p=new Proyecto();
         $p->setId($_GET['id']);
        $proyecto= $p->getProyectoById();
+       $solicitudes=$p->getSolicitudes();
        $participantes=$p->getParticipaciones();
        $stats=$p->getStatsProyecto();
       $tc=new TareasController();
@@ -101,10 +103,13 @@ class ProyectoController extends Controller{
 //      echo $numeros[1]->total;
       $restantes=$numeros[0]->total-$numeros[1]->total;
      $tareas= $tc->getTareasDeProyecto($p->getId());
+     $archivo = new Archivo();
+        $archivo->setProyecto($_GET['id']);
+        $archivos=$archivo->getArchivosByProyecto();
      
      $mc= new MuroController();
     $mensajes= $mc->readMuro($_GET['id']);
-       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats,'yo'=>$_SESSION['idusuario']];
+       $datos=['proyecto'=>$proyecto,'participantes'=>$participantes,'tareas'=>$tareas,'progreso'=>$numeros[1]->total,'totales'=>$restantes,'muro'=>$mensajes,'stats'=>$stats,'yo'=>$_SESSION['idusuario'],'archivos'=>$archivos,'solicitudes'=>$solicitudes];
        $this->view('proyecto', $datos);
     }
     function borrarProyecto(){

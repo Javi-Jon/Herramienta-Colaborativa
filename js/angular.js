@@ -81,8 +81,11 @@ $("#upload").dropzone({
     clickable: "#upload",
     paramName: "userfile",
     success: function(file, response){
-        alertify.success('as');
+        
         console.log(response);
+        if(response==1){
+            alertify.success('as');
+        }
     },
     error: function(file, response){
         alertify.error("error: " +response); 

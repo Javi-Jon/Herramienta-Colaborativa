@@ -41,14 +41,14 @@ class ArchivosController extends Controller {
     }
 
     function nuevoArchivo() {
-        $dir_subida = 'C:/xampp/htdocs/Herramienta-Colaborativa/Archivos/';
+        $dir_subida = './Archivos/';
         if ($_FILES['userfile']){
             if ($_FILES['userfile']['error'] == UPLOAD_ERR_OK) {
                 $temp = explode(".", $_FILES['userfile']['name']);
                 $newfilename = round(microtime(true)) . '.' . end($temp);
 
                 $fichero_subido = $dir_subida . basename($newfilename);
-
+              
                 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $fichero_subido)) {
                     $archivo = new Archivo();
                     $archivo->setNombre($_FILES['userfile']['name']);

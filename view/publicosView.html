@@ -1,7 +1,9 @@
 {% extends "index.html" %}
 
 {% block content %}
-
+{%if datos.proyectos|length==0%}
+<div class="alert alert-warning">No hay proyectos publicos o ya eres partipante de todos</div>
+{%else%}
  {%for proyecto in datos.proyectos%}
  
 <div class="card" style="width: 18rem;">
@@ -17,6 +19,7 @@
 </div>
 
  {%endfor%}
+ {%endif%}
  <script src="js/validetta.min.js"></script>
   <script type="text/javascript" src="js/publicos.js"></script>
 
