@@ -31,10 +31,10 @@ if(!isset($_SESSION['idusuario']) && !isset($_POST['username']) && !isset($_GET[
             $controller=new MensajesController();
              action($controller);  
         break;
-    case 'archivo':
-        $controller=new ArchivosController();
-        action($controller);
-        break;
+       case 'archivo':
+           $controller=new ArchivosController();
+           action($controller);
+           break;
     default:
         index();
         break;       
@@ -56,4 +56,3 @@ function index(){
      $datos=$usuario->getInfoUsuario($_SESSION['idusuario']);
     $ctrl->view('index', ['proyectos'=>$datos['proyectos'] ,'yo'=>$_SESSION['idusuario'],'usuario'=>$datos['usuario']]);
 }
-
