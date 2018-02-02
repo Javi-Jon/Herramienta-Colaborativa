@@ -152,7 +152,7 @@ $(document).ready(function () {
       
     });
     $('#blayout').click(function(){
-       $('.proyectos-index-r').toggleClass('fd-c'); 
+       $('.proyectos-index-r').toggleClass('d-flex'); 
     });
     
     $(".tareas-wrap").on('click', '.bborrarTarea', function (e) {
@@ -178,6 +178,8 @@ $(document).ready(function () {
     });
    $("#mensajes-modal").on('click', '.conver', function (){
         buscarConversavcion($(this).attr('dataVal'));
+        $(this).children().remove();
+        $('#titulo-mensajes').html($(this).html());
    });
     $("#mensajes-modal").on('submit', '#form-chat', function (e) {
         e.preventDefault();
@@ -284,7 +286,13 @@ function construirCompaneros(convers) {
  $('#ul-convers').empty();
 //   $('#mistareas-btn > .badge').html(convers.length);
     convers.forEach(function (persona) {
-        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'<span class="badge badge-success">'+persona.pendientes+'</span></div>');
+        if(persona.pendientes>0){
+            $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'<span class="badge badge-success">'+persona.pendientes+'</span></div>'); 
+        }
+       else{
+            $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'</div>'); 
+       }
+    
     });
 
 }
@@ -332,7 +340,7 @@ function construirConversacion(conversacion,id){
         $('#wrap-conversacion').append('<div class="msj" >'+mensaje.mensaje+'</div>');
     }
     });
-    $('#wrap-conversacion').append('<form id="form-chat" class="d-flex"><input type="text" name="mensaje" class="form-control"><input type="hidden" name="recibe" value="'+id+'"><button><i class="material-icons">send</i></button></form>');
+    $('#wrap-conversacion').append('<form id="form-chat" class="d-flex"><input type="text" name="mensaje" class="form-control"><input type="hidden" name="recibe" value="'+id+'"><button class="btn btn-success"><i class="material-icons">send</i></button></form>');
 }
 function contarMensajes(){
     $.ajax({

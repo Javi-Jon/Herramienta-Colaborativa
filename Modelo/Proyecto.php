@@ -91,7 +91,7 @@ class Proyecto extends BD{
         return $filas;
     }
     function getProyectosByUsuario($idusuario){
-        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador` FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario ORDER BY proyectos.id DESC ", ['idusuario'=>$idusuario]);
+        $proyectos= $this->fSelectN("SELECT proyectos.`id`,`nombre`,`descripcion`,`creacion`,`creador`,tipo FROM `proyectos`,participaciones WHERE  proyectos.id=participaciones.idproyecto AND participaciones.idusuario=:idusuario ORDER BY proyectos.id DESC ", ['idusuario'=>$idusuario]);
     
        return $proyectos;
     }

@@ -11,6 +11,9 @@
 html{
     min-width: 615px;
 }
+body{
+    height: 100vh;
+}
 
 
 
@@ -127,15 +130,20 @@ html{
     border-radius: 3px;
     padding: 0.5em;
     align-self: flex-start ;
+    background-color: #bbb7b5;
 }
 .self-msj{
     align-self: flex-end !important;
-    background-color: #aade86;
+    background-color: #aade86 !important;
     display: flex;
     justify-content: flex-end;
+    
+    
+    
 }
 #form-chat{
     align-self: stretch;
+    margin-top: 0.5em;
 }
 .msj > i {
     font-size: 20px !important;
@@ -164,9 +172,7 @@ align-items: stretch;
 #wrap{
     display: flex;
     align-items: stretch;
-
     flex-grow: 1;
-
 }
 .aside-index{
     display: flex;
@@ -179,7 +185,9 @@ align-items: stretch;
 
     align-items: center;
 }
-
+.section-index > article{
+    padding: 1.5em;
+}
 .fd-c{
 
     flex-direction: column;
@@ -190,7 +198,7 @@ align-items: stretch;
 
 }
 .proyectos-index-r{
-    display: flex;
+   
     flex-wrap: wrap;
     justify-content: space-around;
     /*    flex-grow: 7;*/
@@ -201,6 +209,7 @@ align-items: stretch;
 
     display: flex;
     margin: 0.5em;
+    padding: 0.5em;
     /*    background-color: #83b339;*/
     flex-grow: 1;
 }
@@ -429,6 +438,7 @@ fieldset{
     text-decoration: none;
     background-color: darkslateblue;
     border-radius: 72px;
+    color: white;
     }
     [id*="fragment"]{
     height: 88vh;
@@ -455,4 +465,39 @@ to { -webkit-transform: rotate(4deg) scale(0.935) skew(1deg) translate(0px) opac
         flex-grow: 1;
       
     }
+}
+.card-body{
+    padding: 0.5em;
+}
+/******
+
+publicos
+***/
+
+
+
+#publicos-wrap{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+       background:  #2b3137;
+    background-size:auto 100%;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+#jmbtr{
+background-color: transparent;
+}
+#proyectos-publicos{
+        display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.card-public{
+    margin-top: 1.5em;
+}
+.f-grow-1{
+    flex-grow: 1;
 }
