@@ -1,7 +1,7 @@
 #wrap{
     display: flex;
 
-    
+
 }
 aside{
     flex-grow: 3;
@@ -15,12 +15,12 @@ section{
     align-content: center;
     flex-grow: 7;
     background-color: blue;
-   
+
 }
 .div-proyecto{
     display: flex;
     flex-wrap: wrap;
     width: 30%;
-margin: 1.5em;
+    margin: 1.5em;
     background-color: #83b339;
 }

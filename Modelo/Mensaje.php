@@ -54,7 +54,7 @@ class Mensaje extends BD{
    }
 
    function setHora() {
-      $this->hora = date("Y-m-d h:i:sa");
+      $this->hora = date("Y-m-d H:i:sa");
    }
 
    function setEstado($estado) {

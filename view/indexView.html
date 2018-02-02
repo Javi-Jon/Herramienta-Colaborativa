@@ -24,28 +24,28 @@
             {%if datos.proyectos%}
             {%for proyecto in datos.proyectos%}
             <div class="div-proyecto card d-flex ">
-            
-                    <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}" class="a-proyecto">
 
-                        <h3>{{proyecto.nombre}}</h3>
-                        <p>{{proyecto.descripcion}}</p> {{proyecto.prog}} %
-                        
-                        <span class="d-flex align-items-center">
-                            {%if proyecto.creador==datos.yo%}
-                            <i class="material-icons">supervisor_account</i> Eres admin
-                            {%else%}
-                            <i class="material-icons">perm_identity</i>
-                            {%endif%}
-                            {%if proyecto.tipo==0%}
-                            <i class="material-icons">public</i> Proyecto publico
-                            {%else%}
-                            <i class="material-icons">lock</i>Proyecto privado
-                            {%endif%}
-                        </span>
+                <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}" class="a-proyecto">
+
+                    <h3>{{proyecto.nombre}}</h3>
+                    <p>{{proyecto.descripcion}}</p> {{proyecto.prog}} %
+
+                    <span class="d-flex align-items-center">
+                        {%if proyecto.creador==datos.yo%}
+                        <i class="material-icons">supervisor_account</i> Eres admin
+                        {%else%}
+                        <i class="material-icons">perm_identity</i>
+                        {%endif%}
+                        {%if proyecto.tipo==0%}
+                        <i class="material-icons">public</i> Proyecto publico
+                        {%else%}
+                        <i class="material-icons">lock</i>Proyecto privado
+                        {%endif%}
+                    </span>
 
 
-                    </a>
-               
+                </a>
+
             </div>
 
             {% endfor %}
