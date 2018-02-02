@@ -127,20 +127,25 @@ and open the template in the editor.
         <div class="vacio"></div>
         <div class="card">
             <div class="form-group">
-                <form action="index.php?controller=usuario&action=c" method="POST" class="form">
-                    <input type="text" name="fullname" class="form-control" placeholder="Nombre y apellidos"><br>
-                    <input type="text" name="username" class="form-control" placeholder="Elige un nombre de usuario"><br>
-                    <input type="password" name="password" id="contrasena" class="form-control" placeholder="Contraseña">
+                <form action="index.php?controller=usuario&action=c" method="POST" class="form" id="registro">
+                    <input type="text" name="fullname" class="form-control" data-validetta="required" placeholder="Nombre y apellidos"><br>
+                    <input type="text" name="username" class="form-control" data-validetta="required" placeholder="Elige un nombre de usuario"><br>
+                    <input type="password" name="password" id="contrasena" data-validetta="required" class="form-control" placeholder="Contraseña">
                     <i id="i1" class="fa fa-eye fa-lg" style="color: lightgrey;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasena', '#i1')" onmouseup="mouseUp('contrasena', '#i1')"></i><br>
-                    <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com"><br>
+                    <input type="text" name="correo" class="form-control" data-validetta="required,email" placeholder="nombre@ejemplo.com"><br>
                     <input type="submit" class="btn btn-success" value="Registrarse en ViWeb Colaborativa">
                 </form>
-
-                <form action="index.php?controller=usuario&action=log" method="POST">
+{% if datos.success%}
+                    <div class="alert alert-success m-top-nav">{{datos.success}}</div>
+                   {%endif%}
+                <form action="index.php?controller=usuario&action=log" method="POST" class="m-top-nav">
                     <input type="text" name="username" class="form-control" placeholder="Usuario"><br>
                     <input type="password" name="password" id="contrasenaLogin" class="form-control" placeholder="Contraseña">
                     <i id="i2" class="fa fa-eye fa-lg" style="color: lightgrey;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasenaLogin', '#i2')" onmouseup="mouseUp('contrasenaLogin', '#i2')"></i><br>
                     <input type="submit" class="btn btn btn-success" value="Acceder">
+                    {% if datos.error%}
+                    <div class="alert alert-danger m-top-nav">{{datos.error}}</div>
+                   {%endif%}
                 </form>
             </div>
         </div>
