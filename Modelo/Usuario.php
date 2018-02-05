@@ -92,7 +92,7 @@ class Usuario extends BD {
     }
 
     function getUsuarioByID() {
-        $item = $this->fSelectO("SELECT id, fullname FROM $this->tabla WHERE id=:id", ['id' => $this->getId()]);
+        $item = $this->fSelectO("SELECT id, fullname,username FROM $this->tabla WHERE id=:id", ['id' => $this->getId()]);
         return $item;
     }
 

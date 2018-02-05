@@ -17,7 +17,7 @@ $(document).ready(function(){
                console.log(datos);
                if(datos!=0){
                    alertify.success('solicitud enviada');
-                   form.parent().parent().hide();
+                   form.parent().parent().parent().hide();
                }else{
                     alertify.error('error inseperado vuelva a intentarlo mas adelante');
                }

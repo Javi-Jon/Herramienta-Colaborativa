@@ -59,7 +59,7 @@ body{
     font-family: Arial;
     color: #c43d4f;
     font-size: 15px;
-    background: #ffffff;
+    background: inherit;
     border: 1px solid transparent;
     text-decoration: none;
 }
@@ -173,7 +173,8 @@ align-items: stretch;
 #wrap{
     display: flex;
     align-items: stretch;
-    flex-grow: 1;
+    flex-grow: 1; background-color: bisque;
+    min-height: 100vh;
 }
 .aside-index{
     display: flex;
@@ -212,6 +213,7 @@ align-items: stretch;
     margin: 0.5em;
     padding: 0.5em;
     /*    background-color: #83b339;*/
+     background-color: #94bad4;
     flex-grow: 1;
 }
 .div-proyecto:hover{
@@ -229,6 +231,11 @@ align-items: stretch;
         display: none;
     }
 }
+@media screen and (max-width: 573px){
+    #blayout{
+        display: none;
+    }
+}
 
 /*****************************************
 
@@ -241,7 +248,18 @@ align-items: stretch;
 
 #wrapper-proyecto{
     flex-grow: 1;
-}/*
+    background-color: #ccc;
+}
+#tabs{
+    background-color: inherit;
+}
+.ui-widget-header{
+    background: inherit;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+    background: inherit !important;
+}
+/*
 #wrapper-proyecto  section {
     display: flex;
     flex-direction: row;
@@ -486,7 +504,7 @@ publicos
     
     background-repeat: no-repeat;
   
-      min-height: 91vh;
+      min-height: 94vh;
       height: 100%;
       padding-bottom: 1.5em;
 }
@@ -497,7 +515,8 @@ publicos
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
+    flex: 1;
 }
 .card-public{
     margin-top: 1.5em;
@@ -510,4 +529,14 @@ publicos
 }
 #jmbtr p{
     color: coral;
+}
+.btn-solicitar{
+    color: #d9534f;
+    background-color: #ffffff;
+    border-color: #d9534f;
+}
+.btn-solicitar:hover{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d9534f;
 }

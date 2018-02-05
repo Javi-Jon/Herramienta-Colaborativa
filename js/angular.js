@@ -52,6 +52,9 @@ $('#formNuevaTarea').validetta({
             event.preventDefault();
 var titulo=  $('#formNuevaTarea [name="titulo"]').val();
         var tarea=$('#formNuevaTarea').serialize();
+       
+        var descripcion=$('#descripcion').val();
+        console.log(titulo);
         $.ajax({
             url:'index.php?controller=tareas&action=ct',
             data: tarea,
@@ -59,6 +62,12 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
             success:function(data){
                if(data!==0){
                    console.log(data);
+                   $('#pendiente-append').append('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="'+data+'"> <div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+titulo+'</div><div class="portlet-content">'+descripcion+'</div> </div>');
+                   
+                 
+                                  
+                              
+                           
                    $('#asignaciones-modal .modal-title').html(titulo); 
                    $('#formNuevaTarea')[0].reset();
                    $('[name="idtarea"]').val(data);
@@ -85,6 +94,8 @@ $("#upload").dropzone({
         console.log(response);
         if(response==1){
             alertify.success('as');
+        }else{
+            alertify.error("no se ha podido subir el archivo");
         }
     },
     error: function(file, response){
