@@ -54,7 +54,7 @@ class UsuarioController extends Controller{
         //dirección de respuesta, si queremos que sea distinta que la del remitente 
         $headers .= "Reply-To: pruebasjavier3@gmail.com\r\n";
 
-     if (mail($usuario->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
+     if (@mail($usuario->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
            $this->view('login', ['success'=>'Registro efectuado con exito en cosa de 30 segundos recibirás el e-mail de verificación']);    
         } else {
            $this->view('login', ['error'=>'Error de servidor por favor ponte en contacto con el administrador de la web']);    

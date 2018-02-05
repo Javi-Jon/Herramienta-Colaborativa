@@ -540,3 +540,16 @@ publicos
     background-color: #d9534f;
     border-color: #d9534f;
 }
+.card-public >a:hover {
+    text-decoration: none;
+}
+.card-public >a{
+    color: #2b3137;
+}
+.card-public:hover{
+    background-color: #d9534f;
+    color: white;
+}
+.card-public:hover > a{
+    color: white;
+}
