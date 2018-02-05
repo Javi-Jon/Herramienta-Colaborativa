@@ -45,7 +45,7 @@
                             Borrar Proyecto
                         </button>
                     </a>
-                    <button class="btn-warning btn d-flex align-items-center" id="adm-participantes">
+                    <button class="btn-warning btn d-flex align-items-center " id="adm-participantes">
                         <i class="material-icons">group_add </i>
                         Administrar Participantes
                     </button>
@@ -70,6 +70,7 @@
                     <!--<canvas id="myChart" width="400" height="400"></canvas>-->
                     {%endif%}
                 </div>
+                <br>
                 <div class="card " >
                     <div class="card-body alert-info">
                         <h2>
@@ -110,6 +111,7 @@
 
             </div>
         </div>
+        {% if datos.participo==1%}
         <div id="fragment-3">
                 <div>
                     <button id="abrir" class="btn-primary btn d-flex align-items-center"><i class="material-icons" >add</i>Nueva Tarea</button>
@@ -230,6 +232,7 @@
                     {%endfor%}
                 </div>    
             </div>
+        {%endif%}
         {%endif%}
         </div>   
      </div>
