@@ -10,3 +10,6 @@ function mouseUp(opcion, elemento) {
     $(elemento).toggleClass("fa-eye-slash fa-eye");
 }
 // End mostrar contraseñas en formularios
+$(document).ready(function(){
+   $('#registro').validetta(); 
+});

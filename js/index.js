@@ -76,6 +76,7 @@ $(document).ready(function () {
                     persona = jQuery.parseJSON(dato);
                     console.log(persona);
                     $('.participantes').append("<li  class=' d-flex justify-content-between'><div class='d-flex'><i class='material-icons'>perm_identity</i>"+persona[0].fullname+"</div><button class='bborrar' idpart='" + persona.participacionID + "'>X</button> </li>");
+                    $('#participantes').append('<li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>'+persona[0].fullname+'<button class=" bborrar" idpart="'+ persona.participacionID +'">X</button></li>');
                     formulario[0].reset();
                 }
 
@@ -88,12 +89,13 @@ $(document).ready(function () {
 
     $("#container").on('click', '.bborrar', function () {
         participacion = $(this).parent();
+        var idpart=$(this).attr('idpart');
         $.ajax({
             url: './index.php?controller=proyecto&action=dp&idpart=' + $(this).attr('idpart'),
             method: 'GET',
             success: function (datos) {
                 if (datos == 1) {
-                    participacion.remove();
+                    $('[idpart="'+idpart+'"]').parent().remove();
                 }
             },
             error: function () {
@@ -152,7 +154,7 @@ $(document).ready(function () {
       
     });
     $('#blayout').click(function(){
-       $('.proyectos-index-r').toggleClass('fd-c'); 
+       $('.proyectos-index-r').toggleClass('d-flex'); 
     });
     
     $(".tareas-wrap").on('click', '.bborrarTarea', function (e) {
@@ -178,6 +180,8 @@ $(document).ready(function () {
     });
    $("#mensajes-modal").on('click', '.conver', function (){
         buscarConversavcion($(this).attr('dataVal'));
+        $(this).children().remove();
+        $('#titulo-mensajes').html($(this).html());
    });
     $("#mensajes-modal").on('submit', '#form-chat', function (e) {
         e.preventDefault();
@@ -276,7 +280,7 @@ function construirElemTareas(tareas) {
     $('.tareas-wrap').empty();
    $('#mistareas-btn > .badge').html(tareas.length);
     tareas.forEach(function (tarea) {
-        $('.tareas-wrap').append('<li class="tarea-li"><div><input type="checkbox" value="' + tarea.id + '" class="realizar-tarea"><span>' + tarea.titulo + tarea.plazo + tarea.estado + '</span><span class="tarea-span"><i class="material-icons beditarTarea" idtarea="' + tarea.id + '">mode_edit</i><i class="material-icons bborrarTarea" idtarea="' + tarea.id + '">delete</i></span></div></li>');
+        $('.tareas-wrap').append('<li class="tarea-li"><div><input type="checkbox" value="' + tarea.id + '" class="realizar-tarea"><span class="">' + tarea.titulo+'<i class="material-icons">date_range</i> '+ tarea.plazo + '</span><span class="tarea-span"><i class="material-icons beditarTarea" idtarea="' + tarea.id + '">mode_edit</i><i class="material-icons bborrarTarea" idtarea="' + tarea.id + '">delete</i></span></div></li>');
     });
 
 }
@@ -284,7 +288,13 @@ function construirCompaneros(convers) {
  $('#ul-convers').empty();
 //   $('#mistareas-btn > .badge').html(convers.length);
     convers.forEach(function (persona) {
-        $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'<span class="badge badge-success">'+persona.pendientes+'</span></div>');
+        if(persona.pendientes>0){
+            $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'<span class="badge badge-success">'+persona.pendientes+'</span></div>'); 
+        }
+       else{
+            $('#div-convers').append('<div class="conver" dataVal="'+persona.id+'">'+persona.username+'</div>'); 
+       }
+    
     });
 
 }
@@ -332,7 +342,7 @@ function construirConversacion(conversacion,id){
         $('#wrap-conversacion').append('<div class="msj" >'+mensaje.mensaje+'</div>');
     }
     });
-    $('#wrap-conversacion').append('<form id="form-chat" class="d-flex"><input type="text" name="mensaje" class="form-control"><input type="hidden" name="recibe" value="'+id+'"><button><i class="material-icons">send</i></button></form>');
+    $('#wrap-conversacion').append('<form id="form-chat" class="d-flex"><input type="text" name="mensaje" class="form-control"><input type="hidden" name="recibe" value="'+id+'"><button class="btn btn-success"><i class="material-icons">send</i></button></form>');
 }
 function contarMensajes(){
     $.ajax({

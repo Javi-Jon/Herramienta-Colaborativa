@@ -1,7 +1,9 @@
 <?php
 
-require_once __DIR__ .'./ModeloBD.php';
+require_once __DIR__ . './ModeloBD.php';
+
 class Tarea extends BD {
+
     private $id;
     private $titulo;
     private $descripcion;
@@ -9,169 +11,161 @@ class Tarea extends BD {
     private $estado;
     private $dificultad;
     private $plazo;
-
     private $tabla = "tareas";
 
-    function __construct(){
-
+    function __construct() {
+        
     }
 
     /**
      * @return mixed
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
      * @param mixed $id
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 
     /**
      * @return mixed
      */
-    public function getTitulo()
-    {
+    public function getTitulo() {
         return $this->titulo;
     }
 
     /**
      * @param mixed $titulo
      */
-    public function setTitulo($titulo)
-    {
+    public function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
 
     /**
      * @return mixed
      */
-    public function getDescripcion()
-    {
+    public function getDescripcion() {
         return $this->descripcion;
     }
 
     /**
      * @param mixed $descripcion
      */
-    public function setDescripcion($descripcion)
-    {
+    public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
 
     /**
      * @return mixed
      */
-    public function getProyecto()
-    {
+    public function getProyecto() {
         return $this->proyecto;
     }
 
     /**
      * @param mixed $proyecto
      */
-    public function setProyecto($proyecto)
-    {
+    public function setProyecto($proyecto) {
         $this->proyecto = $proyecto;
     }
 
     /**
      * @return mixed
      */
-    public function getEstado()
-    {
+    public function getEstado() {
         return $this->estado;
     }
 
     /**
      * @param mixed $estado
      */
-    public function setEstado($estado)
-    {
+    public function setEstado($estado) {
         $this->estado = $estado;
     }
 
     /**
      * @return mixed
      */
-    public function getDificultad()
-    {
+    public function getDificultad() {
         return $this->dificultad;
     }
 
     /**
      * @param mixed $dificultad
      */
-    public function setDificultad($dificultad)
-    {
+    public function setDificultad($dificultad) {
         $this->dificultad = $dificultad;
     }
 
     /**
      * @return mixed
      */
-    public function getPlazo()
-    {
+    public function getPlazo() {
         return $this->plazo;
     }
 
     /**
      * @param mixed $plazo
      */
-    public function setPlazo($plazo)
-    {
+    public function setPlazo($plazo) {
         $this->plazo = $plazo;
     }
 
     function nuevaTarea() {
-        $id= $this->insert("INSERT INTO $this->tabla (titulo, descripcion, proyecto, estado, dificultad, plazo) VALUES (:titulo, :descripcion, :proyecto, :estado, :dificultad, :plazo)", ["titulo"=>$this->getTitulo(), "descripcion"=>$this->getDescripcion(), "proyecto"=>$this->getProyecto(), "estado"=>$this->getEstado(), "dificultad"=>$this->getDificultad(), "plazo"=>$this->getPlazo()]);
+        $id = $this->insert("INSERT INTO $this->tabla (titulo, descripcion, proyecto, estado, dificultad, plazo) VALUES (:titulo, :descripcion, :proyecto, :estado, :dificultad, :plazo)", ["titulo" => $this->getTitulo(), "descripcion" => $this->getDescripcion(), "proyecto" => $this->getProyecto(), "estado" => $this->getEstado(), "dificultad" => $this->getDificultad(), "plazo" => $this->getPlazo()]);
         return $id;
     }
 
     function borrarTarea() {
-      $filas=  $this->delete("DELETE FROM `tareas` WHERE id=:id",['id'=> $this->getId()]);
-     
+        $filas = $this->delete("DELETE FROM `tareas` WHERE id=:id", ['id' => $this->getId()]);
+
         return $filas;
     }
-    function editarTarea(){
-        $filas=$this->update("UPDATE $this->tabla SET `titulo`=:titulo,`descripcion`=:descripcion,`dificultad`=:dificultad,`plazo`=:plazo WHERE id=:id", ['titulo'=> $this->getTitulo(),'descripcion'=> $this->getDescripcion(),'dificultad'=> $this->getDificultad(),'plazo'=> $this->getPlazo(),'id'=> $this->getId()]); 
-       return $filas;
+
+    function editarTarea() {
+        $filas = $this->update("UPDATE $this->tabla SET `titulo`=:titulo,`descripcion`=:descripcion,`dificultad`=:dificultad,`plazo`=:plazo WHERE id=:id", ['titulo' => $this->getTitulo(), 'descripcion' => $this->getDescripcion(), 'dificultad' => $this->getDificultad(), 'plazo' => $this->getPlazo(), 'id' => $this->getId()]);
+        return $filas;
     }
-    function getTareasByUser($iduser){
-        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:user AND estado=0", ['user'=>$iduser]);
-      return $tareas; 
-        
+
+    function getTareasByUser($iduser) {
+        $tareas = $this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:user AND estado=0", ['user' => $iduser]);
+        return $tareas;
     }
+
     function marcarRealizada() {
-        $resultado= $this->update("UPDATE $this->tabla SET `estado`=:estado WHERE id=:id",['id'=> $this->getId(),'estado'=> 1]);
+        $resultado = $this->update("UPDATE $this->tabla SET `estado`=:estado WHERE id=:id", ['id' => $this->getId(), 'estado' => 1]);
         return $resultado;
     }
+
     function marcarPendiente() {
-        $resultado= $this->update("UPDATE $this->tabla SET `estado`=:estado WHERE id=:id",['id'=> $this->getId(),'estado'=> 0]);
+        $resultado = $this->update("UPDATE $this->tabla SET `estado`=:estado WHERE id=:id", ['id' => $this->getId(), 'estado' => 0]);
         return $resultado;
     }
-    function getTareasByProyecto($idproyecto){
-        $tareas=$this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla WHERE proyecto=:proyecto ", ['proyecto'=>$idproyecto]);
-      return $tareas; 
-        
+
+    function getTareasByProyecto($idproyecto) {
+        $tareas = $this->fSelectN("SELECT tareas.`id`, `titulo`, `descripcion`, `proyecto`, `estado`, `dificultad`, `plazo` FROM $this->tabla WHERE proyecto=:proyecto ", ['proyecto' => $idproyecto]);
+        return $tareas;
     }
-    function asignarTareas($idusuario){
-        $asignaciones=$this->insert("INSERT INTO `asignacion`(`idtarea`, `iduser`) VALUES (:idtarea,:idusuario)", ['idtarea'=>$this->getId(),'idusuario'=>$idusuario]);
+
+    function asignarTareas($idusuario) {
+        $asignaciones = $this->insert("INSERT INTO `asignacion`(`idtarea`, `iduser`) VALUES (:idtarea,:idusuario)", ['idtarea' => $this->getId(), 'idusuario' => $idusuario]);
         return $asignaciones;
     }
-    function getTotalTareas(){
-        $total= $this->fSelectO("SELECT count(id) as total FROM $this->tabla WHERE proyecto =:proyecto", ['proyecto'=> $this->getProyecto()]);
+
+    function getTotalTareas() {
+        $total = $this->fSelectO("SELECT count(id) as total FROM $this->tabla WHERE proyecto =:proyecto", ['proyecto' => $this->getProyecto()]);
         return $total;
     }
-    function getTotalTareasRealizadas(){
-        $totalRealizadas= $this->fSelectO("SELECT count(id) as total FROM $this->tabla WHERE proyecto =:proyecto AND estado=1", ['proyecto'=> $this->getProyecto()]);
+
+    function getTotalTareasRealizadas() {
+        $totalRealizadas = $this->fSelectO("SELECT count(id) as total FROM $this->tabla WHERE proyecto =:proyecto AND estado=1", ['proyecto' => $this->getProyecto()]);
         return $totalRealizadas;
     }
+
 //    function getTotalTareasUser($idusuario){
 //        $total= $this->fSelectO("SELECT COUNT(tareas.id) FROM tareas, asignacion WHERE  tareas.id=asignacion.idtarea AND asignacion.iduser=:idusuario AND estado=0", ['idusuario'=> $idusuario]);
 //        return $total;

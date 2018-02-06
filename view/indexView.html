@@ -1,47 +1,60 @@
 {% extends "index.html" %}
 
 {% block content %}
-        <div id="wrap">            
-            <aside class="aside-index">
-                <div class="text-center">
-                    <img src="https://www.sonypark360.net/wp-content/uploads/2017/08/profile-pictures.png" class="img-circle" alt="...">
-                </div>
-                <hr>{{ datos.usuario.fullname}}
-                <div> 
-                    <ul class="tareas-wrap"></ul>
-                </div>
-            </aside>
-            
-        <section class="section-index">
-            <article>
+<div id="wrap">            
+    <aside class="aside-index">
+        <div class="text-center">
+            <img src="https://www.sonypark360.net/wp-content/uploads/2017/08/profile-pictures.png" class="img-circle" alt="...">
+        </div>
+        <hr>{{ datos.usuario.fullname}}
+        @{{ datos.usuario.username}}
+        <div> 
+            <ul class="tareas-wrap"></ul>
+        </div>
+    </aside>
+
+    <section class="section-index">
+        <article>
             <h1>Tus Proyectos</h1>
             {%if datos.proyectos%}
-            <button id="blayout"><i class="material-icons">dashboard</i></button>
+            <button id="blayout" class="btn btn-primary"><i class="material-icons">dashboard</i></button>
             {%endif%}
             <hr>
-            </article>
-            <section class="proyectos-index-r fd-c">
-                {%if datos.proyectos%}
-                 {%for proyecto in datos.proyectos%}
-                 <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}" class="a-proyecto">
-                    <div class="div-proyecto card">
+        </article>
+        <section class="proyectos-index-r ">
+            {%if datos.proyectos%}
+            {%for proyecto in datos.proyectos%}
+            <div class="div-proyecto card d-flex ">
+
+                <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}" class="a-proyecto">
+
                     <h3>{{proyecto.nombre}}</h3>
                     <p>{{proyecto.descripcion}}</p> {{proyecto.prog}} %
-                    {%if proyecto.creador==datos.yo%}
-                    <i class="material-icons">supervisor_account</i>
-                    {%else%}
-                    <i class="material-icons">perm_identity</i>
-                    {%endif%}
-                </div>
-                     </a>
 
-                
-                 {% endfor %}
-                 {%else%}
-                 <div class="alert-warning alert">No participas en ningun proyecto aun haz click en nuevo Proyeco para empezar</div>
-                 {%endif%}
-            </section>
+                    <span class="d-flex align-items-center">
+                        {%if proyecto.creador==datos.yo%}
+                        <i class="material-icons">supervisor_account</i> Eres admin
+                        {%else%}
+                        <i class="material-icons">perm_identity</i>
+                        {%endif%}
+                        {%if proyecto.tipo==0%}
+                        <i class="material-icons">public</i> Proyecto publico
+                        {%else%}
+                        <i class="material-icons">lock</i>Proyecto privado
+                        {%endif%}
+                    </span>
+
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+            {%else%}
+            <div class="alert-warning alert">No participas en ningun proyecto aun haz click en nuevo Proyeco para empezar</div>
+            {%endif%}
         </section>
-    </div>
+    </section>
+</div>
 <script src="js/validetta.min.js"></script>
 {% endblock %}

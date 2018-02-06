@@ -1,0 +1,24 @@
+    <!DOCTYPE html>
+    <html ng-app>
+    <head>
+    	<title></title> 
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+     <script type="text/javascript" src="./angular.js"></script>
+    </head>
+    <body ng-controller="ctrl">
+		<div>
+            {{getTotal()}}
+			<ul>
+				<li ng-repeat="tarea in lista" >{{tarea.nombre}} <button ng-click="borrar(tarea.id)">X</button></li>
+
+			</ul>
+            <form>
+                <input type="text" name="nombre" ng-model="txtnombre" >
+                <input type="submit" ng-click='anadir()'>
+            </form>
+		</div>
+
+
+    </body>
+    </html>
+   

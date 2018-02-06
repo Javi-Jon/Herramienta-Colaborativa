@@ -40,7 +40,31 @@ class UsuarioController extends Controller{
         $usuario->setTipo(0);
         $usuario->setFullname($_POST['fullname']);
         $usuario->setCorreo($_POST['correo']);
-        $usuario->registrar();
+        $id=$usuario->registrar();
+        if ($id!=0){
+            $mensaje = '<a href="http://172.20.224.102/HColaborativ/index.php?confirm=afusdfiunsdug&controller=usuario&action=confirm&id='.$id.'">te has registrado con exito</a> ';
+
+        //para el envío en formato HTML 
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+
+        //dirección del remitente 
+        $headers .= "From: javier marin <pruebasjavier3@gmail.com>\r\n";
+
+        //dirección de respuesta, si queremos que sea distinta que la del remitente 
+        $headers .= "Reply-To: pruebasjavier3@gmail.com\r\n";
+
+     if (@mail($usuario->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
+           $this->view('login', ['success'=>'Registro efectuado con exito en cosa de 30 segundos recibirás el e-mail de verificación']);    
+        } else {
+           $this->view('login', ['error'=>'Error de servidor por favor ponte en contacto con el administrador de la web']);    
+        } 
+        } else {
+            $this->view('login', ['error'=>'El nombre de usuario y/o el correo ya estan en uso']);    
+        }
+        
+        
+       
     }
     function logearse() {
         $usuario=new Usuario();
@@ -51,7 +75,7 @@ class UsuarioController extends Controller{
 //          $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
 //            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
         }else{
-            echo 'login incorrecto';
+            $this->view('login',['error'=>'Login incorrecto']);
         }
         
     }

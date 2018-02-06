@@ -52,6 +52,9 @@ $('#formNuevaTarea').validetta({
             event.preventDefault();
 var titulo=  $('#formNuevaTarea [name="titulo"]').val();
         var tarea=$('#formNuevaTarea').serialize();
+       
+        var descripcion=$('#descripcion').val();
+        console.log(titulo);
         $.ajax({
             url:'index.php?controller=tareas&action=ct',
             data: tarea,
@@ -59,6 +62,12 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
             success:function(data){
                if(data!==0){
                    console.log(data);
+                   $('#pendiente-append').append('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="'+data+'"> <div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+titulo+'</div><div class="portlet-content">'+descripcion+'</div> </div>');
+                   
+                 
+                                  
+                              
+                           
                    $('#asignaciones-modal .modal-title').html(titulo); 
                    $('#formNuevaTarea')[0].reset();
                    $('[name="idtarea"]').val(data);
@@ -81,8 +90,13 @@ $("#upload").dropzone({
     clickable: "#upload",
     paramName: "userfile",
     success: function(file, response){
-        alertify.success('as');
+        
         console.log(response);
+        if(response==1){
+            alertify.success('as');
+        }else{
+            alertify.error("no se ha podido subir el archivo");
+        }
     },
     error: function(file, response){
         alertify.error("error: " +response); 
@@ -209,4 +223,46 @@ $('#bfinalizar').click(function(){
     $('#adm-participantes-modal').modal('hide');
 });
 
+
+$('.aceptar-solicitud').submit(function(e){
+    e.preventDefault();
+    var form=$(this);
+var datos=$(this).serialize();
+  $.ajax({
+      url:'index.php?controller=proyecto&action=aceptar',
+      data:datos,
+      success:function(datos){
+          console.log(datos);
+          if(datos!=0){              
+               form.parent().parent().parent().remove();
+          }
+      },
+       error: function () {
+              alertify.error("Algo no ha ido como deberia");
+            }
+  });
+});
+
+$('.rechazar-solicitud').submit(function(e){
+
+    e.preventDefault();
+var datos=$(this).serialize();
+var form=$(this);
+  $.ajax({
+      url:'index.php?controller=proyecto&action=rechazar',
+      data:datos,
+      success:function(datos){
+          console.log(datos);
+          if(datos==1){
+              form.parent().parent().parent().remove();
+          }
+      },
+       error: function () {
+              alertify.error("Algo no ha ido como deberia");
+            }
+  });
+});
+$('a[href="#fragment-5"]').click(function(){
+   $(this).children().remove(); 
+});
 });

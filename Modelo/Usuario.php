@@ -45,7 +45,7 @@ class Usuario extends BD {
     }
 
     function setPassword($password) {
-       
+
         $this->password = $password;
     }
 
@@ -66,65 +66,50 @@ class Usuario extends BD {
     }
 
     function registrar() {
-        
-         $password = password_hash($this->getPassword(), 1);
-        $id= $this->insert("INSERT INTO $this->tabla (username, password, tipo,fullname,correo) VALUES (:username,:password,:tipo,:fullname,:correo)", ['username' => $this->getUsername(), 'password' => $password, "tipo" => $this->getTipo(), "fullname" => $this->getFullname(), 'correo' => $this->getCorreo()]);
+
+        $password = password_hash($this->getPassword(), 1);
+        $id = $this->insert("INSERT INTO $this->tabla (username, password, tipo,fullname,correo) VALUES (:username,:password,:tipo,:fullname,:correo)", ['username' => $this->getUsername(), 'password' => $password, "tipo" => $this->getTipo(), "fullname" => $this->getFullname(), 'correo' => $this->getCorreo()]);
         //mail($usuario->getCorreo(), "registro", "te has registrado");  //METER MAIL AQUI?
 
-        $mensaje = '<a href="http://172.20.224.102/HColaborativ/index.php?confirm=afusdfiunsdug&controller=usuario&action=confirm&id='.$id.'">te has registrado con exito</a> ';
+        return $id;
+    }
 
-        //para el envío en formato HTML 
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+    function login() {
 
-        //dirección del remitente 
-        $headers .= "From: javier marin <pruebasjavier3@gmail.com>\r\n";
-
-        //dirección de respuesta, si queremos que sea distinta que la del remitente 
-        $headers .= "Reply-To: pruebasjavier3@gmail.com\r\n";
-
-     if (mail($this->getCorreo(), 'pruebaclase', $mensaje, $headers)) {
-           echo 'exito';
+        $item = $this->fSelectO("SELECT id, fullname, password FROM $this->tabla WHERE username=:username AND tipo=1", ['username' => $this->getUsername()]);
+        if (password_verify($this->password, $item->password)) {
+// LOGIN CORRECTO
+            $_SESSION['idusuario'] = $item->id;
+            return true;
         } else {
-            echo 'error';
+            return false;
         }
     }
-    function login(){
-        
-     $item= $this->fSelectO("SELECT id, fullname, password FROM $this->tabla WHERE username=:username AND tipo=1", ['username'=> $this->getUsername()]);
-       if(password_verify($this->password,$item->password)){
-// LOGIN CORRECTO
-           $_SESSION['idusuario']=$item->id;
-           return true;
-       }else{
-          return false;
-       }
-    }
+
     function getUsuarioByUsername() {
-         $item= $this->fSelectO("SELECT id, fullname FROM $this->tabla WHERE username=:username", ['username'=> $this->getUsername()]);
+        $item = $this->fSelectO("SELECT id, fullname FROM $this->tabla WHERE username=:username", ['username' => $this->getUsername()]);
         return $item;
-        
     }
+
     function getUsuarioByID() {
-         $item= $this->fSelectO("SELECT id, fullname FROM $this->tabla WHERE id=:id", ['id'=> $this->getId()]);
+        $item = $this->fSelectO("SELECT id, fullname,username FROM $this->tabla WHERE id=:id", ['id' => $this->getId()]);
         return $item;
-        
     }
-    function getCompaneros(){
-        $conocidos= $this->fSelectN("
+
+    function getCompaneros() {
+        $conocidos = $this->fSelectN("
             SELECT DISTINCT usuarios.id,username,(SELECT COUNT(*)  FROM mensajes WHERE envia=usuarios.id and recibe=:idusuario AND estado=0) AS pendientes   
             FROM `participaciones`,usuarios,mensajes 
             WHERE idproyecto IN (SELECT idproyecto 
                            FROM `participaciones`
                            WHERE idusuario=:idusuario)
-            AND participaciones.idusuario=usuarios.id AND usuarios.id <>:idusuario", ['idusuario'=> $this->getId()]);
+            AND participaciones.idusuario=usuarios.id AND usuarios.id <>:idusuario", ['idusuario' => $this->getId()]);
         return $conocidos;
-        
     }
-    function  confirmAcc(){
-        $filas= $this->update("UPDATE `usuarios` SET `tipo`=1 WHERE id=:idusuario", ['idusuario'=> $this->getId()]);
+
+    function confirmAcc() {
+        $filas = $this->update("UPDATE `usuarios` SET `tipo`=1 WHERE id=:idusuario", ['idusuario' => $this->getId()]);
         return $filas;
     }
-   
 
 }

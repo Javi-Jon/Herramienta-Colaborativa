@@ -48,7 +48,7 @@ class ArchivosController extends Controller {
                 $newfilename = round(microtime(true)) . '.' . end($temp);
 
                 $fichero_subido = $dir_subida . basename($newfilename);
-
+              
                 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $fichero_subido)) {
                     $archivo = new Archivo();
                     $archivo->setNombre($_FILES['userfile']['name']);

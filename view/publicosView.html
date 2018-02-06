@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div id="publicos-wrap" >
+    <div class="jumbotron jumbotron-fluid " id="jmbtr">
+        <div class="container">
+            <h1 class="display-4">Bienvenido a la seccion comunitaria!</h1>
+            <p class="lead">En esta seccion los usuarios podréis solicitar acceso a proyectos creados como publicos</p>
+
+            
+        </div>
+</div>
+    {%if datos.proyectos|length==0%}
+    <div class="alert alert-warning">No hay proyectos publicos o ya eres partipante de todos</div>
+    {%else%}
+    
+    
+    <div id="proyectos-publicos">
+    {%for proyecto in datos.proyectos%}
+
+    <div class="card card-public" style="width: 18rem;">
+        <a href="index.php?controller=proyecto&action=vp&id={{proyecto.id}}">
+        <div class="card-body d-flex fd-c align-items-center">
+            <h5 class="card-title">{{proyecto.nombre}}</h5>
+{{proyecto.descripcion}}
+            <form class="form-solicitar">
+                <input type="hidden" value="{{proyecto.id}}" name="id">
+                <button class="btn-solicitar btn">SolicitarAcceso</button>
+
+            </form>
+        </div>
+            </a>
+    </div>
+
+    {%endfor%}
+    </div>
+    {%endif%}
+</div>
+<script src="js/validetta.min.js"></script>
+<script type="text/javascript" src="js/publicos.js"></script>
+
+{%endblock%}
