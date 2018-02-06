@@ -547,7 +547,7 @@ publicos
     color: #2b3137;
 }
 .card-public:hover{
-    background-color: #d9534f;
+    background-color: #b5b4b4;
     color: white;
 }
 .card-public:hover > a{

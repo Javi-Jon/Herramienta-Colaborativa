@@ -40,7 +40,6 @@ $(document).ready(function(){
 
 
 
-
 $('#formNuevaTarea').validetta({
         realTime : true,
         display:'inline',
@@ -233,8 +232,13 @@ var datos=$(this).serialize();
       data:datos,
       success:function(datos){
           console.log(datos);
-          if(datos!=0){              
+          if(datos!=0){                      
+             $('#participantes').append('<li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>'+$('#solicitud-username').html()+'<button class=" bborrar" idpart="'+datos+'">X</button></li>');
+             $('.participantes').append("<li  class=' d-flex justify-content-between'><div class='d-flex'><i class='material-icons'>perm_identity</i>"+$('#solicitud-fullname').html()+"</div><button class='bborrar' idpart='" + datos + "'>X</button> </li>");
                form.parent().parent().parent().remove();
+          }
+          else{
+              alertify.error('ha ocurrido un error inesperado vuelve a intentarlo mas adelante');
           }
       },
        error: function () {

@@ -157,7 +157,7 @@
                         </div>
                         <div class="card estiloTarjeta" id="terminado">
                             <h5 class="card-header">Completado</h5>
-                            <div class="card-body column">
+                            <div class="card-body column" id="acabadas-append">
                                 {%if tarea is empty%}
                                 {%for tarea in datos.tareas%}
                                 {% if tarea.estado==1%}
@@ -207,8 +207,8 @@
                     {%for solicitud in datos.solicitudes%}
                     <div style=" border: solid 1px #848484 " class="d-flex justify-content-between">
                         <div class="d-flex fd-c">
-                            <span class="d-flex align-items-center"><i class="material-icons">face</i>{{solicitud.fullname}}</span>
-                            <span class="d-flex align-items-center"><i class="material-icons">account_circle</i>{{solicitud.username}}</span>
+                            <span class="d-flex align-items-center"><i class="material-icons">face</i><span id="solicitud-fullname">{{solicitud.fullname}}</span></span>
+                            <span class="d-flex align-items-center"><i class="material-icons">account_circle</i><span id="solicitud-username">{{solicitud.username}}</span></span>
                             <span class="d-flex align-items-center"><i class="material-icons">mail</i>{{solicitud.correo}}</span></div>
                             <div class="d-flex">
                             <form class="aceptar-solicitud d-flex">
@@ -296,7 +296,7 @@
                         <input type="checkbox" value="{{persona.id}}" name="participantes[]" data-validetta="minChecked[1]">{{persona.fullname}}<br>
 
                         {% endfor %}
-                        <input type="submit">
+                        <input type="submit" class="btn btn-primary">
                     </form>
 
                 </div>
