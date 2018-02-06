@@ -70,14 +70,24 @@ class UsuarioController extends Controller{
         $usuario=new Usuario();
         $usuario->setUsername($_POST['username']);
         $usuario->setPassword($_POST['password']);        
-        if($usuario->login()){
-            index();
-//          $proyectos=$this->getInfoUsuario($_SESSION['idusuario']);
-//            $this->view('index',['proyectos'=>$proyectos,'yo'=>$_SESSION['idusuario']]);
-        }else{
-            $this->view('login',['error'=>'Login incorrecto']);
-        }
+        $item=$usuario->login();
         
+       if(isset ($item->tipo)){
+            if($item->tipo==0){
+                 $this->view('login',['error'=>'Esta cuenta aun no esta verificada']);
+            }else{
+                if (password_verify($usuario->getPassword(), $item->password)) {
+                    $_SESSION['idusuario'] = $item->id;
+                    index();
+                }else{
+                         $this->view('login',['error'=>'Login incorrecto']);
+                }
+            }
+       
+        } else {
+            $this->view('login',['error'=>'Login incorrecto']);
+
+        } 
     }
     function buscarByUsername(){
         $user=new Usuario();
