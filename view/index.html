@@ -49,24 +49,19 @@ and open the template in the editor.
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <a class="navbar-brand" href="index.php"><img src="img/logo2.png"  height="40" alt="logo"></a>
-
-                <div class="navbar-collapse collapse show " id="navbarColor01" aria-expanded="true" style="">
+                <div class="navbar-collapse collapse" id="navbarColor01" aria-expanded="true" style="">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item  ">
                             <a class="nav-link" href="index.php?controller=proyecto&action=vpubl">Comunidad</a>
                         </li>
-
                         <li class="nav-item active">
                             <span class="nav-link" id="nvb-msjs"><i class="material-icons">email</i><span class="badge badge-danger" id="msjs"></span></span>
                         </li>
-
                     </ul>
                     <div class="navbar-nav ">
                         <button class="btn btn-success d-flex align-items-center m-top-nav" data-toggle="modal" data-target="#proyect-modal" ><i class="material-icons">add_box</i>Nuevo Proyecto</button>
                         <button class="btn btn-warning d-flex align-items-center m-top-nav "  id="mistareas-btn"><i class="material-icons">assignment</i> <span class="badge badge-danger">4</span>Mis tareas </button>
-
                         <div class="dropdown">
                             <button class="btn btn-dark  d-flex align-items-center dropdown-toggle m-top-nav" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">account_circle</i>Bienvenido 
@@ -78,15 +73,13 @@ and open the template in the editor.
                            
                         </div>
                     </div>
-
-
                 </div>
             </nav>     
             <div class="modal fade" id="proyect-modal" tabindex="-1" role="dialog"  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">New message</h5>
+                            <h5 class="modal-title">Nuevo proyecto</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -102,14 +95,14 @@ and open the template in the editor.
                                     <textarea class="form-control" id="desc-proj" name="descripcion"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tipo-proj" class="col-form-label">Privacidad Proyecto</label>
+                                    <label class="col-form-label">Privacidad Proyecto</label>
                                     <select name="tipo" class="form-control">
                                         <option value="0">Publico</option>
                                         <option value="1">Privado</option>
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                     <input type="submit" class="btn btn-primary" id="subm-newProy">
                                 </div>
                             </form>
@@ -140,7 +133,7 @@ and open the template in the editor.
 
                                 </form> 
                                 <br>
-                                <a href="" id="finalizar" class="btn btn-primary" style="float: right">finalizar</a>
+                                <a href="" id="finalizar" class="btn btn-primary" style="float: right">Finalizar</a>
                             </div>
                         </div>                        
                     </div>

@@ -23,6 +23,7 @@ body{
     display: flex;
     flex-grow: 1;
     height: 94%;
+    background: #2b3137;
 }
 
 /*para hacer que los elementos del navbar tengan separacion */
@@ -193,8 +194,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', end
     transition: width 0.4s linear;
     max-width: 400px;
     min-width: 400px;
-
     align-items: center;
+
+    outline: solid 1px #fff;
 }
 .section-index > article{
     padding: 1.5em;
@@ -235,6 +237,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', end
     display: flex;
     flex-direction: column;
     flex-grow: 7;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 @media screen and (max-width: 991px){
     .aside-index{
@@ -521,16 +525,17 @@ publicos
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
-    background:  #2b3137;
-    
-    background-repeat: no-repeat;
-  
-      min-height: 94vh;
-      height: 100%;
-      padding-bottom: 1.5em;
+    /*background:  #2b3137;*/
+    /*background-repeat: no-repeat;*/
+    min-height: 94vh;
+    height: 100%;
+    padding-bottom: 1.5em;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 #jmbtr{
     background-color: transparent;
+    text-align: center;
 }
 #proyectos-publicos{
     display: flex;
