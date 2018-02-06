@@ -107,4 +107,9 @@ class Usuario extends BD {
         return $filas;
     }
 
+    function updateUsuarioByID(){
+        $filas = $this->update("UPDATE `usuarios` SET username=:username, password=:password, fullname=:fullname, correo=:correo WHERE id=:idusuario", ['idusuario'=> $this->getId(), 'username'=> $this->getUsername(), 'password'=> $this->getPassword(), 'fullname'=> $this->getFullname(), 'correo'=> $this->getCorreo()]);
+        return $filas;
+    }
+
 }
