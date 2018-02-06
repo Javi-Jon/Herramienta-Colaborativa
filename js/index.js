@@ -7,7 +7,33 @@ contarMensajes();
 buscarComps();
 $(document).ready(function () {
     //alertify.success("Success log message");
-    
+     $('#bperfil').click(function(){
+         $('#perfil-modal').modal('show');
+     });
+     $('#form-perfil').validetta({
+            realTime : true,
+        onValid: function(e){
+            e.preventDefault();
+            $.ajax({
+                url:'index.php?controller=usuario&action=uuser',
+                method:'POST',
+                data:$('#form-perfil').serialize(),
+                success:function(filas){
+                    if(filas==1){
+                        alertify.success('actualizado con exito');
+                    }else{
+                        alertify.error('ha habido un problema puede que el nombre de usuario o el correo esten en uso');
+                    }
+                },
+                error: function () {
+                    alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
+                }
+                
+            });
+            
+        }
+            
+        });
     $('#newProy').validetta({
          realTime : true,
         display:'bubble',
