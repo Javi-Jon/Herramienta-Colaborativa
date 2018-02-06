@@ -141,6 +141,7 @@ $(document).ready(function () {
             url: 'index.php?controller=tareas&action=marcarDone&idtarea=' + idtarea+'&estado=1',
             success: function (datos) {
                 if (datos == 1) {
+                    $('[id="'+idtarea+'"').appendTo('#acabadas-append');
                    $(selector).next().css('text-decoration', 'line-through').parent().delay(750).fadeOut();
                 } else {
                    alertify.error("Error desconocido vuelva a intentarlo mas adelante");
