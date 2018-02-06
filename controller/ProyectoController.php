@@ -152,7 +152,7 @@ class ProyectoController extends Controller {
     function aceptarSolicitud() {
         $proyecto = new Proyecto();
         $id = $this->anadirParticipacion2($_GET['usuario'], $_GET['proyecto']);
-        $proyecto->borrarSolicitud($_GET['id']);
+        $proyecto->borrarSolicitudes($_GET['usuario'], $_GET['proyecto']);
         echo $id;
     }
 

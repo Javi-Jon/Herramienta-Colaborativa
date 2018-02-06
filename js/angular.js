@@ -51,6 +51,7 @@ $('#formNuevaTarea').validetta({
             event.preventDefault();
 var titulo=  $('#formNuevaTarea [name="titulo"]').val();
         var tarea=$('#formNuevaTarea').serialize();
+        var dificultad=$('[name="dificultad"]:checked').val();
        
         var descripcion=$('#descripcion').val();
         console.log(titulo);
@@ -60,8 +61,20 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
             method:'POST',
             success:function(data){
                if(data!==0){
-                   console.log(data);
-                   $('#pendiente-append').append('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="'+data+'"> <div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+titulo+'</div><div class="portlet-content">'+descripcion+'</div> </div>');
+                   console.log(dificultad);
+                   console.log(tarea);
+                   switch(dificultad){
+                       case "1":
+                            $('#pendiente-append').append('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="'+data+'"> <div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all tarea-facil">'+titulo+'</div><div class="portlet-content">'+descripcion+'</div> </div>');
+                            break;
+                        case "2":
+                             $('#pendiente-append').append('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="'+data+'"> <div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all tarea-media">'+titulo+'</div><div class="portlet-content">'+descripcion+'</div> </div>');
+                            break;
+                        case "3":
+                             $('#pendiente-append').append('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" id="'+data+'"> <div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all tarea-dificil">'+titulo+'</div><div class="portlet-content">'+descripcion+'</div> </div>');
+                             break;
+                   }
+                  
                    
                  
                                   
@@ -74,12 +87,12 @@ var titulo=  $('#formNuevaTarea [name="titulo"]').val();
                    $('#asignaciones-modal').modal('show');                   
          
                }else{
-                alertify.error("Error log message");
+                alertify.error("Ha habido un problema");
                }
                 
             },
              error: function () {
-              alertify.error("Error log message");
+             alertify.error("Ha habido un problema");
             }
         });
      }});
@@ -92,7 +105,7 @@ $("#upload").dropzone({
         
         console.log(response);
         if(response==1){
-            alertify.success('as');
+            alertify.success('Archivo subido con exito');
         }else{
             alertify.error("no se ha podido subir el archivo");
         }
@@ -193,7 +206,7 @@ uploadprogress: function(file, progress, bytesSent) {
 //});
 $('#form-muro').submit(function(e){
     var datos=$(this).serialize();
-    console.log(datos);
+   
     var form=$(this);
     e.preventDefault();
     $.ajax({
@@ -201,12 +214,12 @@ $('#form-muro').submit(function(e){
         data: datos,
         method:'POST',
         success:function(data){
-            console.log(data);
+          
             form.next().before('<div class="comentario card"><span>'+$('[name="mensaje"]').val()+'</span><span></span><span>ahora mismo</span></div>');
             form[0].reset();
         },
         error: function () {
-              alertify.error("Error log message");
+              alertify.error("Ha habido un problema");
             }
     });
 
@@ -238,7 +251,7 @@ var datos=$(this).serialize();
                form.parent().parent().parent().remove();
           }
           else{
-              alertify.error('ha ocurrido un error inesperado vuelve a intentarlo mas adelante');
+              alertify.error('ha ocurrido un error inesperado probablemente el usuario ya participe en el proyecto vuelve a intentarlo mas adelante');
           }
       },
        error: function () {
@@ -258,7 +271,7 @@ var form=$(this);
       success:function(datos){
           console.log(datos);
           if(datos==1){
-              form.parent().parent().parent().remove();
+              form.parent().parent().remove();
           }
       },
        error: function () {

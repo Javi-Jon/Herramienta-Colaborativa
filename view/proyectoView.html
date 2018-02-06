@@ -145,7 +145,11 @@
                                 {%for tarea in datos.tareas%}
                                 {% if tarea.estado==0%}
                                 <div class="portlet" id="{{tarea.id}}">
-                                    <div class="portlet-header">{{tarea.titulo}}</div>
+                                    {%if tarea.dificultad ==1%}<div class="portlet-header tarea-facil">{{tarea.titulo}}</div>{%endif%}
+                                    {%if tarea.dificultad ==2%}<div class="portlet-header tarea-media">{{tarea.titulo}}</div>{%endif%}
+                                    {%if tarea.dificultad ==3%}<div class="portlet-header tarea-dificil">{{tarea.titulo}}</div>{%endif%}
+                                    
+                                   
                                     <div class="portlet-content">{{tarea.descripcion}}</div>
                                 </div>
                                 {%endif%}
@@ -162,7 +166,9 @@
                                 {%for tarea in datos.tareas%}
                                 {% if tarea.estado==1%}
                                 <div class="portlet" id="{{tarea.id}}">
-                                    <div class="portlet-header">{{tarea.titulo}}</div>
+                                   {%if tarea.dificultad ==1%}<div class="portlet-header tarea-facil">{{tarea.titulo}}</div>{%endif%}
+                                    {%if tarea.dificultad ==2%}<div class="portlet-header tarea-media">{{tarea.titulo}}</div>{%endif%}
+                                    {%if tarea.dificultad ==3%}<div class="portlet-header tarea-dificil">{{tarea.titulo}}</div>{%endif%}
                                     <div class="portlet-content">{{tarea.descripcion}}</div>
                                 </div>
                                 {%endif%}

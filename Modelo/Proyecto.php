@@ -134,5 +134,9 @@ class Proyecto extends BD {
         $filas = $this->delete("DELETE FROM solicitudes WHERE id=:id", ['id' => $id]);
         return $filas;
     }
+     function borrarSolicitudes($idusuario,$idproyecto) {
+        $filas = $this->delete("DELETE FROM solicitudes WHERE idusuario=:idusuario AND idproyecto=:idproyecto", ['idusuario' => $idusuario,'idproyecto'=>$idproyecto]);
+        return $filas;
+    }
 
 }

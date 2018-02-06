@@ -9,7 +9,8 @@
 
 **************************************/
 html{
-    /*min-width: 615px;*/
+ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+     min-width: 412px;
 }
 body{
     height: 100%;
@@ -165,6 +166,7 @@ align-items: stretch;
 
 .a-proyecto:hover{
     text-decoration: none;
+        color: black;
 
 }
 .a-proyecto{
@@ -173,7 +175,14 @@ align-items: stretch;
 #wrap{
     display: flex;
     align-items: stretch;
-    flex-grow: 1; background-color: bisque;
+    flex-grow: 1;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,2989d8+60,207cca+75,1e5799+100 */
+background: #7db9e8; /* Old browsers */
+background: -moz-linear-gradient(top, #7db9e8 0%, #2989d8 60%, #207cca 75%, #1e5799 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #7db9e8 0%,#2989d8 60%,#207cca 75%,#1e5799 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #7db9e8 0%,#2989d8 60%,#207cca 75%,#1e5799 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */
+/*    background-color: bisque;*/
     min-height: 100vh;
 }
 .aside-index{
@@ -213,12 +222,13 @@ align-items: stretch;
     margin: 0.5em;
     padding: 0.5em;
     /*    background-color: #83b339;*/
-     background-color: #94bad4;
+     background-color: #deeaf3;
     flex-grow: 1;
 }
 .div-proyecto:hover{
 
-    background-color: #94bad4;
+    background-color: #f5e4a3;
+
     box-shadow: 5px 5px 20px black;
 }
 .section-index{
@@ -398,16 +408,27 @@ fieldset{
     min-height: 100px;
 }
 .comentario{
-    margin: 1.5em;
+   margin: 0.5em;
     border-radius: 5px;
     padding: 0.5em;
-    border: solid 2px #a9a8ad;
-    box-shadow: 3px 3px 17px 0px black;
+    border: solid 2px #636c72;
 }
 
-.comentario:hover{
-    background-color: activecaption;
+.tarea-facil{
+  background-color: #5cb85cb8;
 }
+.tarea-media{
+    background-color: #f0ad4eb8;
+}
+.tarea-dificil{
+    background-color: #dc1414a8;
+}
+
+
+
+/*.comentario:hover{
+    background-color: activecaption;
+}*/
 .comentario > span:nth-child(1){
     margin: 0.5em;
     font-weight:normal;color:#000000;
