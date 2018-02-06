@@ -35,7 +35,7 @@
                 {%if datos.proyecto.creador==datos.yo%}
                     <b class="d-flex align-items-center"> <i class="material-icons">supervisor_account</i>Eres el administrador de este proyecto</b>
                 {%if datos.proyecto.tipo==0%}
-                    <b class="d-flex align-items-center"> <i class="material-icons">public</i>este proyecto es publico</b>
+                    <b class="d-flex align-items-center"> <i class="material-icons">public</i>Este proyecto es público</b>
                 {%endif%}
                 <hr>
                 <div class="d-flex justify-content-around" id="botones-admin">
@@ -65,7 +65,7 @@
                     </div>
                     {%else%}
                    <div class="alert alert-warning" role="alert">
-                        No hay estadísticas disponibles aún añade tareas y recarga la página para comenzar a usar esta funcionalidad.
+                        No hay estadísticas disponibles aún, añade tareas y recarga la página para comenzar a usar esta funcionalidad.
                     </div>
                     <!--<canvas id="myChart" width="400" height="400"></canvas>-->
                     {%endif%}
@@ -108,23 +108,20 @@
                     <span> {{comentario.fullname}}</span>
                     <span> {{comentario.hora}}</span></div>
                 {% endfor %}
-
             </div>
         </div>
         {% if datos.participo==1%}
         <div id="fragment-3">
                 <div>
                     <button id="abrir" class="btn-primary btn d-flex align-items-center"><i class="material-icons" >add</i>Nueva Tarea</button>
-
-
                     <fieldset>
                         <form id="formNuevaTarea">
                             <h3>Nueva Tarea</h3>
-                            <label for="titulo">Titulo: </label><input class='form-control' type="text" name="titulo" id="titulo" data-validetta="required">
+                            <label for="titulo">Título: </label><input class='form-control' type="text" name="titulo" id="titulo" data-validetta="required">
                             <label for="descripcion">Descripción: </label><input class='form-control' type="text" name="descripcion" id="descripcion" data-validetta="required">
                             <label for="plazo">Plazo: </label><input class='form-control' type="date" name="plazo" id="plazo" data-validetta="required">
                             <input  type="radio" name="dificultad" value="1" id="rbf" data-validetta="required">
-                            <label for="rbf">Facil </label>
+                            <label for="rbf">Fácil </label>
                             <input  type="radio" name="dificultad" value="2" id="rbm" data-validetta="required">
                             <label for="rbm">Medio </label>
                             <input  type="radio" name="dificultad" value="3" id="rbd" data-validetta="required">
@@ -179,11 +176,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<ul id="tareas-proyecto">
-                       {%for tarea in datos.tareas%}
-                      <li {% if tarea.estado==1%} class="tarea-realizada" {%endif%}>{{tarea.titulo}}</li>
-                       {% endfor %}
-                   </ul>-->
                 </div>
         </div>
     

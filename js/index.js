@@ -155,7 +155,10 @@ $(document).ready(function () {
       
     });
     $('#blayout').click(function(){
-       $('.proyectos-index-r').toggleClass('d-flex'); 
+        $('.proyectos-index-r').toggleClass('d-flex');
+        $(this).children().text(function(i, text){
+            return text === "dashboard" ? "list" : "dashboard";
+        })
     });
     
     $(".tareas-wrap").on('click', '.bborrarTarea', function (e) {
