@@ -1,7 +1,7 @@
 <h2>
 	<u><span style="font-size:20px;"><span style="font-family:arial,helvetica,sans-serif;">Herramienta Colaborativa</span></span></u></h2>
 <div style="text-align: justify;">
-	<span style="font-family:arial,helvetica,sans-serif;">Este proyecto ha sido desarrolado para el Ciclo de de Desarrollo de Aplicaciones Web por alumnos de Egibide como parte del metodo de Aprendizaje Colaborativo Basado en Retos. El e</span><span style="font-family: arial, helvetica, sans-serif;">nunciado propuesto es el siguiente:</span></div>
+	<span style="font-family:arial,helvetica,sans-serif;">Este proyecto ha sido desarrolado para el Ciclo de Desarrollo de Aplicaciones Web por alumnos de Egibide como parte del metodo de Aprendizaje Colaborativo Basado en Retos. El e</span><span style="font-family: arial, helvetica, sans-serif;">nunciado propuesto es el siguiente:</span></div>
 <div style="text-align: justify;">
 	&nbsp;</div>
 <div style="text-align: justify;">
