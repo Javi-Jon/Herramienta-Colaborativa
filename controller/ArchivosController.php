@@ -41,7 +41,7 @@ class ArchivosController extends Controller {
     }
 
     function nuevoArchivo() {
-        $dir_subida = 'C:/xampp/htdocs/Herramienta-Colaborativa/Archivos/';
+        $dir_subida = './Archivos/';
         if ($_FILES['userfile']){
             if ($_FILES['userfile']['error'] == UPLOAD_ERR_OK) {
                 $temp = explode(".", $_FILES['userfile']['name']);
