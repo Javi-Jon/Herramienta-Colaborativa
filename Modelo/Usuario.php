@@ -76,14 +76,9 @@ class Usuario extends BD {
 
     function login() {
 
-        $item = $this->fSelectO("SELECT id, fullname, password FROM $this->tabla WHERE username=:username AND tipo=1", ['username' => $this->getUsername()]);
-        if (password_verify($this->password, $item->password)) {
-// LOGIN CORRECTO
-            $_SESSION['idusuario'] = $item->id;
-            return true;
-        } else {
-            return false;
-        }
+        $item = $this->fSelectO("SELECT id, fullname, password,tipo FROM $this->tabla WHERE username=:username", ['username' => $this->getUsername()]);     
+        return $item;
+        
     }
 
     function getUsuarioByUsername() {

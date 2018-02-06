@@ -100,9 +100,11 @@ and open the template in the editor.
                                     <br>
                                     <input type="submit" class="btn btn-block btn-success" value="Iniciar sesión">
                                 </form>
-                                    {%if datos.error%}
+                                {%if datos.error%}
                                     <div class="alert alert-danger m-top-nav">{{datos.error}}</div>
-                                        {%endif%}
+                                {%elseif datos.success%}
+                                    <div class="alert alert-success m-top-nav">{{datos.success}}</div>
+                                {%endif%}
                             </div>
                         </div>
                         <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog"  aria-hidden="true">
