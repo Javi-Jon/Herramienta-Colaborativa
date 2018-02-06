@@ -9,147 +9,183 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+
+        <!-- Tether -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
+
+        <!-- JQuery UI -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+        <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
+
+        <!-- Google apis -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+        <!-- Alertify -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css"/>
+
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+
+        <!-- Local JS -->
+        <script src="js/showPassword.js"></script>
+
+        <!-- Local styles -->
         <link rel="stylesheet" href="css/validetta.min.css">
         <link href="css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.css" />
     </head>
     <body>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" ></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
-
-        <script src="js/validetta.min.js"></script>
-        <script src="js/showPassword.js"></script>
-        <style>
-            *{
-                box-sizing: border-box;
-            }
-            .jumbotron{
-                color: #fff;
-                padding-top: 120px;
-                padding-bottom: 120px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 0px;
-            }
-            #banner{
-                background: url("img/main_colab.png");
-                background-size: 100%;
-                max-width: 100%;
-                height: 700px;
-            }
-            .texto{
-                min-width: 200px;
-            }
-            .vacio{
-                flex-basis:  20%;
-            }
-            blockquote{
-                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; /*CSS-Tricks*/
-                font-weight: 300;
-                font-size: 2em;
-            }
-            .card{
-                color:#000;
-                width: 25rem;
-                padding: 20px;
-                display: flex;
-            }
-            hr {
-                border: 0.5px solid #000;
-                width: 95%;
-                display: flex;
-                flex-direction: row;
-                margin-top: 0.5em;
-                margin-bottom: 0.5em;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            nav{
-                padding-top: 30px;
-                padding-bottom: 30px;
-            }
-            .form-control::placeholder{
-                color:lightgrey;
-            }
-        </style>
-        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
+        <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-inverse bg-inverse">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a class="navbar-brand" href="#"><img src="img/logo2.png" alt="ViWeb Logo" class="img-responsive" height="40"></a>
 
-
-            <a class="navbar-brand" href="#"><img src="img/logo2.png" class="img-responsive" height="40"></a>
-
-            <div class="navbar-collapse collapse show " id="navbarColor01" aria-expanded="true" style="">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#">Tus proyectos </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="material-icons">face</i><span class="badge badge-danger">2</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="material-icons">email</i><span class="badge badge-danger">2</span></a>
-                    </li>
-                    <li class="nav-item ">
-                        <button class="btn btn-success d-flex align-items-center m-top-nav" data-toggle="modal" data-target="#proyect-modal" ><i class="material-icons">add_box</i>Nuevo Proyecto</button>
-                    </li>
-                </ul>
-                <div class="navbar-nav">
-                    <a class="nav-link nav-item d-flex align-items-center" style="color:white;" href="">Registrarse</a>
-                    <span class="nav-link nav-item d-flex align-items-center"> o </span>
-                    <a class="nav-link nav-item d-flex align-items-center" style="color:white;" href="#">Iniciar sesión</a>
-                </div>
-
-
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto"></ul>
+                <!-- <div class="nav-item"> -->
+                <hr class="hidden-lg-up w-100 blanco">
+                <a class="nav-link nav-item d-flex align-items-center blanco" href="https://github.com/Javi-Jon/Herramienta-Colaborativa">GitHub del equipo</a>
+                <span class="nav-link nav-item d-flex align-items-center"><span class="blanco hidden-md-down">|</span> </span>
+                <hr class="hidden-lg-up w-100 blanco">
+                <a class="nav-link nav-item d-flex align-items-center blanco" href="https://github.com/Javi-Jon/Herramienta-Colaborativa/archive/master.zip">Descargar proyecto</a>
+                <!-- </div> -->
             </div>
         </nav>
-        <div class="jumbotron" id="banner">
-            <div class="texto">
-                <blockquote>
-                    "Reunirse es un comienzo, <br />
-                    permanecer juntos es un progreso<br />
-                    pero trabajar juntos es el éxito"
-                </blockquote>
-                <small>
-                    <i>
-                        - Henry Ford -
-                    </i>
-                </small>
-            </div>
-            <div class="vacio"></div>
-            <div class="card">
-                <div class="form-group">
-                    <form action="index.php?controller=usuario&action=c" method="POST" class="form" id="registro">
-                        <input type="text" name="fullname" class="form-control" data-validetta="required" placeholder="Nombre y apellidos"><br>
-                        <input type="text" name="username" class="form-control" data-validetta="required" placeholder="Elige un nombre de usuario"><br>
-                        <input type="password" name="password" id="contrasena" data-validetta="required" class="form-control" placeholder="Contraseña">
-                        <i id="i1" class="fa fa-eye fa-lg" style="color: lightgrey;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasena', '#i1')" onmouseup="mouseUp('contrasena', '#i1')"></i><br>
-                        <input type="text" name="correo" class="form-control" data-validetta="required,email" placeholder="nombre@ejemplo.com"><br>
-                        <input type="submit" class="btn btn-success" value="Registrarse en ViWeb Colaborativa">
-                    </form>
-                    {% if datos.success%}
-                    <div class="alert alert-success m-top-nav">{{datos.success}}</div>
-                    {%endif%}
-                    <form action="index.php?controller=usuario&action=log" method="POST" class="m-top-nav">
-                        <input type="text" name="username" class="form-control" placeholder="Usuario"><br>
-                        <input type="password" name="password" id="contrasenaLogin" class="form-control" placeholder="Contraseña">
-                        <i id="i2" class="fa fa-eye fa-lg" style="color: lightgrey;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasenaLogin', '#i2')" onmouseup="mouseUp('contrasenaLogin', '#i2')"></i><br>
-                        <input type="submit" class="btn btn btn-success" value="Acceder">
-                        {% if datos.error%}
-                        <div class="alert alert-danger m-top-nav">{{datos.error}}</div>
-                        {%endif%}
-                    </form>
+        <main class="main jumbo">
+            <div class="jumbo-bkgrd">
+                <div class="columns">
+                    <div class="column centrar-v">
+                        <div class="descripcion">
+                            ViWeb es una plataforma colaborativa pensada para agilizar la asignacíon de tareas y gestión de proyectos. Desde tareas simples hasta negocios, individualmente o en grupo, con esta herramienta ahorrarás tiempo y llevarás a cabo tus ideas de una manera
+                            eficiente.
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card">
+                            <div class="form-group ">
+                                <form action="index.php?controller=usuario&action=c" method="POST" class="form">
+                                    <input type="text" name="fullname" class="form-control" placeholder="Nombre y apellidos"><br>
+                                    <input type="text" name="username" class="form-control" placeholder="Elige un nombre de usuario"><br>
+                                    <div class="passw-ajust">
+                                        <input type="password" name="password" id="contrasena" class="form-control" placeholder="Contraseña">
+                                        <i id="i1" class="fa fa-eye fa-lg" style="color: lightgrey; position: absolute; z-index: 100; right: 10%;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasena', '#i1')" onmouseup="mouseUp('contrasena', '#i1')"></i>
+                                    </div>
+                                    <br>
+                                    <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com"><br>
+                                    <input type="submit" class="btn btn-block btn-success" value="Registrarse en ViWeb Colaborativa">
+                                </form>
+                                <hr>
+                                <form action="index.php?controller=usuario&action=log" method="POST">
+                                    <input type="text" name="username" class="form-control" placeholder="Usuario"><br>
+                                    <div class="passw-ajust">
+                                        <input type="password" name="password" id="contrasenaLogin" class="form-control" placeholder="Contraseña">
+                                        <i id="i2" class="fa fa-eye fa-lg" style="color: lightgrey; position: absolute; z-index: 100; right: 10%;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasenaLogin', '#i2')" onmouseup="mouseUp('contrasenaLogin', '#i2')"></i>
+                                    </div>
+                                    <br>
+                                    <input type="submit" class="btn btn-block btn-success" value="Iniciar sesión">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" style="color:#000;">Iniciar sesión</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="index.php?controller=usuario&action=c" method="POST" class="form">
+                                            <input type="text" name="fullname" class="form-control" placeholder="Nombre y apellidos"><br>
+                                            <input type="text" name="username" class="form-control" placeholder="Elige un nombre de usuario"><br>
+                                            <div class="passw-ajust">
+                                                <input type="password" name="password" id="contrasenaSignUpModal" class="form-control" placeholder="Contraseña">
+                                                <i id="i3" class="fa fa-eye fa-lg" style="color: lightgrey; position: absolute; z-index: 100; right: 10%;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasenaSignUpModal', '#i3')" onmouseup="mouseUp('contrasenaSignUpModal', '#i3')"></i>
+                                            </div>
+                                            <br>
+                                            <input type="email" name="correo" class="form-control" placeholder="nombre@ejemplo.com"><br>
+                                            <div class="modal-footer">
+                                                <input type="submit" class="btn btn-block btn-success" value="Registrarse en ViWeb Colaborativa">
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" style="color:#000;">Iniciar sesión</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="index.php?controller=usuario&action=log" method="POST">
+                                            <input type="text" name="username" class="form-control" placeholder="Usuario"><br>
+                                            <div class="passw-ajust">
+                                                <input type="password" name="password" id="contrasenaLoginModal" class="form-control" placeholder="Contraseña">
+                                                <i id="i4" class="fa fa-eye fa-lg" style="color: lightgrey; position: absolute; z-index: 100; right: 10%;" title="Mostrar contraseña" aria-hidden="true" onmousedown="mouseDown('contrasenaLoginModal', '#i4')" onmouseup="mouseUp('contrasenaLoginModal', '#i4')"></i>
+                                            </div>
+                                            <br>
+                                            <div class="modal-footer">
+                                                <input type="submit" class="btn btn-block btn-success" value="Iniciar sesión">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success mostrar-xs " data-toggle="modal" data-target="#signup-modal">Registrarse en ViWeb Colaborativa</button>
+                    <br>
+                    <span class="blanco mostrar-xs centrar-text-h">0</span>
+                    <br>
+                    <button type="submit" class="btn btn-success mostrar-xs" data-toggle="modal" data-target="#signin-modal">Iniciar sesión</button>
                 </div>
             </div>
-        </div>
-    </body>
+            <div class="columns">
+                <div>
+                    <div class="fila centrar-text-h">
+                        <h1>Una forma de trabajar juntos mejor.</h1>
+                        <br>
+                        <p>ViWeb reúne a los equipos para resolver problemas, avanzar ideas y aprender unos de otros en el proceso.</p>
+                    </div>
+                    <div class="fila centrar-text-h">
+                        <img src="http://www.wegwijzerwoerden.nl/images/teamwork-diversity-20471736.jpg" alt="team-work">
 
+                    </div>
+                </div>
+            </div>
+            <footer class="navbar-inverse bg-inverse">
+                <div>
+                    <p style="color:#d3d3d3;">ViWeb Colaborativa</p>
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+                        <img alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+                    </a>
+                    <br />
+                    Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+                    licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional
+                </a>.
+                </div>
+            </footer>
+        </main>
+    </body>
 </html>

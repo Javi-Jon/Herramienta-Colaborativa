@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    min-width: 412px;
+}
+
+.jumbo{
+    color: white;
+    max-width: 100%;
+    height: 700px;
+    background-position: center 10%;
+    background-size: cover;
+}
+
+.jumbo-bkgrd{
+    background: url(https://openclipart.org/download/223720/Wall.svg), #2b3137;
+    background-size: 100%;
+    background-position: center 10%;
+    background-size: cover;
+    /* padding-top: 60px;
+    padding-bottom: 60px; */
+}
+
+.columns {
+    margin: 0 auto;
+    max-width: 1040px;
+    padding: 20px;
+    display: flex;
+}
+
+.column {
+    justify-content: center;
+    /* background: #eee;
+    border: 5px solid #ccc; */
+    display: flex;
+    flex: 1;
+    padding: 20px;
+}
+
+.fila{
+    /* background: #eee;
+    border: 5px solid #ccc; */
+}
+
+.blanco{
+    color: white;
+}
+
+.descripcion {
+    font-weight: 300;
+    font-size: 1.7em;
+}
+
+.centrar-text-h{
+    text-align: center;
+}
+
+.centrar-v{
+    align-items: center;
+}
+
+.card {
+    color: #000;
+    padding: 20px;
+    min-width: 25rem;
+
+}
+.mostrar-xs{
+    display: none;
+}
+
+h1, p{
+    font-weight: 300;
+    font-size: 1.7em;
+    color: #000;
+}
+h1{
+    font-size: 54px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+footer{
+    margin-top: 60px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.passw-ajust{
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 770px) {
+    .columns{
+        flex-direction: column;
+    }
+    .column{
+        min-height: unset;
+    }
+    .descripcion{
+        text-align: center;
+    }
+}
+@media screen and (max-width: 550px) {
+    .card{
+        display:none;
+    }
+    .mostrar-xs{
+        display: inline-block;
+    }
+}
