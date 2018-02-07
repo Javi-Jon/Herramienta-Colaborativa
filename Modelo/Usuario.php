@@ -87,7 +87,7 @@ class Usuario extends BD {
     }
 
     function getUsuarioByID() {
-        $item = $this->fSelectO("SELECT id, fullname,username FROM $this->tabla WHERE id=:id", ['id' => $this->getId()]);
+        $item = $this->fSelectO("SELECT id, fullname,username,correo FROM $this->tabla WHERE id=:id", ['id' => $this->getId()]);
         return $item;
     }
 
@@ -111,5 +111,8 @@ class Usuario extends BD {
         $filas = $this->update("UPDATE `usuarios` SET username=:username, password=:password, fullname=:fullname, correo=:correo WHERE id=:idusuario", ['idusuario'=> $this->getId(), 'username'=> $this->getUsername(), 'password'=> $this->getPassword(), 'fullname'=> $this->getFullname(), 'correo'=> $this->getCorreo()]);
         return $filas;
     }
-
+     function updateUsuarioByIDsinContra(){
+        $filas = $this->update("UPDATE `usuarios` SET username=:username, fullname=:fullname, correo=:correo WHERE id=:idusuario", ['idusuario'=> $this->getId(), 'username'=> $this->getUsername(),'fullname'=> $this->getFullname(), 'correo'=> $this->getCorreo()]);
+        return $filas;
+    }
 }

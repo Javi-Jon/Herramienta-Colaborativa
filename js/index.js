@@ -21,6 +21,7 @@ $(document).ready(function () {
                 success:function(filas){
                     if(filas==1){
                         alertify.success('actualizado con exito');
+                         $('#perfil-modal').modal('hide');
                     }else{
                         alertify.error('ha habido un problema puede que el nombre de usuario o el correo esten en uso');
                     }

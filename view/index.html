@@ -212,9 +212,9 @@ and open the template in the editor.
                                     <label>Correo electronico</label>
                                         <input class="form-control" name="correo" value="{{ datos.usuario.correo}}" data-validetta="required,email">
                                     <label>Contraseña</label>
-                                        <input class="form-control" name="password" type="password" placeholder="****" data-validetta="required">
+                                        <input class="form-control" name="password" type="password" placeholder="****" >
                                     <label>Repita contraseña</label>
-                                        <input class="form-control"  type="password" placeholder="****" data-validetta="required,equalTo[password]">
+                                        <input class="form-control"  type="password" placeholder="****" data-validetta="equalTo[password]">
                                     <input type="submit" value="Actualizar" class="btn btn-primary">                                  
                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </form>                                
