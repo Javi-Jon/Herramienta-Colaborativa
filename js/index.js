@@ -97,14 +97,20 @@ $(document).ready(function () {
             method: 'POST',
             data: formulario.serialize(),
             success: function (dato) {
+                console.log(dato);
                 if (dato === 'error') {
                   formulario.effect( "shake" );
                 } else {
                     persona = jQuery.parseJSON(dato);
-                    console.log(persona);
+                   if(persona.participacionID==0){
+                       formulario.effect( "shake" );
+                   }else{
+                       
+                   
                     $('.participantes').append("<li  class=' d-flex justify-content-between'><div class='d-flex'><i class='material-icons'>perm_identity</i>"+persona[0].fullname+"</div><button class='bborrar' idpart='" + persona.participacionID + "'>X</button> </li>");
                     $('#participantes').append('<li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>'+persona[0].fullname+'<button class=" bborrar" idpart="'+ persona.participacionID +'">X</button></li>');
                     formulario[0].reset();
+                }
                 }
 
             },
@@ -185,7 +191,7 @@ $(document).ready(function () {
         $('.proyectos-index-r').toggleClass('d-flex');
         $(this).children().text(function(i, text){
             return text === "dashboard" ? "list" : "dashboard";
-        })
+        });
     });
     
     $(".tareas-wrap").on('click', '.bborrarTarea', function (e) {
