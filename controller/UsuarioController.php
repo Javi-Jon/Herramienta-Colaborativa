@@ -25,6 +25,9 @@ class UsuarioController extends Controller{
             case 'confirm':
                 $this->confirmarCuenta();
                 break;
+            case 'uuser':
+                $this->actualizarUser();
+                break;
             case 'logout':
                 unset($_SESSION['idusuario']);
                 header("Location: index.php");
@@ -141,6 +144,23 @@ class UsuarioController extends Controller{
             header('Location:index.php');
       
         }
+    }
+
+    function actualizarUser(){
+        $usuario=new Usuario();
+        $usuario->setId($_SESSION['idusuario']);
+        $usuario->setUsername($_POST['username']);
+        $usuario->setPassword($_POST['password']);
+        $usuario->setFullname($_POST['fullname']);
+        $usuario->setCorreo($_POST['correo']);
+        $uuser=$usuario->updateUsuarioByID();
+        if ($uuser == 1) {
+            echo '1';
+        } else {
+            echo '0';
+        }
+//        return $uuser;
+
     }
     
 }
