@@ -7,7 +7,34 @@ contarMensajes();
 buscarComps();
 $(document).ready(function () {
     //alertify.success("Success log message");
-    
+     $('#bperfil').click(function(){
+         $('#perfil-modal').modal('show');
+     });
+     $('#form-perfil').validetta({
+            realTime : true,
+        onValid: function(e){
+            e.preventDefault();
+            $.ajax({
+                url:'index.php?controller=usuario&action=uuser',
+                method:'POST',
+                data:$('#form-perfil').serialize(),
+                success:function(filas){
+                    if(filas==1){
+                        alertify.success('actualizado con exito');
+                         $('#perfil-modal').modal('hide');
+                    }else{
+                        alertify.error('ha habido un problema puede que el nombre de usuario o el correo esten en uso');
+                    }
+                },
+                error: function () {
+                    alertify.error("Error en el servidor comprueba tu conexion y vuelve a intentarlo");
+                }
+                
+            });
+            
+        }
+            
+        });
     $('#newProy').validetta({
          realTime : true,
         display:'bubble',
@@ -70,14 +97,20 @@ $(document).ready(function () {
             method: 'POST',
             data: formulario.serialize(),
             success: function (dato) {
+                console.log(dato);
                 if (dato === 'error') {
                   formulario.effect( "shake" );
                 } else {
                     persona = jQuery.parseJSON(dato);
-                    console.log(persona);
+                   if(persona.participacionID==0){
+                       formulario.effect( "shake" );
+                   }else{
+                       
+                   
                     $('.participantes').append("<li  class=' d-flex justify-content-between'><div class='d-flex'><i class='material-icons'>perm_identity</i>"+persona[0].fullname+"</div><button class='bborrar' idpart='" + persona.participacionID + "'>X</button> </li>");
                     $('#participantes').append('<li class="d-flex align-items-center "> <i class="material-icons">perm_identity</i>'+persona[0].fullname+'<button class=" bborrar" idpart="'+ persona.participacionID +'">X</button></li>');
                     formulario[0].reset();
+                }
                 }
 
             },
@@ -158,7 +191,7 @@ $(document).ready(function () {
         $('.proyectos-index-r').toggleClass('d-flex');
         $(this).children().text(function(i, text){
             return text === "dashboard" ? "list" : "dashboard";
-        })
+        });
     });
     
     $(".tareas-wrap").on('click', '.bborrarTarea', function (e) {

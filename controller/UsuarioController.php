@@ -147,13 +147,23 @@ class UsuarioController extends Controller{
     }
 
     function actualizarUser(){
+        $v=false;
         $usuario=new Usuario();
         $usuario->setId($_SESSION['idusuario']);
         $usuario->setUsername($_POST['username']);
-        $usuario->setPassword($_POST['password']);
+        if(isset($_POST['password'])&& $_POST['password']!=''){
+             $usuario->setPassword(password_hash($_POST['password'], 1));
+             $v=true;
+        }
+       
         $usuario->setFullname($_POST['fullname']);
         $usuario->setCorreo($_POST['correo']);
-        $uuser=$usuario->updateUsuarioByID();
+        if($v){
+            $uuser=$usuario->updateUsuarioByID();
+        }else{
+             $uuser=$usuario->updateUsuarioByIDsinContra();
+        }
+        
         if ($uuser == 1) {
             echo '1';
         } else {
